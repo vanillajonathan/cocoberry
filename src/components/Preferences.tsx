@@ -31,7 +31,6 @@ export class Preferences extends React.Component<PreferencesProps, PreferencesSt
         const file = new File([json], "cocoberry.json", { type: "octet/stream" });
         const url = window.URL.createObjectURL(file);
         window.location.assign(url);
-        window.URL.revokeObjectURL(url);
     }
 
     private handleSubmit(event: React.FormEvent) {

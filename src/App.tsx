@@ -2,18 +2,16 @@
 import { Home } from './components/Home';
 import { Experience } from './components/ExpList';
 import { Preferences } from "./components/Preferences";
+import { PwaInstaller } from "./components/PwaInstaller";
 //import * as data from "./seed.json";
 import uuid from "uuid/v4";
 
 interface AppState {
     experiences: Experience[];
     nav: string;
-    showInstallPrompt: boolean;
 }
 
 class App extends React.Component<{}, AppState> {
-    private deferredPrompt: any;
-
     constructor(props: {}) {
         super(props);
 
@@ -26,12 +24,11 @@ class App extends React.Component<{}, AppState> {
             experiences = JSON.parse(storedExperiences);
         }
 
-        this.state = { experiences: experiences, nav: "", showInstallPrompt: false };
+        this.state = { experiences: experiences, nav: "" };
 
         this.handleAddExperience = this.handleAddExperience.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleImport = this.handleImport.bind(this);
-        this.handleInstall = this.handleInstall.bind(this);
         this.handleNavigation = this.handleNavigation.bind(this);
     }
 
@@ -54,28 +51,8 @@ class App extends React.Component<{}, AppState> {
         this.setState({ experiences: experiences });
     }
 
-    private handleInstall(): void {
-        this.setState({ showInstallPrompt: false });
-        this.deferredPrompt.prompt();
-        this.deferredPrompt.userChoice.then((choiceResult: any) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
-            } else {
-                console.log('User dismissed the A2HS prompt');
-            }
-            this.deferredPrompt = null;
-        });
-    }
-
     private handleNavigation(component: string): void {
         this.setState({ nav: component });
-    }
-
-    componentDidMount() {
-        window.addEventListener("beforeinstallprompt", (e) => {
-            this.deferredPrompt = e;
-            this.setState({ showInstallPrompt: true });
-        }, { once: true });
     }
 
     render() {
@@ -85,12 +62,7 @@ class App extends React.Component<{}, AppState> {
 
         return (<React.Fragment>
             <Home experiences={this.state.experiences} onAddExperience={this.handleAddExperience} onClick={this.handleClick} onNavigation={this.handleNavigation} />
-            {this.state.showInstallPrompt && <div className="card fixed-bottom">
-                <div className="card-body">
-                    <p>Install web application?</p>
-                    <button className="btn btn-primary" onClick={this.handleInstall}>Install</button>
-                </div>
-            </div>}
+            <PwaInstaller />
         </React.Fragment>);
     }
 }
