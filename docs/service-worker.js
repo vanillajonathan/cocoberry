@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/cocoberry/precache-manifest.6110cec16e94b686cf9a42cb9364c52b.js"
+  "/cocoberry/precache-manifest.ba83da62008db1d0b7f65c9c5a3c0144.js"
 );
 
 workbox.clientsClaim();

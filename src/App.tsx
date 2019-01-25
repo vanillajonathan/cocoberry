@@ -2,7 +2,7 @@
 import { Home } from './components/Home';
 import { Experience } from './components/ExpList';
 import { Preferences } from "./components/Preferences";
-import * as data from "./seed.json";
+//import * as data from "./seed.json";
 import uuid from "uuid/v4";
 
 interface AppState {
@@ -31,6 +31,7 @@ class App extends React.Component<{}, AppState> {
         this.handleAddExperience = this.handleAddExperience.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleImport = this.handleImport.bind(this);
+        this.handleInstall = this.handleInstall.bind(this);
         this.handleNavigation = this.handleNavigation.bind(this);
     }
 
@@ -40,7 +41,7 @@ class App extends React.Component<{}, AppState> {
             name: name,
             tag: tag
         };
-        this.setState(prevState => ({ experiences: [...prevState.experiences, experience], nav: "" }));
+        this.setState(prevState => ({ experiences: [...prevState.experiences, experience] }));
     }
 
     private handleClick(key: string): void {
@@ -84,7 +85,12 @@ class App extends React.Component<{}, AppState> {
 
         return (<React.Fragment>
             <Home experiences={this.state.experiences} onAddExperience={this.handleAddExperience} onClick={this.handleClick} onNavigation={this.handleNavigation} />
-            {this.state.showInstallPrompt && <div className="card fixed-bottom">Install?<button className="btn btn-primary" onClick={this.handleInstall}>Install</button></div>}
+            {this.state.showInstallPrompt && <div className="card fixed-bottom">
+                <div className="card-body">
+                    <p>Install web application?</p>
+                    <button className="btn btn-primary" onClick={this.handleInstall}>Install</button>
+                </div>
+            </div>}
         </React.Fragment>);
     }
 }
