@@ -1,10 +1,11 @@
 ﻿import * as React from 'react';
 import { TagList } from "./TagList";
+import { Experience } from "../experience";
 
 type EditExperienceProps = {
     name?: string,
-    onSave(name: string, tag: string): void,
     onClose(): void,
+    onSave(experience: Experience): void,
     show: boolean,
     tags: string[],
 }
@@ -12,7 +13,7 @@ type EditExperienceProps = {
 type EditExperienceState = {
     name: string,
     tag: string,
-    last: string | null;
+    last: number | null;
 };
 
 export class EditExperience extends React.Component<EditExperienceProps, EditExperienceState> {
@@ -35,7 +36,7 @@ export class EditExperience extends React.Component<EditExperienceProps, EditExp
     }
 
     private handleTimeChange(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ last: event.target.value });
+        this.setState({ last: parseInt(event.target.value, 10) });
     }
 
     private handleClose() {
@@ -44,7 +45,8 @@ export class EditExperience extends React.Component<EditExperienceProps, EditExp
 
     private handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-        this.props.onSave(this.state.name, this.state.tag);
+        let experience: Experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
+        this.props.onSave(experience);
     }
 
     render() {
