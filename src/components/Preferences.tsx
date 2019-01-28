@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { Experience } from "./ExpList";
+import { Experience } from "../experience";
 
 type PreferencesProps = {
     export: Experience[];

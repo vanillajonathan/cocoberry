@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import { AddExperience } from './AddExperience';
-import { ExpList, Experience } from './ExpList';
+import { Experience } from "../experience";
+import { ExpList } from './ExpList';
 import { TagList } from './TagList';
 import './Home.css';
 

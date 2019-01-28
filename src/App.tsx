@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
+import uuid from "uuid/v4";
+import { Experience } from './experience';
 import { Home } from './components/Home';
-import { Experience } from './components/ExpList';
 import { Preferences } from "./components/Preferences";
 import { PwaInstaller } from "./components/PwaInstaller";
 //import * as data from "./seed.json";
-import uuid from "uuid/v4";
 
 interface AppState {
     experiences: Experience[];

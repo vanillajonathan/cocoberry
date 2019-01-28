@@ -1,17 +1,11 @@
 ﻿import * as React from 'react';
 import moment from 'moment';
+import { Experience } from "../experience";
 
 type ExpListProps = {
     experiences: Experience[],
     onClick(id: string): void,
 };
-
-export interface Experience {
-    id: string,
-    name: string,
-    last?: number | null,
-    tag?: string,
-}
 
 export class ExpList extends React.Component<ExpListProps> {
     constructor(props: ExpListProps) {
