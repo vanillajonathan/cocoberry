@@ -5,6 +5,7 @@ import { Experience } from "../experience";
 type ExpListProps = {
     experiences: Experience[],
     onClick(id: string): void,
+    onEdit(id: string): void,
 };
 
 export class ExpList extends React.Component<ExpListProps> {
@@ -41,21 +42,21 @@ export class ExpList extends React.Component<ExpListProps> {
 
         return (
             <React.Fragment>
-                <ExpListGroup onClick={this.props.onClick} experiences={this.props.experiences.sort(this.compare)} />
+                <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={this.props.experiences.sort(this.compare)} />
 
                 {weekAgo.length > 0 && <React.Fragment>
                     <h2 className="h5">A week ago</h2>
-                    <ExpListGroup onClick={this.props.onClick} experiences={weekAgo} />
+                    <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={weekAgo} />
                 </React.Fragment>}
 
                 {monthAgo.length > 0 && <React.Fragment>
                     <h2 className="h5">A month ago</h2>
-                    <ExpListGroup onClick={this.props.onClick} experiences={monthAgo} />
+                    <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={monthAgo} />
                 </React.Fragment>}
 
                 {yearAgo.length > 0 && <React.Fragment>
                     <h2 className="h5">A year ago</h2>
-                    <ExpListGroup onClick={this.props.onClick} experiences={yearAgo} />
+                    <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={yearAgo} />
                 </React.Fragment>}
             </React.Fragment>
         );
@@ -65,6 +66,7 @@ export class ExpList extends React.Component<ExpListProps> {
 type ExpListGroupProps = {
     experiences: Experience[],
     onClick(id: string): void,
+    onEdit(id: string): void,
 }
 
 const ExpListGroup: React.FunctionComponent<ExpListGroupProps> = (props: ExpListGroupProps) => (

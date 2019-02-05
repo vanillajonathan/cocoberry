@@ -3,7 +3,11 @@ import * as ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { LocalStorage } from './localStorage';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const storage = new LocalStorage();
+const tags = ["Fruit", "Vegetable", "Activity"];
+
+ReactDOM.render(<App storage={storage} tags={tags} />, document.getElementById('root'));
 
 serviceWorker.register();

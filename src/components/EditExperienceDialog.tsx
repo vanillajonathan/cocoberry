@@ -1,28 +1,32 @@
 ﻿import * as React from 'react';
 import { TagList } from "./TagList";
+import { Experience } from "../experience";
 
-type AddExperienceProps = {
+type EditExperienceProps = {
     name?: string,
-    onAdd(name: string, tag: string): void,
     onClose(): void,
-    show: boolean,
+    onSave(experience: Experience): void,
+    isOpen: boolean,
     tags: string[],
 }
 
-type AddExperienceState = {
+type EditExperienceState = {
     name: string,
     tag: string,
+    last: number | null;
 };
 
-export class AddExperience extends React.Component<AddExperienceProps, AddExperienceState> {
-    constructor(props: AddExperienceProps) {
+export class EditExperienceDialog extends React.Component<EditExperienceProps, EditExperienceState> {
+    constructor(props: EditExperienceProps) {
         super(props);
         this.state = {
             name: this.props.name || "",
             tag: "",
+            last: null
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -31,19 +35,24 @@ export class AddExperience extends React.Component<AddExperienceProps, AddExperi
         this.setState({ name: event.target.value });
     }
 
+    private handleTimeChange(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ last: parseInt(event.target.value, 10) });
+    }
+
     private handleClose() {
         this.props.onClose();
     }
 
     private handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-        this.props.onAdd(this.state.name, this.state.tag);
+        let experience: Experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
+        this.props.onSave(experience);
     }
 
     render() {
         let className = "modal fade";
         let backdropClassName = "fade";
-        if (this.props.show) {
+        if (this.props.isOpen) {
             className += " d-block show";
             backdropClassName += " modal-backdrop show";
         }
@@ -53,7 +62,7 @@ export class AddExperience extends React.Component<AddExperienceProps, AddExperi
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Add experience</h5>
+                                <h5 className="modal-title">Edit experience</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.handleClose}>
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -68,10 +77,14 @@ export class AddExperience extends React.Component<AddExperienceProps, AddExperi
                                         <label>Tag</label>
                                         <TagList activeTag={this.state.tag} tags={this.props.tags} onClick={tag => this.setState({ tag: tag })} />
                                     </div>
+                                    <div className="form-group">
+                                        <label htmlFor="time">Last</label>
+                                        <input className="form-control" id="time" type="datetime-local" onChange={this.handleTimeChange} />
+                                    </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.handleClose}>Close</button>
-                                    <button type="submit" className="btn btn-primary">Add</button>
+                                    <button type="submit" className="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>

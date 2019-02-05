@@ -1,30 +1,42 @@
 ﻿import * as React from 'react';
 import uuid from "uuid/v4";
+import { AppStorage } from "./appStorage";
 import { Experience } from './experience';
 import { Home } from './components/Home';
 import { Preferences } from "./components/Preferences";
 import { PwaInstaller } from "./components/PwaInstaller";
+import { Toast } from "./components/Toast";
 //import * as data from "./seed.json";
+
+interface AppProps {
+    storage: AppStorage;
+    tags: string[];
+}
 
 interface AppState {
     experiences: Experience[];
     nav: string;
+    showToast: boolean;
 }
 
-class App extends React.Component<{}, AppState> {
-    constructor(props: {}) {
+class App extends React.Component<AppProps, AppState> {
+    static defaultProps = {
+        tags: []
+    }
+
+    constructor(props: AppProps) {
         super(props);
 
-        const storedExperiences = localStorage.getItem('experiences');
+        const storedExperiences = props.storage.get();
         let experiences: Experience[];
 
-        if (storedExperiences == null) {
+        if (storedExperiences.length === 0) {
             experiences = seedExperiences;
         } else {
-            experiences = JSON.parse(storedExperiences);
+            experiences = storedExperiences;
         }
 
-        this.state = { experiences: experiences, nav: "" };
+        this.state = { experiences: experiences, nav: "", showToast: false };
 
         this.handleAddExperience = this.handleAddExperience.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -43,8 +55,15 @@ class App extends React.Component<{}, AppState> {
 
     private handleClick(key: string): void {
         this.setState({
-            experiences: this.state.experiences.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i)
+            experiences: this.state.experiences.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i),
+            showToast: true
         });
+        window.setTimeout(() => {
+            this.setState({
+                experiences: this.state.experiences.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i),
+                showToast: false
+            });
+        }, 2000);
     }
 
     private handleImport(experiences: Experience[]): void {
@@ -61,8 +80,9 @@ class App extends React.Component<{}, AppState> {
         }
 
         return (<React.Fragment>
-            <Home experiences={this.state.experiences} onAddExperience={this.handleAddExperience} onClick={this.handleClick} onNavigation={this.handleNavigation} />
+            <Home experiences={this.state.experiences} onAddExperience={this.handleAddExperience} onClick={this.handleClick} onNavigation={this.handleNavigation} tags={this.props.tags} />
             <PwaInstaller />
+            <Toast show={this.state.showToast} />
         </React.Fragment>);
     }
 }

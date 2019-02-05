@@ -1,7 +1,9 @@
 ﻿import * as React from 'react';
-import { AddExperience } from './AddExperience';
+import { AddExperienceDialog } from "./AddExperienceDialog";
+import { EditExperienceDialog } from "./EditExperienceDialog";
 import { Experience } from "../experience";
 import { ExpList } from './ExpList';
+import { OptionsSheet } from './OptionsSheet'
 import { TagList } from './TagList';
 import './Home.css';
 
@@ -10,29 +12,42 @@ interface HomeProps {
     onAddExperience(name: string, tag: string): void;
     onClick(key: string): void;
     onNavigation(component: string): void;
+    tags: string[];
 }
 
 interface HomeState {
+    activeId: string,
     search: string,
     showDialog: boolean,
+    showEditDialog: boolean,
+    showOptions: boolean,
     showTags: boolean,
     tag: string,
 }
 
 export class Home extends React.Component<HomeProps, HomeState> {
-    private readonly tags = ["Fruit", "Vegetable", "Activity"];
-
     constructor(props: HomeProps) {
         super(props);
 
-        this.state = { search: '', showDialog: false, showTags: false, tag: '' };
+        this.state = {
+            activeId: '',
+            search: '',
+            showDialog: false,
+            showEditDialog: false,
+            showOptions: false,
+            showTags: false,
+            tag: ''
+        };
 
         // This binding is necessary to make `this` work in the callback
         this.handleAddExperience = this.handleAddExperience.bind(this);
         this.handleAddExperienceButtonClick = this.handleAddExperienceButtonClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleOpenOptions = this.handleOpenOptions.bind(this);
+        this.handleCloseOptions = this.handleCloseOptions.bind(this);
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
+        this.handleEditOpenClick = this.handleEditOpenClick.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
     }
 
@@ -43,6 +58,22 @@ export class Home extends React.Component<HomeProps, HomeState> {
 
     private handleAddExperienceButtonClick() {
         this.setState({ showDialog: true });
+    }
+
+    private handleOpenOptions(): void {
+        this.setState({ showOptions: true });
+    }
+
+    private handleCloseOptions(): void {
+        this.setState({ showOptions: false });
+    }
+
+    private handleEditOpenClick(tag: string) {
+        this.setState({ showEditDialog: true });
+    }
+
+    private handleEditSaveClick(experience: Experience) {
+        this.setState({ showEditDialog: false });
     }
 
     private handleChange(event: React.FormEvent<HTMLInputElement>) {
@@ -93,12 +124,12 @@ export class Home extends React.Component<HomeProps, HomeState> {
                     </nav>
                     {this.state.showTags &&
                         <div className="container">
-                            <TagList activeTag={this.state.tag} tags={this.tags} onClick={this.handleTagClick} />
+                            <TagList activeTag={this.state.tag} tags={this.props.tags} onClick={this.handleTagClick} />
                         </div>
                     }
                 </header>
                 <main className="App container">
-                    <ExpList experiences={experiences} onClick={this.props.onClick} />
+                    <ExpList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />
                     {experiences.length === 0 &&
                         <React.Fragment>
                             <p>There are no matched experiences.</p>
@@ -106,7 +137,15 @@ export class Home extends React.Component<HomeProps, HomeState> {
                         </React.Fragment>
                     }
                 </main>
-                <AddExperience name={this.state.search} show={this.state.showDialog} tags={this.tags} onAdd={this.handleAddExperience} onClose={this.handleClose} />
+                <AddExperienceDialog name={this.state.search} isOpen={this.state.showDialog} tags={this.props.tags} onAdd={this.handleAddExperience} onClose={this.handleClose} />
+                <EditExperienceDialog name={this.state.search} isOpen={this.state.showEditDialog} tags={this.props.tags} onSave={this.handleEditSaveClick} onClose={this.handleClose} />
+                <OptionsSheet
+                    id={this.state.activeId}
+                    show={this.state.showOptions}
+                    onClose={this.handleCloseOptions}
+                    onDelete={this.handleCloseOptions}
+                    onDone={this.handleCloseOptions}
+                    onEdit={this.handleCloseOptions} />
             </React.Fragment>
         );
     }

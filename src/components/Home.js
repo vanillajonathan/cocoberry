@@ -1,19 +1,31 @@
 import * as React from 'react';
-import { AddExperience } from './AddExperience';
+import { AddExperienceDialog } from "./AddExperienceDialog";
+import { EditExperienceDialog } from "./EditExperienceDialog";
 import { ExpList } from './ExpList';
+import { OptionsSheet } from './OptionsSheet';
 import { TagList } from './TagList';
 import './Home.css';
 export class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.tags = ["Fruit", "Vegetable", "Activity"];
-        this.state = { search: '', showDialog: false, showTags: false, tag: '' };
+        this.state = {
+            activeId: '',
+            search: '',
+            showDialog: false,
+            showEditDialog: false,
+            showOptions: false,
+            showTags: false,
+            tag: ''
+        };
         // This binding is necessary to make `this` work in the callback
         this.handleAddExperience = this.handleAddExperience.bind(this);
         this.handleAddExperienceButtonClick = this.handleAddExperienceButtonClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleOpenOptions = this.handleOpenOptions.bind(this);
+        this.handleCloseOptions = this.handleCloseOptions.bind(this);
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
+        this.handleEditOpenClick = this.handleEditOpenClick.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
     }
     handleAddExperience(name, tag) {
@@ -22,6 +34,18 @@ export class Home extends React.Component {
     }
     handleAddExperienceButtonClick() {
         this.setState({ showDialog: true });
+    }
+    handleOpenOptions() {
+        this.setState({ showOptions: true });
+    }
+    handleCloseOptions() {
+        this.setState({ showOptions: false });
+    }
+    handleEditOpenClick(tag) {
+        this.setState({ showEditDialog: true });
+    }
+    handleEditSaveClick(experience) {
+        this.setState({ showEditDialog: false });
     }
     handleChange(event) {
         this.setState({ search: event.currentTarget.value });
@@ -62,14 +86,16 @@ export class Home extends React.Component {
                     React.createElement("button", { className: "btn btn-outline-success", accessKey: "p", onClick: () => this.props.onNavigation("Preferences") }, "\u2630")),
                 this.state.showTags &&
                     React.createElement("div", { className: "container" },
-                        React.createElement(TagList, { activeTag: this.state.tag, tags: this.tags, onClick: this.handleTagClick }))),
+                        React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: this.handleTagClick }))),
             React.createElement("main", { className: "App container" },
-                React.createElement(ExpList, { experiences: experiences, onClick: this.props.onClick }),
+                React.createElement(ExpList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
                 experiences.length === 0 &&
                     React.createElement(React.Fragment, null,
                         React.createElement("p", null, "There are no matched experiences."),
                         React.createElement("button", { className: "btn btn-outline-secondary", onClick: this.handleAddExperienceButtonClick }, "Add new experience"))),
-            React.createElement(AddExperience, { name: this.state.search, show: this.state.showDialog, tags: this.tags, onAdd: this.handleAddExperience, onClose: this.handleClose })));
+            React.createElement(AddExperienceDialog, { name: this.state.search, isOpen: this.state.showDialog, tags: this.props.tags, onAdd: this.handleAddExperience, onClose: this.handleClose }),
+            React.createElement(EditExperienceDialog, { name: this.state.search, isOpen: this.state.showEditDialog, tags: this.props.tags, onSave: this.handleEditSaveClick, onClose: this.handleClose }),
+            React.createElement(OptionsSheet, { id: this.state.activeId, show: this.state.showOptions, onClose: this.handleCloseOptions, onDelete: this.handleCloseOptions, onDone: this.handleCloseOptions, onEdit: this.handleCloseOptions })));
     }
 }
 //# sourceMappingURL=Home.js.map

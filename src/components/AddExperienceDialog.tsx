@@ -1,32 +1,28 @@
 ﻿import * as React from 'react';
 import { TagList } from "./TagList";
-import { Experience } from "../experience";
 
-type EditExperienceProps = {
+type AddExperienceProps = {
     name?: string,
+    onAdd(name: string, tag: string): void,
     onClose(): void,
-    onSave(experience: Experience): void,
-    show: boolean,
+    isOpen: boolean,
     tags: string[],
 }
 
-type EditExperienceState = {
+type AddExperienceState = {
     name: string,
     tag: string,
-    last: number | null;
 };
 
-export class EditExperience extends React.Component<EditExperienceProps, EditExperienceState> {
-    constructor(props: EditExperienceProps) {
+export class AddExperienceDialog extends React.Component<AddExperienceProps, AddExperienceState> {
+    constructor(props: AddExperienceProps) {
         super(props);
         this.state = {
             name: this.props.name || "",
             tag: "",
-            last: null
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -35,24 +31,19 @@ export class EditExperience extends React.Component<EditExperienceProps, EditExp
         this.setState({ name: event.target.value });
     }
 
-    private handleTimeChange(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ last: parseInt(event.target.value, 10) });
-    }
-
     private handleClose() {
         this.props.onClose();
     }
 
     private handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-        let experience: Experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
-        this.props.onSave(experience);
+        this.props.onAdd(this.state.name, this.state.tag);
     }
 
     render() {
         let className = "modal fade";
         let backdropClassName = "fade";
-        if (this.props.show) {
+        if (this.props.isOpen) {
             className += " d-block show";
             backdropClassName += " modal-backdrop show";
         }
@@ -77,14 +68,10 @@ export class EditExperience extends React.Component<EditExperienceProps, EditExp
                                         <label>Tag</label>
                                         <TagList activeTag={this.state.tag} tags={this.props.tags} onClick={tag => this.setState({ tag: tag })} />
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="time">Last</label>
-                                        <input className="form-control" id="time" type="datetime-local" onChange={this.handleTimeChange} />
-                                    </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.handleClose}>Close</button>
-                                    <button type="submit" className="btn btn-primary">Save</button>
+                                    <button type="submit" className="btn btn-primary">Add</button>
                                 </div>
                             </form>
                         </div>
