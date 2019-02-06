@@ -62,7 +62,7 @@ export class Preferences extends React.Component<PreferencesProps, PreferencesSt
                         <p>Export and import configuration.</p>
                         <div className="form-group">
                             <label htmlFor="file">File</label>
-                            <input className="form-control-file" id="file" type="file" accept=".json" ref={this.fileInput} required />
+                            <input className="form-control-file" id="file" type="file" accept="application/json" ref={this.fileInput} required />
                         </div>
                         <input className="btn btn-secondary mr-1" type="submit" value="Import from file" />
                         <button className="btn btn-secondary" type="button" accessKey="e" onClick={this.handleExport}>Export to file</button>
