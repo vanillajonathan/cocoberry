@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 type PwaInstallerState = {
     showInstallPrompt: boolean;
@@ -21,10 +21,10 @@ export class PwaInstaller extends React.Component<{}, PwaInstallerState> {
         this.setState({ showInstallPrompt: false });
         this.deferredPrompt.prompt();
         this.deferredPrompt.userChoice.then((choiceResult: any) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
+            if (choiceResult.outcome === "accepted") {
+                console.log("User accepted the A2HS prompt");
             } else {
-                console.log('User dismissed the A2HS prompt');
+                console.log("User dismissed the A2HS prompt");
             }
             this.deferredPrompt = null;
         });

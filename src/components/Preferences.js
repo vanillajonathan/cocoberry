@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 export class Preferences extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +26,8 @@ export class Preferences extends React.Component {
                 }
             }
         };
-        reader.readAsText(this.fileInput.current.files[0]);
+        const file = this.fileInput.current.files[0];
+        reader.readAsText(file);
     }
     render() {
         return (React.createElement(React.Fragment, null,

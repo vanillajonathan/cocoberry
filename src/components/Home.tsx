@@ -1,13 +1,13 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
-import { Experience } from "../experience";
-import { ExpList } from './ExpList';
-import { OptionsSheet } from './OptionsSheet'
-import { TagList } from './TagList';
-import './Home.css';
+import { IExperience as Experience } from "../IExperience";
+import { ExpList } from "./ExpList";
+import { OptionsSheet } from "./OptionsSheet";
+import { TagList } from "./TagList";
+import "./Home.css";
 
-interface HomeProps {
+interface IProps {
     experiences: Experience[];
     onAddExperience(name: string, tag: string): void;
     onClick(key: string): void;
@@ -15,28 +15,28 @@ interface HomeProps {
     tags: string[];
 }
 
-interface HomeState {
-    activeId: string,
-    search: string,
-    showDialog: boolean,
-    showEditDialog: boolean,
-    showOptions: boolean,
-    showTags: boolean,
-    tag: string,
+interface IState {
+    activeId: string;
+    search: string;
+    showDialog: boolean;
+    showEditDialog: boolean;
+    showOptions: boolean;
+    showTags: boolean;
+    tag: string;
 }
 
-export class Home extends React.Component<HomeProps, HomeState> {
-    constructor(props: HomeProps) {
+export class Home extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
-            activeId: '',
-            search: '',
+            activeId: "",
+            search: "",
             showDialog: false,
             showEditDialog: false,
             showOptions: false,
             showTags: false,
-            tag: ''
+            tag: ""
         };
 
         // This binding is necessary to make `this` work in the callback
@@ -56,7 +56,7 @@ export class Home extends React.Component<HomeProps, HomeState> {
         this.props.onAddExperience(name, tag);
     }
 
-    private handleAddExperienceButtonClick() {
+    private handleAddExperienceButtonClick(): void {
         this.setState({ showDialog: true });
     }
 
@@ -68,26 +68,26 @@ export class Home extends React.Component<HomeProps, HomeState> {
         this.setState({ showOptions: false });
     }
 
-    private handleEditOpenClick(tag: string) {
+    private handleEditOpenClick(tag: string): void {
         this.setState({ showEditDialog: true });
     }
 
-    private handleEditSaveClick(experience: Experience) {
+    private handleEditSaveClick(experience: Experience): void {
         this.setState({ showEditDialog: false });
     }
 
-    private handleChange(event: React.FormEvent<HTMLInputElement>) {
+    private handleChange(event: React.FormEvent<HTMLInputElement>): void {
         this.setState({ search: event.currentTarget.value });
     }
 
-    private handleDropdownClick(event: any) {
+    private handleDropdownClick(event: any): void {
         event.target.parentElement.classList.toggle("dropup");
         this.setState(prevState => ({
             showTags: !prevState.showTags
         }));
     }
 
-    private handleTagClick(tag: string) {
+    private handleTagClick(tag: string): void {
         this.setState({ tag: tag });
     }
 
@@ -97,9 +97,9 @@ export class Home extends React.Component<HomeProps, HomeState> {
 
     render() {
         let experiences: Experience[];
-        if (this.state.search !== '' || this.state.tag !== '') {
+        if (this.state.search !== "" || this.state.tag !== "") {
             experiences = this.props.experiences.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()));
-            if (this.state.tag !== '') {
+            if (this.state.tag !== "") {
                 experiences = experiences.filter(x => x.tag != null && x.tag.includes(this.state.tag));
             }
         } else {
@@ -130,7 +130,7 @@ export class Home extends React.Component<HomeProps, HomeState> {
                 </header>
                 <main className="App container">
                     <ExpList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />
-                    {experiences.length === 0 &&
+                    {this.state.search !== "" && experiences.length === 0 &&
                         <React.Fragment>
                             <p>There are no matched experiences.</p>
                             <button className="btn btn-outline-secondary" onClick={this.handleAddExperienceButtonClick}>Add new experience</button>

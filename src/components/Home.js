@@ -1,21 +1,21 @@
-import * as React from 'react';
+import * as React from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
-import { ExpList } from './ExpList';
-import { OptionsSheet } from './OptionsSheet';
-import { TagList } from './TagList';
-import './Home.css';
+import { ExpList } from "./ExpList";
+import { OptionsSheet } from "./OptionsSheet";
+import { TagList } from "./TagList";
+import "./Home.css";
 export class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeId: '',
-            search: '',
+            activeId: "",
+            search: "",
             showDialog: false,
             showEditDialog: false,
             showOptions: false,
             showTags: false,
-            tag: ''
+            tag: ""
         };
         // This binding is necessary to make `this` work in the callback
         this.handleAddExperience = this.handleAddExperience.bind(this);
@@ -64,9 +64,9 @@ export class Home extends React.Component {
     }
     render() {
         let experiences;
-        if (this.state.search !== '' || this.state.tag !== '') {
+        if (this.state.search !== "" || this.state.tag !== "") {
             experiences = this.props.experiences.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()));
-            if (this.state.tag !== '') {
+            if (this.state.tag !== "") {
                 experiences = experiences.filter(x => x.tag != null && x.tag.includes(this.state.tag));
             }
         }
@@ -89,7 +89,7 @@ export class Home extends React.Component {
                         React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: this.handleTagClick }))),
             React.createElement("main", { className: "App container" },
                 React.createElement(ExpList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
-                experiences.length === 0 &&
+                this.state.search !== "" && experiences.length === 0 &&
                     React.createElement(React.Fragment, null,
                         React.createElement("p", null, "There are no matched experiences."),
                         React.createElement("button", { className: "btn btn-outline-secondary", onClick: this.handleAddExperienceButtonClick }, "Add new experience"))),

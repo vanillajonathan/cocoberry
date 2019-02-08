@@ -1,18 +1,18 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 import { TagList } from "./TagList";
-import { Experience } from "../experience";
+import { IExperience as Experience } from "../IExperience";
 
 type EditExperienceProps = {
-    name?: string,
-    onClose(): void,
-    onSave(experience: Experience): void,
-    isOpen: boolean,
-    tags: string[],
-}
+    name?: string;
+    onClose(): void;
+    onSave(experience: Experience): void;
+    isOpen: boolean;
+    tags: string[];
+};
 
 type EditExperienceState = {
-    name: string,
-    tag: string,
+    name: string;
+    tag: string;
     last: number | null;
 };
 
@@ -22,7 +22,7 @@ export class EditExperienceDialog extends React.Component<EditExperienceProps, E
         this.state = {
             name: this.props.name || "",
             tag: "",
-            last: null
+            last: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,21 +31,21 @@ export class EditExperienceDialog extends React.Component<EditExperienceProps, E
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    private handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         this.setState({ name: event.target.value });
     }
 
-    private handleTimeChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private handleTimeChange(event: React.ChangeEvent<HTMLInputElement>): void {
         this.setState({ last: parseInt(event.target.value, 10) });
     }
 
-    private handleClose() {
+    private handleClose(): void {
         this.props.onClose();
     }
 
-    private handleSubmit(event: React.FormEvent) {
+    private handleSubmit(event: React.FormEvent): void {
         event.preventDefault();
-        let experience: Experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
+        const experience: Experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
         this.props.onSave(experience);
     }
 

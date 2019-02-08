@@ -1,0 +1,8 @@
+﻿{
+  "extends": [ "tslint:latest", "tslint-react" ],
+  "rules": {
+    "jsx-no-lambda": false,
+    "member-ordering": false,
+    "ordered-imports": false
+  }
+}

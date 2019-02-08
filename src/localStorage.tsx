@@ -1,34 +1,47 @@
-﻿import { AppStorage } from "./appStorage";
-import { Experience } from "./experience";
+﻿import uuid from "uuid/v4";
+import { IStorage, INewExperience as NewExperience } from "./IStorage";
+import { IExperience as Experience } from "./IExperience";
 
-export class LocalStorage implements AppStorage {
-    add(experience: Experience): void {
+export class LocalStorage implements IStorage {
+    public add(experience: NewExperience): void {
         const experiences = this.get();
-        experiences.push(experience);
-        localStorage.setItem('experiences', JSON.stringify(experiences));
+        const item: Experience = {
+            id: uuid(),
+            name: experience.name,
+            last: experience.last,
+            tag: experience.tag,
+        };
+        experiences.push(item);
+        localStorage.setItem("experiences", JSON.stringify(experiences));
     }
 
-    add_many(experiences: Experience[]): void {
+    public add_many(experiences: NewExperience[]): void {
         const data = this.get();
         for (const experience of experiences) {
-            data.push(experience);
+            const item: Experience = {
+                id: uuid(),
+                name: experience.name,
+                last: experience.last,
+                tag: experience.tag,
+            };
+            data.push(item);
         }
-        localStorage.setItem('experiences', JSON.stringify(data));
+        localStorage.setItem("experiences", JSON.stringify(data));
     }
 
-    delete(id: string): void {
+    public delete(id: string): void {
         throw new Error("Method not implemented.");
     }
 
-    get(): Experience[] {
-        const experiences = localStorage.getItem('experiences');
+    public get(): Experience[] {
+        const experiences = localStorage.getItem("experiences");
         if (experiences === null) {
             return [];
         }
         return JSON.parse(experiences);
     }
 
-    update(experience: Experience): void {
+    public update(experience: Experience): void {
         throw new Error("Method not implemented.");
     }
 }

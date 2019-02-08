@@ -1,21 +1,21 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 import { TagList } from "./TagList";
 
-type AddExperienceProps = {
+type Props = {
     name?: string,
     onAdd(name: string, tag: string): void,
     onClose(): void,
     isOpen: boolean,
     tags: string[],
-}
+};
 
-type AddExperienceState = {
+type State = {
     name: string,
     tag: string,
 };
 
-export class AddExperienceDialog extends React.Component<AddExperienceProps, AddExperienceState> {
-    constructor(props: AddExperienceProps) {
+export class AddExperienceDialog extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             name: this.props.name || "",
@@ -27,15 +27,15 @@ export class AddExperienceDialog extends React.Component<AddExperienceProps, Add
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    private handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         this.setState({ name: event.target.value });
     }
 
-    private handleClose() {
+    private handleClose(): void {
         this.props.onClose();
     }
 
-    private handleSubmit(event: React.FormEvent) {
+    private handleSubmit(event: React.FormEvent): void {
         event.preventDefault();
         this.props.onAdd(this.state.name, this.state.tag);
     }

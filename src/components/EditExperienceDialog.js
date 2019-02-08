@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { TagList } from "./TagList";
 export class EditExperienceDialog extends React.Component {
     constructor(props) {
@@ -6,7 +6,7 @@ export class EditExperienceDialog extends React.Component {
         this.state = {
             name: this.props.name || "",
             tag: "",
-            last: null
+            last: null,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
@@ -24,7 +24,7 @@ export class EditExperienceDialog extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        let experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
+        const experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
         this.props.onSave(experience);
     }
     render() {

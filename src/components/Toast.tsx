@@ -1,8 +1,8 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 type ToastProps = {
     show: boolean
-}
+};
 
 export const Toast: React.FunctionComponent<ToastProps> = (props: ToastProps) => {
     let className = "toast fixed-bottom bg-dark text-white mx-auto mb-3 fade";

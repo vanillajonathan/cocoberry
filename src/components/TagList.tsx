@@ -1,10 +1,10 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 type TagProps = {
     activeTag: string,
     onClick(tag: string): void,
     tags: string[],
-}
+};
 
 export class TagList extends React.Component<TagProps> {
     constructor(props: TagProps) {

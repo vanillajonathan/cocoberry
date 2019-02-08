@@ -1,17 +1,17 @@
-﻿import * as React from 'react';
-import { Experience } from "../experience";
+﻿import * as React from "react";
+import { IExperience as Experience } from "../IExperience";
 
 type PreferencesProps = {
     export: Experience[];
     onImport(experience: Experience[]): void;
     onNavigation(component: string): void;
-}
+};
 
 type PreferencesState = {
-    id: string,
-    name: string,
-    last?: number | null,
-    tag?: string,
+    id: string;
+    name: string;
+    last?: number | null;
+    tag?: string;
 };
 
 export class Preferences extends React.Component<PreferencesProps, PreferencesState> {
@@ -26,14 +26,14 @@ export class Preferences extends React.Component<PreferencesProps, PreferencesSt
         this.fileInput = React.createRef();
     }
 
-    private handleExport() {
+    private handleExport(): void {
         const json = JSON.stringify(this.props.export);
         const file = new File([json], "cocoberry.json", { type: "octet/stream" });
         const url = window.URL.createObjectURL(file);
         window.location.assign(url);
     }
 
-    private handleSubmit(event: React.FormEvent) {
+    private handleSubmit(event: React.FormEvent): void {
         event.preventDefault();
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -41,12 +41,13 @@ export class Preferences extends React.Component<PreferencesProps, PreferencesSt
                 try {
                     const experiences = JSON.parse(reader.result) as Experience[];
                     this.props.onImport(experiences);
-                } catch(e) {
+                } catch (e) {
                     alert(e);
                 }
             }
-        }
-        reader.readAsText(this.fileInput.current.files[0]);
+        };
+        const file: File = this.fileInput.current.files[0];
+        reader.readAsText(file);
     }
 
     render() {
