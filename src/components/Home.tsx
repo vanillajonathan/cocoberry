@@ -1,14 +1,15 @@
 ﻿import * as React from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
-import { IExperience as Experience } from "../IExperience";
-import { ExpList } from "./ExpList";
+import { IExperience } from "../IExperience";
+import { ExperienceList as ExpList } from "./ExperienceList";
 import { OptionsSheet } from "./OptionsSheet";
+import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
 import "./Home.css";
 
 interface IProps {
-    experiences: Experience[];
+    experiences: IExperience[];
     onAddExperience(name: string, tag: string): void;
     onClick(key: string): void;
     onNavigation(component: string): void;
@@ -20,6 +21,7 @@ interface IState {
     search: string;
     showDialog: boolean;
     showEditDialog: boolean;
+    showNeverCard: boolean;
     showOptions: boolean;
     showTags: boolean;
     tag: string;
@@ -34,6 +36,7 @@ export class Home extends React.Component<IProps, IState> {
             search: "",
             showDialog: false,
             showEditDialog: false,
+            showNeverCard: true,
             showOptions: false,
             showTags: false,
             tag: ""
@@ -49,6 +52,7 @@ export class Home extends React.Component<IProps, IState> {
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
         this.handleEditOpenClick = this.handleEditOpenClick.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
+        this.randomExperience = this.randomExperience.bind(this);
     }
 
     private handleAddExperience(name: string, tag: string): void {
@@ -72,7 +76,7 @@ export class Home extends React.Component<IProps, IState> {
         this.setState({ showEditDialog: true });
     }
 
-    private handleEditSaveClick(experience: Experience): void {
+    private handleEditSaveClick(experience: IExperience): void {
         this.setState({ showEditDialog: false });
     }
 
@@ -95,8 +99,12 @@ export class Home extends React.Component<IProps, IState> {
         this.setState({ showDialog: false });
     }
 
+    private randomExperience(experiences: IExperience[]): IExperience {
+        return experiences[Math.floor(Math.random() * experiences.length)];
+    }
+
     render() {
-        let experiences: Experience[];
+        let experiences: IExperience[];
         if (this.state.search !== "" || this.state.tag !== "") {
             experiences = this.props.experiences.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()));
             if (this.state.tag !== "") {
@@ -129,6 +137,9 @@ export class Home extends React.Component<IProps, IState> {
                     }
                 </header>
                 <main className="App container">
+                    {this.state.showNeverCard && this.state.search === "" && experiences.length !== 0 &&
+                        <NeverCard experience={this.randomExperience(this.props.experiences.filter(x => x.last === null))} onClick={this.handleEditOpenClick} />
+                    }
                     <ExpList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />
                     {this.state.search !== "" && experiences.length === 0 &&
                         <React.Fragment>

@@ -37,25 +37,40 @@ const experiences: NewExperience[] = [
     { name: "Eat tomato 🍅", last: new Date(2018, 10, 1).getTime(), tag: "vegetable" },
     { name: "Eat strawberry 🍓", last: new Date(2018, 10, 1).getTime(), tag: "fruit" },
     { name: "Eat watermelon 🍉", last: new Date(2017, 4, 3).getTime(), tag: "fruit" },
+    { name: "Get a massage 💆‍♂️💆‍♀️", tag: "activity" },
     { name: "Bake a applepie 🥧🍪", last: new Date(2018, 7, 13).getTime() },
+    { name: "Basketball 🏀", tag: "activity" },
     { name: "Bike 🚴", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Climb 🧗", last: null, tag: "activity" },
+    { name: "Cold shower 🥶🚿", tag: "activity" },
     { name: "Dance 💃🕺", last: new Date(2019, 0, 13).getTime(), tag: "activity" },
+    { name: "Fasting 🍽" },
+    { name: "Football ⚽", tag: "activity" },
     { name: "Guitar 🎸", last: null, tag: "activity" },
-    { name: "Ice Skate ⛸️", last: new Date(2019, 0, 13).getTime(), tag: "activity" },
+    { name: "Ice bath 🥶🛀", last: new Date(2019, 0, 13).getTime(), tag: "activity" },
+    { name: "Ice skate ⛸️", last: new Date(2019, 0, 13).getTime(), tag: "activity" },
     { name: "Meditate 🧘‍", last: new Date(2019, 0, 13).getTime(), tag: "activity" },
     { name: "Read 📖", last: new Date(2019, 0, 13).getTime(), tag: "activity" },
     { name: "Run 🏃", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Paint 🎨", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Play chess ♟️", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
+    { name: "Sauna 🧖‍♂️🧖‍♀️", tag: "activity" },
+    { name: "Ski 🎿", tag: "activity" },
     { name: "Swim 🏊", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Theatre 🎭", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Yoga 🧘", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
+    { name: "Watch a movie 🎬", last: null, tag: "activity" },
     { name: "Wrestle 🤼", last: null, tag: "activity" },
+    { name: "Cook pasta 🍝", last: null },
+    { name: "Beach 🏖", last: null, tag: "places" },
+    { name: "Botanical garden 🌿", last: null, tag: "places" },
+    { name: "Cemetery ⚱️", last: null, tag: "places" },
+    { name: "Museum 🖼", last: null, tag: "places" },
+    { name: "Park 🏞", last: null, tag: "places" },
 ];
 
 const storage: AppStorage = new LocalStorage();
-const tags: string[] = ["Activity", "Fruit", "Vegetable"];
+const tags: string[] = ["Activity", "Fruit", "Places", "Vegetable"];
 
 ReactDOM.render(<App seed={experiences} storage={storage} tags={tags} />, document.getElementById("root"));
 

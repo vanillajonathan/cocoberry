@@ -8,7 +8,7 @@ type ExpListProps = {
     onEdit(id: string): void,
 };
 
-export class ExpList extends React.Component<ExpListProps> {
+export class ExperienceList extends React.Component<ExpListProps> {
     constructor(props: ExpListProps) {
         super(props);
     }

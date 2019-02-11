@@ -1,8 +1,9 @@
 import * as React from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
-import { ExpList } from "./ExpList";
+import { ExperienceList as ExpList } from "./ExperienceList";
 import { OptionsSheet } from "./OptionsSheet";
+import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
 import "./Home.css";
 export class Home extends React.Component {
@@ -13,6 +14,7 @@ export class Home extends React.Component {
             search: "",
             showDialog: false,
             showEditDialog: false,
+            showNeverCard: true,
             showOptions: false,
             showTags: false,
             tag: ""
@@ -27,6 +29,7 @@ export class Home extends React.Component {
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
         this.handleEditOpenClick = this.handleEditOpenClick.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
+        this.randomExperience = this.randomExperience.bind(this);
     }
     handleAddExperience(name, tag) {
         this.setState({ showDialog: false });
@@ -62,6 +65,9 @@ export class Home extends React.Component {
     handleClose() {
         this.setState({ showDialog: false });
     }
+    randomExperience(experiences) {
+        return experiences[Math.floor(Math.random() * experiences.length)];
+    }
     render() {
         let experiences;
         if (this.state.search !== "" || this.state.tag !== "") {
@@ -88,6 +94,8 @@ export class Home extends React.Component {
                     React.createElement("div", { className: "container" },
                         React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: this.handleTagClick }))),
             React.createElement("main", { className: "App container" },
+                this.state.showNeverCard && this.state.search === "" && experiences.length !== 0 &&
+                    React.createElement(NeverCard, { experience: this.randomExperience(this.props.experiences.filter(x => x.last === null)), onClick: this.handleEditOpenClick }),
                 React.createElement(ExpList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
                 this.state.search !== "" && experiences.length === 0 &&
                     React.createElement(React.Fragment, null,
