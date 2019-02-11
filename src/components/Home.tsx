@@ -137,7 +137,7 @@ export class Home extends React.Component<IProps, IState> {
                     }
                 </header>
                 <main className="App container">
-                    {this.state.showNeverCard && this.state.search === "" && experiences.length !== 0 &&
+                    {this.state.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
                         <NeverCard experience={this.randomExperience(this.props.experiences.filter(x => x.last === null))} onClick={this.handleEditOpenClick} />
                     }
                     <ExpList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />
