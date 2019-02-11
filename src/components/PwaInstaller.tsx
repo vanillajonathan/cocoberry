@@ -1,10 +1,10 @@
 ﻿import * as React from "react";
 
-type PwaInstallerState = {
+interface IState {
     showInstallPrompt: boolean;
 };
 
-export class PwaInstaller extends React.Component<{}, PwaInstallerState> {
+export class PwaInstaller extends React.Component<{}, IState> {
     private deferredPrompt: any;
 
     constructor(props: {}) {

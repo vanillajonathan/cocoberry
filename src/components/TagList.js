@@ -1,4 +1,5 @@
-import * as React from 'react';
+import * as React from "react";
+;
 export class TagList extends React.Component {
     constructor(props) {
         super(props);

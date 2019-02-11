@@ -1,10 +1,10 @@
 ﻿import * as React from "react";
 
-type ToastProps = {
-    show: boolean
+interface IProps {
+    show: boolean;
 };
 
-export const Toast: React.FunctionComponent<ToastProps> = (props: ToastProps) => {
+export const Toast: React.FunctionComponent<IProps> = (props: IProps) => {
     let className = "toast fixed-bottom bg-dark text-white mx-auto mb-3 fade";
     if (props.show) {
         className += " show";

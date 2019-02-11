@@ -1,13 +1,13 @@
 ﻿import * as React from "react";
 
-type TagProps = {
-    activeTag: string,
-    onClick(tag: string): void,
-    tags: string[],
+interface IProps {
+    activeTag: string;
+    onClick(tag: string): void;
+    tags: string[];
 };
 
-export class TagList extends React.Component<TagProps> {
-    constructor(props: TagProps) {
+export class TagList extends React.Component<IProps> {
+    constructor(props: IProps) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }

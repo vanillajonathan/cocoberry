@@ -2,14 +2,14 @@
 import moment from "moment";
 import { IExperience as Experience } from "../IExperience";
 
-type ExpListProps = {
-    experiences: Experience[],
-    onClick(id: string): void,
-    onEdit(id: string): void,
+interface IProps {
+    experiences: Experience[];
+    onClick(id: string): void;
+    onEdit(id: string): void;
 };
 
-export class ExperienceList extends React.Component<ExpListProps> {
-    constructor(props: ExpListProps) {
+export class ExperienceList extends React.Component<IProps> {
+    constructor(props: IProps) {
         super(props);
     }
 
@@ -44,37 +44,37 @@ export class ExperienceList extends React.Component<ExpListProps> {
 
         return (
             <React.Fragment>
-                <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={this.props.experiences.sort(this.compare)} />
+                <ExperienceListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={this.props.experiences.sort(this.compare)} />
 
                 {weekAgo.length > 0 &&
                     <React.Fragment>
                         <h2 className="h5">A week ago</h2>
-                        <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={weekAgo}/>
+                        <ExperienceListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={weekAgo}/>
                     </React.Fragment>}
 
                 {monthAgo.length > 0 &&
                     <React.Fragment>
                         <h2 className="h5">A month ago</h2>
-                        <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={monthAgo}/>
+                        <ExperienceListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={monthAgo}/>
                     </React.Fragment>}
 
                 {yearAgo.length > 0 &&
                     <React.Fragment>
                         <h2 className="h5">A year ago</h2>
-                        <ExpListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={yearAgo}/>
+                        <ExperienceListGroup onClick={this.props.onClick} onEdit={this.props.onEdit} experiences={yearAgo}/>
                     </React.Fragment>}
             </React.Fragment>
         );
     }
 }
 
-type ExpListGroupProps = {
+interface IExperienceListGroupProps {
     experiences: Experience[];
     onClick(id: string): void;
     onEdit(id: string): void;
 };
 
-const ExpListGroup: React.FunctionComponent<ExpListGroupProps> = (props: ExpListGroupProps) => (
+const ExperienceListGroup: React.FunctionComponent<IExperienceListGroupProps> = (props: IExperienceListGroupProps) => (
     <div className="list-group mb-3">
         {props.experiences.map(experience =>
             <a className="list-group-item list-group-item-action" key={experience.id} onClick={() => props.onClick(experience.id)}>

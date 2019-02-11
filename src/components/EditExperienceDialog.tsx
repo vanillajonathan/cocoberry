@@ -2,7 +2,7 @@
 import { TagList } from "./TagList";
 import { IExperience as Experience } from "../IExperience";
 
-type EditExperienceProps = {
+interface IProps {
     name?: string;
     onClose(): void;
     onSave(experience: Experience): void;
@@ -10,14 +10,14 @@ type EditExperienceProps = {
     tags: string[];
 };
 
-type EditExperienceState = {
+interface IState {
     name: string;
     tag: string;
     last: number | null;
 };
 
-export class EditExperienceDialog extends React.Component<EditExperienceProps, EditExperienceState> {
-    constructor(props: EditExperienceProps) {
+export class EditExperienceDialog extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
         this.state = {
             name: this.props.name || "",

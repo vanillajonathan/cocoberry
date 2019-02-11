@@ -1,11 +1,11 @@
 import * as React from "react";
 
-type BottomSheetProps = {
+interface IBottomSheetProps {
     onClose(): void;
     show: boolean;
 };
 
-class BottomSheet extends React.Component<BottomSheetProps> {
+class BottomSheet extends React.Component<IBottomSheetProps> {
     render() {
         let className = "fixed-bottom fade";
         let backdropClassName = "fade";
@@ -25,7 +25,7 @@ class BottomSheet extends React.Component<BottomSheetProps> {
     }
 }
 
-type OptionSheetProps = {
+interface IOptionSheetProps {
     id: string;
     onClose(): void;
     onDone(id: string): void;
@@ -34,7 +34,7 @@ type OptionSheetProps = {
     show: boolean;
 };
 
-export class OptionsSheet extends React.Component<OptionSheetProps> {
+export class OptionsSheet extends React.Component<IOptionSheetProps> {
     render() {
         return (
             <BottomSheet show={this.props.show} onClose={this.props.onClose}>

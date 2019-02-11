@@ -1,17 +1,17 @@
 ﻿import * as React from "react";
 import { TagList } from "./TagList";
 
-type Props = {
-    name?: string,
-    onAdd(name: string, tag: string): void,
-    onClose(): void,
-    isOpen: boolean,
-    tags: string[],
+interface Props {
+    name?: string;
+    onAdd(name: string, tag: string): void;
+    onClose(): void;
+    isOpen: boolean;
+    tags: string[];
 };
 
-type State = {
-    name: string,
-    tag: string,
+interface State {
+    name: string;
+    tag: string;
 };
 
 export class AddExperienceDialog extends React.Component<Props, State> {
