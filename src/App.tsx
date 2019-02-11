@@ -1,20 +1,20 @@
 ﻿import * as React from "react";
 import uuid from "uuid/v4";
-import { IStorage as AppStorage, INewExperience as NewExperience } from "./IStorage";
-import { IExperience as Experience } from "./IExperience";
+import { IStorage, INewExperience } from "./IStorage";
+import { IExperience } from "./IExperience";
 import { Home } from "./components/Home";
 import { Preferences } from "./components/Preferences";
 import { PwaInstaller } from "./components/PwaInstaller";
 import { Toast } from "./components/Toast";
 
 interface IProps {
-    seed: NewExperience[],
-    storage: AppStorage;
+    seed: INewExperience[],
+    storage: IStorage;
     tags: string[];
 }
 
 interface IState {
-    experiences: Experience[];
+    experiences: IExperience[];
     nav: string;
     showToast: boolean;
 }
@@ -46,7 +46,7 @@ class App extends React.Component<IProps, IState> {
     }
 
     private handleAddExperience(name: string, tag: string): void {
-        const experience: Experience = {
+        const experience: IExperience = {
             id: uuid(),
             name: name,
             tag: tag,
@@ -65,7 +65,7 @@ class App extends React.Component<IProps, IState> {
         }, 1500);
     }
 
-    private handleImport(experiences: Experience[]): void {
+    private handleImport(experiences: IExperience[]): void {
         this.setState({ experiences: experiences });
     }
 

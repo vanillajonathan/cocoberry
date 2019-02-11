@@ -1,11 +1,11 @@
 ﻿import uuid from "uuid/v4";
-import { IStorage, INewExperience as NewExperience } from "./IStorage";
-import { IExperience as Experience } from "./IExperience";
+import { IStorage, INewExperience } from "./IStorage";
+import { IExperience } from "./IExperience";
 
 export class LocalStorage implements IStorage {
-    public add(experience: NewExperience): void {
+    public add(experience: INewExperience): void {
         const experiences = this.get();
-        const item: Experience = {
+        const item: IExperience = {
             id: uuid(),
             name: experience.name,
             last: experience.last,
@@ -15,10 +15,10 @@ export class LocalStorage implements IStorage {
         localStorage.setItem("experiences", JSON.stringify(experiences));
     }
 
-    public add_many(experiences: NewExperience[]): void {
+    public add_many(experiences: INewExperience[]): void {
         const data = this.get();
         for (const experience of experiences) {
-            const item: Experience = {
+            const item: IExperience = {
                 id: uuid(),
                 name: experience.name,
                 last: experience.last,
@@ -33,7 +33,7 @@ export class LocalStorage implements IStorage {
         throw new Error("Method not implemented.");
     }
 
-    public get(): Experience[] {
+    public get(): IExperience[] {
         const experiences = localStorage.getItem("experiences");
         if (experiences === null) {
             return [];
@@ -41,7 +41,7 @@ export class LocalStorage implements IStorage {
         return JSON.parse(experiences);
     }
 
-    public update(experience: Experience): void {
+    public update(experience: IExperience): void {
         throw new Error("Method not implemented.");
     }
 }

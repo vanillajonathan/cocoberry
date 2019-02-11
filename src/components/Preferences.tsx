@@ -1,9 +1,9 @@
 ﻿import * as React from "react";
-import { IExperience as Experience } from "../IExperience";
+import { IExperience } from "../IExperience";
 
 interface IProps {
-    export: Experience[];
-    onImport(experience: Experience[]): void;
+    export: IExperience[];
+    onImport(experience: IExperience[]): void;
     onNavigation(component: string): void;
 };
 
@@ -39,7 +39,7 @@ export class Preferences extends React.Component<IProps, IState> {
         reader.onloadend = () => {
             if (typeof reader.result === "string") {
                 try {
-                    const experiences = JSON.parse(reader.result) as Experience[];
+                    const experiences = JSON.parse(reader.result) as IExperience[];
                     this.props.onImport(experiences);
                 } catch (e) {
                     alert(e);

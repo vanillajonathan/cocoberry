@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
-import { ExperienceList as ExpList } from "./ExperienceList";
+import { ExperienceList } from "./ExperienceList";
 import { OptionsSheet } from "./OptionsSheet";
 import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
@@ -96,7 +96,7 @@ export class Home extends React.Component {
             React.createElement("main", { className: "App container" },
                 this.state.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
                     React.createElement(NeverCard, { experience: this.randomExperience(this.props.experiences.filter(x => x.last === null)), onClick: this.handleEditOpenClick }),
-                React.createElement(ExpList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
+                React.createElement(ExperienceList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
                 this.state.search !== "" && experiences.length === 0 &&
                     React.createElement(React.Fragment, null,
                         React.createElement("p", null, "There are no matched experiences."),

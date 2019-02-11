@@ -1,4 +1,4 @@
-﻿import { IExperience as Experience } from "./IExperience";
+﻿import { IExperience } from "./IExperience";
 
 export interface INewExperience {
     name: string;
@@ -10,6 +10,6 @@ export interface IStorage {
     add(experience: INewExperience): void;
     add_many(experiences: INewExperience[]): void;
     delete(id: string): void;
-    get(): Experience[];
-    update(experience: Experience): void;
+    get(): IExperience[];
+    update(experience: IExperience): void;
 }

@@ -1,9 +1,9 @@
 ﻿import * as React from "react";
 import moment from "moment";
-import { IExperience as Experience } from "../IExperience";
+import { IExperience } from "../IExperience";
 
 interface IProps {
-    experiences: Experience[];
+    experiences: IExperience[];
     onClick(id: string): void;
     onEdit(id: string): void;
 };
@@ -13,7 +13,7 @@ export class ExperienceList extends React.Component<IProps> {
         super(props);
     }
 
-    private compare(a: Experience, b: Experience): number {
+    private compare(a: IExperience, b: IExperience): number {
         if (a.last == null || b.last == null) {
             return 0;
         }
@@ -69,7 +69,7 @@ export class ExperienceList extends React.Component<IProps> {
 }
 
 interface IExperienceListGroupProps {
-    experiences: Experience[];
+    experiences: IExperience[];
     onClick(id: string): void;
     onEdit(id: string): void;
 };

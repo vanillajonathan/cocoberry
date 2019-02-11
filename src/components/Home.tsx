@@ -2,7 +2,7 @@
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
 import { IExperience } from "../IExperience";
-import { ExperienceList as ExpList } from "./ExperienceList";
+import { ExperienceList } from "./ExperienceList";
 import { OptionsSheet } from "./OptionsSheet";
 import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
@@ -140,7 +140,7 @@ export class Home extends React.Component<IProps, IState> {
                     {this.state.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
                         <NeverCard experience={this.randomExperience(this.props.experiences.filter(x => x.last === null))} onClick={this.handleEditOpenClick} />
                     }
-                    <ExpList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />
+                    <ExperienceList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />
                     {this.state.search !== "" && experiences.length === 0 &&
                         <React.Fragment>
                             <p>There are no matched experiences.</p>

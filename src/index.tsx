@@ -3,13 +3,13 @@ import * as ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { IStorage as AppStorage, INewExperience as NewExperience } from "./IStorage";
+import { IStorage, INewExperience } from "./IStorage";
 import { LocalStorage } from "./localStorage";
 //import * as data from "./seed.json";
 
 import seed from "./seed.json";
 
-const experiences: NewExperience[] = [
+const experiences: INewExperience[] = [
     { name: "Eat apple 🍏", last: new Date(2018, 4, 3).getTime(), tag: "fruit" },
     { name: "Eat avocado 🥑", last: new Date(2016, 4, 3).getTime(), tag: "fruit" },
     { name: "Eat banana 🍌", last: new Date(2017, 4, 3).getTime(), tag: "fruit" },
@@ -69,7 +69,7 @@ const experiences: NewExperience[] = [
     { name: "Park 🏞", last: null, tag: "places" },
 ];
 
-const storage: AppStorage = new LocalStorage();
+const storage: IStorage = new LocalStorage();
 const tags: string[] = ["Activity", "Fruit", "Places", "Vegetable"];
 
 ReactDOM.render(<App seed={experiences} storage={storage} tags={tags} />, document.getElementById("root"));

@@ -1,11 +1,11 @@
 ﻿import * as React from "react";
 import { TagList } from "./TagList";
-import { IExperience as Experience } from "../IExperience";
+import { IExperience } from "../IExperience";
 
 interface IProps {
     name?: string;
     onClose(): void;
-    onSave(experience: Experience): void;
+    onSave(experience: IExperience): void;
     isOpen: boolean;
     tags: string[];
 };
@@ -45,7 +45,7 @@ export class EditExperienceDialog extends React.Component<IProps, IState> {
 
     private handleSubmit(event: React.FormEvent): void {
         event.preventDefault();
-        const experience: Experience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
+        const experience: IExperience = { id: "", name: this.state.name, tag: this.state.tag, last: this.state.last };
         this.props.onSave(experience);
     }
 
