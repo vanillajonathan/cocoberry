@@ -1,5 +1,4 @@
 import * as React from "react";
-;
 class BottomSheet extends React.Component {
     render() {
         let className = "fixed-bottom fade";
@@ -14,7 +13,6 @@ class BottomSheet extends React.Component {
                 React.createElement("div", { className: backdropClassName, onClick: this.props.onClose })));
     }
 }
-;
 export class OptionsSheet extends React.Component {
     render() {
         return (React.createElement(BottomSheet, { show: this.props.show, onClose: this.props.onClose },

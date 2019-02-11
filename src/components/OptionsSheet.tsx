@@ -3,7 +3,7 @@ import * as React from "react";
 interface IBottomSheetProps {
     onClose(): void;
     show: boolean;
-};
+}
 
 class BottomSheet extends React.Component<IBottomSheetProps> {
     render() {
@@ -32,7 +32,7 @@ interface IOptionSheetProps {
     onEdit(id: string): void;
     onDelete(id: string): void;
     show: boolean;
-};
+}
 
 export class OptionsSheet extends React.Component<IOptionSheetProps> {
     render() {

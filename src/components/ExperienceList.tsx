@@ -6,7 +6,7 @@ interface IProps {
     experiences: IExperience[];
     onClick(id: string): void;
     onEdit(id: string): void;
-};
+}
 
 export class ExperienceList extends React.Component<IProps> {
     constructor(props: IProps) {
@@ -72,7 +72,7 @@ interface IExperienceListGroupProps {
     experiences: IExperience[];
     onClick(id: string): void;
     onEdit(id: string): void;
-};
+}
 
 const ExperienceListGroup: React.FunctionComponent<IExperienceListGroupProps> = (props: IExperienceListGroupProps) => (
     <div className="list-group mb-3">

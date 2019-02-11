@@ -1,7 +1,5 @@
 import * as React from "react";
 import { TagList } from "./TagList";
-;
-;
 export class EditExperienceDialog extends React.Component {
     constructor(props) {
         super(props);

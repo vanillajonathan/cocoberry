@@ -4,7 +4,7 @@ interface IProps {
     activeTag: string;
     onClick(tag: string): void;
     tags: string[];
-};
+}
 
 export class TagList extends React.Component<IProps> {
     constructor(props: IProps) {

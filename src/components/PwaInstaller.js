@@ -1,5 +1,4 @@
 import * as React from "react";
-;
 export class PwaInstaller extends React.Component {
     constructor(props) {
         super(props);
@@ -33,11 +32,10 @@ export class PwaInstaller extends React.Component {
         window.removeEventListener("beforeinstallprompt", this.beforeInstallPrompt);
     }
     render() {
-        return (this.state.showInstallPrompt &&
-            React.createElement("div", { className: "card fixed-bottom" },
-                React.createElement("div", { className: "card-body" },
-                    React.createElement("p", null, "Install web application?"),
-                    React.createElement("button", { className: "btn btn-primary", onClick: this.handleInstall }, "Install"))));
+        return this.state.showInstallPrompt && (React.createElement("div", { className: "card fixed-bottom" },
+            React.createElement("div", { className: "card-body" },
+                React.createElement("p", null, "Install web application?"),
+                React.createElement("button", { className: "btn btn-primary", onClick: this.handleInstall }, "Install"))));
     }
 }
 //# sourceMappingURL=PwaInstaller.js.map

@@ -5,16 +5,9 @@ interface IProps {
     export: IExperience[];
     onImport(experience: IExperience[]): void;
     onNavigation(component: string): void;
-};
+}
 
-interface IState {
-    id: string;
-    name: string;
-    last?: number | null;
-    tag?: string;
-};
-
-export class Preferences extends React.Component<IProps, IState> {
+export class Preferences extends React.Component<IProps> {
     private readonly fileInput: any;
 
     constructor(props: IProps) {

@@ -4,5 +4,8 @@
     "jsx-no-lambda": false,
     "member-ordering": false,
     "ordered-imports": false
+  },
+  "linterOptions": {
+    "exclude": [ "src/serviceWorker.ts" ]
   }
 }

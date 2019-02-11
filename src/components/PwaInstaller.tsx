@@ -2,7 +2,7 @@
 
 interface IState {
     showInstallPrompt: boolean;
-};
+}
 
 export class PwaInstaller extends React.Component<{}, IState> {
     private deferredPrompt: any;
@@ -44,7 +44,7 @@ export class PwaInstaller extends React.Component<{}, IState> {
     }
 
     render() {
-        return (this.state.showInstallPrompt &&
+        return this.state.showInstallPrompt && (
             <div className="card fixed-bottom">
                 <div className="card-body">
                     <p>Install web application?</p>

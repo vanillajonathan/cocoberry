@@ -1,6 +1,4 @@
 import * as React from "react";
-;
-;
 export class Preferences extends React.Component {
     constructor(props) {
         super(props);

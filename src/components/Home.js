@@ -17,7 +17,7 @@ export class Home extends React.Component {
             showNeverCard: true,
             showOptions: false,
             showTags: false,
-            tag: ""
+            tag: "",
         };
         // This binding is necessary to make `this` work in the callback
         this.handleAddExperience = this.handleAddExperience.bind(this);
@@ -55,12 +55,10 @@ export class Home extends React.Component {
     }
     handleDropdownClick(event) {
         event.target.parentElement.classList.toggle("dropup");
-        this.setState(prevState => ({
-            showTags: !prevState.showTags
-        }));
+        this.setState(prevState => ({ showTags: !prevState.showTags }));
     }
     handleTagClick(tag) {
-        this.setState({ tag: tag });
+        this.setState({ tag });
     }
     handleClose() {
         this.setState({ showDialog: false });

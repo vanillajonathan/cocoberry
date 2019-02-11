@@ -1,21 +1,21 @@
 ﻿import * as React from "react";
 import { TagList } from "./TagList";
 
-interface Props {
+interface IProps {
     name?: string;
     onAdd(name: string, tag: string): void;
     onClose(): void;
     isOpen: boolean;
     tags: string[];
-};
+}
 
-interface State {
+interface IState {
     name: string;
     tag: string;
-};
+}
 
-export class AddExperienceDialog extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class AddExperienceDialog extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
         this.state = {
             name: this.props.name || "",
@@ -66,7 +66,7 @@ export class AddExperienceDialog extends React.Component<Props, State> {
                                     </div>
                                     <div className="form-group">
                                         <label>Tag</label>
-                                        <TagList activeTag={this.state.tag} tags={this.props.tags} onClick={tag => this.setState({ tag: tag })} />
+                                        <TagList activeTag={this.state.tag} tags={this.props.tags} onClick={tag => this.setState({ tag })} />
                                     </div>
                                 </div>
                                 <div className="modal-footer">
@@ -77,7 +77,7 @@ export class AddExperienceDialog extends React.Component<Props, State> {
                         </div>
                     </div>
                 </div>
-                <div className={backdropClassName}></div>
+                <div className={backdropClassName} />
             </React.Fragment>
         );
     }

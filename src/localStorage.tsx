@@ -7,8 +7,8 @@ export class LocalStorage implements IStorage {
         const experiences = this.get();
         const item: IExperience = {
             id: uuid(),
-            name: experience.name,
             last: experience.last,
+            name: experience.name,
             tag: experience.tag,
         };
         experiences.push(item);
@@ -20,8 +20,8 @@ export class LocalStorage implements IStorage {
         for (const experience of experiences) {
             const item: IExperience = {
                 id: uuid(),
-                name: experience.name,
                 last: experience.last,
+                name: experience.name,
                 tag: experience.tag,
             };
             data.push(item);

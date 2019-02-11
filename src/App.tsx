@@ -8,7 +8,7 @@ import { PwaInstaller } from "./components/PwaInstaller";
 import { Toast } from "./components/Toast";
 
 interface IProps {
-    seed: INewExperience[],
+    seed: INewExperience[];
     storage: IStorage;
     tags: string[];
 }
@@ -22,7 +22,7 @@ interface IState {
 class App extends React.Component<IProps, IState> {
     static defaultProps = {
         seed: [],
-        tags: []
+        tags: [],
     };
 
     private timerId: number = 0;
@@ -37,7 +37,7 @@ class App extends React.Component<IProps, IState> {
             experiences = props.storage.get();
         }
 
-        this.state = { experiences: experiences, nav: "", showToast: false };
+        this.state = { experiences, nav: "", showToast: false };
 
         this.handleAddExperience = this.handleAddExperience.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -48,8 +48,8 @@ class App extends React.Component<IProps, IState> {
     private handleAddExperience(name: string, tag: string): void {
         const experience: IExperience = {
             id: uuid(),
-            name: name,
-            tag: tag,
+            name,
+            tag,
         };
         this.setState(prevState => ({ experiences: [...prevState.experiences, experience] }));
     }

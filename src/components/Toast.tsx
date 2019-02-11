@@ -2,7 +2,7 @@
 
 interface IProps {
     show: boolean;
-};
+}
 
 export const Toast: React.FunctionComponent<IProps> = (props: IProps) => {
     let className = "toast fixed-bottom bg-dark text-white mx-auto mb-3 fade";

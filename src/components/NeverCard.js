@@ -1,5 +1,4 @@
 import * as React from "react";
-;
 export const NeverCard = (props) => {
     return (React.createElement("div", { className: "card mb-3" },
         React.createElement("div", { className: "card-body" },

@@ -39,7 +39,7 @@ export class Home extends React.Component<IProps, IState> {
             showNeverCard: true,
             showOptions: false,
             showTags: false,
-            tag: ""
+            tag: "",
         };
 
         // This binding is necessary to make `this` work in the callback
@@ -86,13 +86,11 @@ export class Home extends React.Component<IProps, IState> {
 
     private handleDropdownClick(event: any): void {
         event.target.parentElement.classList.toggle("dropup");
-        this.setState(prevState => ({
-            showTags: !prevState.showTags
-        }));
+        this.setState(prevState => ({ showTags: !prevState.showTags }));
     }
 
     private handleTagClick(tag: string): void {
-        this.setState({ tag: tag });
+        this.setState({ tag });
     }
 
     private handleClose(): void {
@@ -123,7 +121,7 @@ export class Home extends React.Component<IProps, IState> {
                             <div className="input-group">
                                 <input className="form-control" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={this.handleChange} aria-label="Search" />
                                 <div className="input-group-append mr-sm-2">
-                                    <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={this.handleDropdownClick} aria-label="Show tags"></button>
+                                    <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={this.handleDropdownClick} aria-label="Show tags" />
                                 </div>
                             </div>
                         </div>
@@ -156,7 +154,8 @@ export class Home extends React.Component<IProps, IState> {
                     onClose={this.handleCloseOptions}
                     onDelete={this.handleCloseOptions}
                     onDone={this.handleCloseOptions}
-                    onEdit={this.handleCloseOptions} />
+                    onEdit={this.handleCloseOptions}
+                />
             </React.Fragment>
         );
     }

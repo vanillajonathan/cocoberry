@@ -8,13 +8,13 @@ interface IProps {
     onSave(experience: IExperience): void;
     isOpen: boolean;
     tags: string[];
-};
+}
 
 interface IState {
+    last: number | null;
     name: string;
     tag: string;
-    last: number | null;
-};
+}
 
 export class EditExperienceDialog extends React.Component<IProps, IState> {
     constructor(props: IProps) {
@@ -90,7 +90,7 @@ export class EditExperienceDialog extends React.Component<IProps, IState> {
                         </div>
                     </div>
                 </div>
-                <div className={backdropClassName}></div>
+                <div className={backdropClassName} />
             </React.Fragment>
         );
     }

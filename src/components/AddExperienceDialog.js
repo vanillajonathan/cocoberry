@@ -1,7 +1,5 @@
 import * as React from "react";
 import { TagList } from "./TagList";
-;
-;
 export class AddExperienceDialog extends React.Component {
     constructor(props) {
         super(props);
@@ -45,7 +43,7 @@ export class AddExperienceDialog extends React.Component {
                                     React.createElement("input", { className: "form-control", id: "name", type: "text", value: this.state.name, onChange: this.handleChange, autoFocus: true, required: true })),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", null, "Tag"),
-                                    React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: tag => this.setState({ tag: tag }) }))),
+                                    React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: tag => this.setState({ tag }) }))),
                             React.createElement("div", { className: "modal-footer" },
                                 React.createElement("button", { type: "button", className: "btn btn-secondary", "data-dismiss": "modal", onClick: this.handleClose }, "Close"),
                                 React.createElement("button", { type: "submit", className: "btn btn-primary" }, "Add")))))),
