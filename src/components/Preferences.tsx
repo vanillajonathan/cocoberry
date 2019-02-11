@@ -1,23 +1,23 @@
 ﻿import * as React from "react";
 import { IExperience as Experience } from "../IExperience";
 
-type PreferencesProps = {
+interface IProps {
     export: Experience[];
     onImport(experience: Experience[]): void;
     onNavigation(component: string): void;
 };
 
-type PreferencesState = {
+interface IState {
     id: string;
     name: string;
     last?: number | null;
     tag?: string;
 };
 
-export class Preferences extends React.Component<PreferencesProps, PreferencesState> {
+export class Preferences extends React.Component<IProps, IState> {
     private readonly fileInput: any;
 
-    constructor(props: PreferencesProps) {
+    constructor(props: IProps) {
         super(props);
 
         this.handleExport = this.handleExport.bind(this);
