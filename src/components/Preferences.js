@@ -3,6 +3,7 @@ export class Preferences extends React.Component {
     constructor(props) {
         super(props);
         this.handleExport = this.handleExport.bind(this);
+        this.handlePreferenceChanged = this.handlePreferenceChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = React.createRef();
     }
@@ -11,6 +12,12 @@ export class Preferences extends React.Component {
         const file = new File([json], "cocoberry.json", { type: "octet/stream" });
         const url = window.URL.createObjectURL(file);
         window.location.assign(url);
+    }
+    handlePreferenceChanged(event) {
+        const preferences = {
+            showNeverCard: event.currentTarget.checked
+        };
+        this.props.onPreferenceChanged(preferences);
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -35,6 +42,11 @@ export class Preferences extends React.Component {
                 React.createElement("nav", { className: "navbar navbar-expand-lg navbar-light bg-white" },
                     React.createElement("button", { className: "btn btn-outline-success", accessKey: "b", onClick: () => this.props.onNavigation("") }, "Back"))),
             React.createElement("main", { className: "App container" },
+                React.createElement("div", { className: "card" },
+                    React.createElement("div", { className: "card-body" },
+                        React.createElement("div", { className: "custom-control custom-switch" },
+                            React.createElement("input", { className: "custom-control-input", id: "showNeverCard", type: "checkbox", checked: this.props.preferences.showNeverCard, onChange: this.handlePreferenceChanged }),
+                            React.createElement("label", { className: "custom-control-label", htmlFor: "showNeverCard" }, "Show the you-have-never card")))),
                 React.createElement("form", { onSubmit: this.handleSubmit },
                     React.createElement("p", null, "Export and import configuration."),
                     React.createElement("div", { className: "form-group" },

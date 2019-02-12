@@ -13,6 +13,7 @@ interface IProps {
     onAddExperience(name: string, tag: string): void;
     onClick(key: string): void;
     onNavigation(component: string): void;
+    showNeverCard?: boolean;
     tags: string[];
 }
 
@@ -21,7 +22,6 @@ interface IState {
     search: string;
     showDialog: boolean;
     showEditDialog: boolean;
-    showNeverCard: boolean;
     showOptions: boolean;
     showTags: boolean;
     tag: string;
@@ -36,7 +36,6 @@ export class Home extends React.Component<IProps, IState> {
             search: "",
             showDialog: false,
             showEditDialog: false,
-            showNeverCard: true,
             showOptions: false,
             showTags: false,
             tag: "",
@@ -135,7 +134,7 @@ export class Home extends React.Component<IProps, IState> {
                     }
                 </header>
                 <main className="App container">
-                    {this.state.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
+                    {this.props.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
                         <NeverCard experience={this.randomExperience(this.props.experiences.filter(x => x.last === null))} onClick={this.handleEditOpenClick} />
                     }
                     <ExperienceList experiences={experiences} onClick={this.props.onClick} onEdit={this.handleEditOpenClick} />

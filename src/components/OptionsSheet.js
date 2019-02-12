@@ -8,9 +8,9 @@ class BottomSheet extends React.Component {
             backdropClassName += " modal-backdrop show";
         }
         return (this.props.show &&
-            React.createElement(React.Fragment, null,
+            (React.createElement(React.Fragment, null,
                 React.createElement("div", { className: className, tabIndex: -1, role: "dialog", style: { zIndex: 2000 } }, this.props.children),
-                React.createElement("div", { className: backdropClassName, onClick: this.props.onClose })));
+                React.createElement("div", { className: backdropClassName, onClick: this.props.onClose }))));
     }
 }
 export class OptionsSheet extends React.Component {

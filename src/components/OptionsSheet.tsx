@@ -15,12 +15,14 @@ class BottomSheet extends React.Component<IBottomSheetProps> {
         }
         return (
             this.props.show &&
+            (
                 <React.Fragment>
                     <div className={className} tabIndex={-1} role="dialog" style={{ zIndex: 2000 }}>
                         {this.props.children}
                     </div>
                     <div className={backdropClassName} onClick={this.props.onClose} />
                 </React.Fragment>
+            )
         );
     }
 }

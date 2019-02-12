@@ -14,7 +14,6 @@ export class Home extends React.Component {
             search: "",
             showDialog: false,
             showEditDialog: false,
-            showNeverCard: true,
             showOptions: false,
             showTags: false,
             tag: "",
@@ -92,7 +91,7 @@ export class Home extends React.Component {
                     React.createElement("div", { className: "container" },
                         React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: this.handleTagClick }))),
             React.createElement("main", { className: "App container" },
-                this.state.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
+                this.props.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
                     React.createElement(NeverCard, { experience: this.randomExperience(this.props.experiences.filter(x => x.last === null)), onClick: this.handleEditOpenClick }),
                 React.createElement(ExperienceList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
                 this.state.search !== "" && experiences.length === 0 &&
