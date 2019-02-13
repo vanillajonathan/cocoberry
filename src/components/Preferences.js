@@ -1,61 +1,58 @@
 import * as React from "react";
-export class Preferences extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleExport = this.handleExport.bind(this);
-        this.handlePreferenceChanged = this.handlePreferenceChanged.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.fileInput = React.createRef();
-    }
-    handleExport() {
-        const json = JSON.stringify(this.props.export);
+export const Preferences = (props) => {
+    const fileInput = React.createRef();
+    function handleExport() {
+        const json = JSON.stringify(props.export);
         const file = new File([json], "cocoberry.json", { type: "octet/stream" });
         const url = window.URL.createObjectURL(file);
         window.location.assign(url);
     }
-    handlePreferenceChanged(event) {
-        const preferences = {
-            showNeverCard: event.currentTarget.checked
-        };
-        this.props.onPreferenceChanged(preferences);
+    function handleBrowse() {
+        const elem = document.getElementById("file");
+        const input = elem;
+        input.click();
     }
-    handleSubmit(event) {
-        event.preventDefault();
+    function handleImport() {
         const reader = new FileReader();
         reader.onloadend = () => {
             if (typeof reader.result === "string") {
                 try {
                     const experiences = JSON.parse(reader.result);
-                    this.props.onImport(experiences);
+                    props.onImport(experiences);
                 }
                 catch (e) {
                     alert(e);
                 }
             }
         };
-        const file = this.fileInput.current.files[0];
+        const file = fileInput.current.files[0];
         reader.readAsText(file);
     }
-    render() {
-        return (React.createElement(React.Fragment, null,
-            React.createElement("header", { className: "fixed-top shadow-sm" },
-                React.createElement("nav", { className: "navbar navbar-expand-lg navbar-light bg-white" },
-                    React.createElement("button", { className: "btn btn-outline-success", accessKey: "b", onClick: () => this.props.onNavigation("") }, "Back"))),
-            React.createElement("main", { className: "App container" },
-                React.createElement("div", { className: "card" },
-                    React.createElement("div", { className: "card-body" },
-                        React.createElement("div", { className: "custom-control custom-switch" },
-                            React.createElement("input", { className: "custom-control-input", id: "showNeverCard", type: "checkbox", checked: this.props.preferences.showNeverCard, onChange: this.handlePreferenceChanged }),
-                            React.createElement("label", { className: "custom-control-label", htmlFor: "showNeverCard" }, "Show the you-have-never card")))),
-                React.createElement("form", { onSubmit: this.handleSubmit },
-                    React.createElement("p", null, "Export and import configuration."),
-                    React.createElement("div", { className: "form-group" },
-                        React.createElement("label", { htmlFor: "file" }, "File"),
-                        React.createElement("input", { className: "form-control-file", id: "file", type: "file", accept: "application/json", ref: this.fileInput, required: true })),
-                    React.createElement("input", { className: "btn btn-secondary mr-1", type: "submit", value: "Import from file" }),
-                    React.createElement("button", { className: "btn btn-secondary", type: "button", accessKey: "e", onClick: this.handleExport }, "Export to file"))),
-            React.createElement("footer", { className: "container mt-3" },
-                React.createElement("p", null, "Built with \u2764 by Jonathan"))));
+    function handlePreferenceChanged(event) {
+        const preferences = {
+            showNeverCard: event.currentTarget.checked
+        };
+        props.onPreferenceChanged(preferences);
     }
-}
+    return (React.createElement(React.Fragment, null,
+        React.createElement("header", { className: "fixed-top shadow-sm" },
+            React.createElement("nav", { className: "navbar navbar-expand-lg navbar-light bg-white" },
+                React.createElement("button", { className: "btn btn-outline-success", accessKey: "b", onClick: () => props.onNavigation("") }, "Back"))),
+        React.createElement("main", { className: "App container" },
+            React.createElement("div", { className: "list-group mb-3" },
+                React.createElement("div", { className: "list-group-item" },
+                    React.createElement("div", { className: "custom-control custom-switch" },
+                        React.createElement("input", { className: "custom-control-input", id: "showNeverCard", type: "checkbox", checked: props.preferences.showNeverCard, onChange: handlePreferenceChanged }),
+                        React.createElement("label", { className: "custom-control-label", htmlFor: "showNeverCard" }, "Show the you-have-never card")))),
+            React.createElement("div", { className: "card" },
+                React.createElement("div", { className: "card-body" },
+                    React.createElement("h5", { className: "card-title" }, "Export and import experiences"),
+                    React.createElement("p", { className: "card-text" }, "Your experiences can be imported and exported. They are stored in the JSON format."),
+                    React.createElement("input", { className: "form-control-file", id: "file", type: "file", accept: "application/json", onChange: handleImport, ref: fileInput, hidden: true, required: true })),
+                React.createElement("div", { className: "list-group list-group-flush" },
+                    React.createElement("button", { className: "list-group-item list-group-item-action", type: "button", accessKey: "e", onClick: handleBrowse }, "Import from file"),
+                    React.createElement("button", { className: "list-group-item list-group-item-action", type: "button", accessKey: "e", onClick: handleExport }, "Export to file")))),
+        React.createElement("footer", { className: "container mt-3" },
+            React.createElement("p", null, "Built with \u2764 by Jonathan"))));
+};
 //# sourceMappingURL=Preferences.js.map

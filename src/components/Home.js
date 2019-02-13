@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
 import { ExperienceList } from "./ExperienceList";
@@ -6,101 +7,83 @@ import { OptionsSheet } from "./OptionsSheet";
 import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
 import "./Home.css";
-export class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeId: "",
-            search: "",
-            showDialog: false,
-            showEditDialog: false,
-            showOptions: false,
-            showTags: false,
-            tag: "",
-        };
-        // This binding is necessary to make `this` work in the callback
-        this.handleAddExperience = this.handleAddExperience.bind(this);
-        this.handleAddExperienceButtonClick = this.handleAddExperienceButtonClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleOpenOptions = this.handleOpenOptions.bind(this);
-        this.handleCloseOptions = this.handleCloseOptions.bind(this);
-        this.handleDropdownClick = this.handleDropdownClick.bind(this);
-        this.handleEditOpenClick = this.handleEditOpenClick.bind(this);
-        this.handleTagClick = this.handleTagClick.bind(this);
-        this.randomExperience = this.randomExperience.bind(this);
+export const Home = (props) => {
+    const [activeId, setActiveId] = useState("");
+    const [search, setSearch] = useState("");
+    const [showDialog, setShowDialog] = useState(false);
+    const [showEditDialog, setShowEditDialog] = useState(false);
+    const [showOptions, setShowOptions] = useState(false);
+    const [showTags, setShowTags] = useState(false);
+    const [tag, setTag] = useState("");
+    function handleAddExperience(name, tag) {
+        setShowDialog(false);
+        props.onAddExperience(name, tag);
     }
-    handleAddExperience(name, tag) {
-        this.setState({ showDialog: false });
-        this.props.onAddExperience(name, tag);
+    function handleAddExperienceButtonClick() {
+        setShowDialog(true);
     }
-    handleAddExperienceButtonClick() {
-        this.setState({ showDialog: true });
+    function handleOpenOptions() {
+        setShowOptions(true);
     }
-    handleOpenOptions() {
-        this.setState({ showOptions: true });
+    function handleCloseOptions() {
+        setShowOptions(false);
     }
-    handleCloseOptions() {
-        this.setState({ showOptions: false });
+    function handleEditOpenClick(tag) {
+        setShowEditDialog(true);
     }
-    handleEditOpenClick(tag) {
-        this.setState({ showEditDialog: true });
+    function handleEditSaveClick(experience) {
+        setShowEditDialog(false);
     }
-    handleEditSaveClick(experience) {
-        this.setState({ showEditDialog: false });
+    function handleChange(event) {
+        setSearch(event.currentTarget.value);
     }
-    handleChange(event) {
-        this.setState({ search: event.currentTarget.value });
-    }
-    handleDropdownClick(event) {
+    function handleDropdownClick(event) {
         event.target.parentElement.classList.toggle("dropup");
-        this.setState(prevState => ({ showTags: !prevState.showTags }));
+        setShowTags((prevState) => !prevState);
     }
-    handleTagClick(tag) {
-        this.setState({ tag });
+    function handleTagClick(tag) {
+        setTag(tag);
     }
-    handleClose() {
-        this.setState({ showDialog: false });
+    function handleClose() {
+        setShowDialog(false);
     }
-    randomExperience(experiences) {
+    function randomExperience(experiences) {
         return experiences[Math.floor(Math.random() * experiences.length)];
     }
-    render() {
-        let experiences;
-        if (this.state.search !== "" || this.state.tag !== "") {
-            experiences = this.props.experiences.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()));
-            if (this.state.tag !== "") {
-                experiences = experiences.filter(x => x.tag != null && x.tag.includes(this.state.tag));
-            }
+    let experiences;
+    if (search !== "" || tag !== "") {
+        experiences = props.experiences.filter(x => x.name.toLowerCase().includes(search.toLowerCase()));
+        if (tag !== "") {
+            experiences = experiences.filter(x => x.tag != null && x.tag.includes(tag));
         }
-        else {
-            experiences = this.props.experiences.filter(x => x.last != null);
-        }
-        return (React.createElement(React.Fragment, null,
-            React.createElement("header", { className: "bg-white fixed-top shadow-sm" },
-                React.createElement("nav", { className: "navbar navbar-expand-lg navbar-light bg-white" },
-                    React.createElement("span", { className: "navbar-brand d-none d-xl-block" }, "Cocoberry"),
-                    React.createElement("div", { className: "form-inline mr-auto" },
-                        React.createElement("div", { className: "input-group" },
-                            React.createElement("input", { className: "form-control", type: "search", accessKey: "s", placeholder: "Search\u2026", title: "Search", onChange: this.handleChange, "aria-label": "Search" }),
-                            React.createElement("div", { className: "input-group-append mr-sm-2" },
-                                React.createElement("button", { className: "btn btn-outline-success dropdown-toggle", type: "button", onClick: this.handleDropdownClick, "aria-label": "Show tags" })))),
-                    React.createElement("button", { className: "btn btn-outline-success mr-sm-2", accessKey: "n", onClick: this.handleAddExperienceButtonClick, title: "Add new experience" }, "+"),
-                    React.createElement("button", { className: "btn btn-outline-success", accessKey: "p", onClick: () => this.props.onNavigation("Preferences") }, "\u2630")),
-                this.state.showTags &&
-                    React.createElement("div", { className: "container" },
-                        React.createElement(TagList, { activeTag: this.state.tag, tags: this.props.tags, onClick: this.handleTagClick }))),
-            React.createElement("main", { className: "App container" },
-                this.props.showNeverCard && this.state.search === "" && this.state.tag === "" && experiences.length !== 0 &&
-                    React.createElement(NeverCard, { experience: this.randomExperience(this.props.experiences.filter(x => x.last === null)), onClick: this.handleEditOpenClick }),
-                React.createElement(ExperienceList, { experiences: experiences, onClick: this.props.onClick, onEdit: this.handleEditOpenClick }),
-                this.state.search !== "" && experiences.length === 0 &&
-                    React.createElement(React.Fragment, null,
-                        React.createElement("p", null, "There are no matched experiences."),
-                        React.createElement("button", { className: "btn btn-outline-secondary", onClick: this.handleAddExperienceButtonClick }, "Add new experience"))),
-            React.createElement(AddExperienceDialog, { name: this.state.search, isOpen: this.state.showDialog, tags: this.props.tags, onAdd: this.handleAddExperience, onClose: this.handleClose }),
-            React.createElement(EditExperienceDialog, { name: this.state.search, isOpen: this.state.showEditDialog, tags: this.props.tags, onSave: this.handleEditSaveClick, onClose: this.handleClose }),
-            React.createElement(OptionsSheet, { id: this.state.activeId, show: this.state.showOptions, onClose: this.handleCloseOptions, onDelete: this.handleCloseOptions, onDone: this.handleCloseOptions, onEdit: this.handleCloseOptions })));
     }
-}
+    else {
+        experiences = props.experiences.filter(x => x.last != null);
+    }
+    return (React.createElement(React.Fragment, null,
+        React.createElement("header", { className: "bg-white fixed-top shadow-sm" },
+            React.createElement("nav", { className: "navbar navbar-expand-lg navbar-light bg-white" },
+                React.createElement("span", { className: "navbar-brand d-none d-xl-block" }, "Cocoberry"),
+                React.createElement("div", { className: "form-inline mr-auto" },
+                    React.createElement("div", { className: "input-group" },
+                        React.createElement("input", { className: "form-control", type: "search", accessKey: "s", placeholder: "Search\u2026", title: "Search", onChange: handleChange, "aria-label": "Search" }),
+                        React.createElement("div", { className: "input-group-append mr-sm-2" },
+                            React.createElement("button", { className: "btn btn-outline-success dropdown-toggle", type: "button", onClick: handleDropdownClick, "aria-label": "Show tags" })))),
+                React.createElement("button", { className: "btn btn-outline-success mr-sm-2", accessKey: "n", onClick: handleAddExperienceButtonClick, title: "Add new experience" }, "+"),
+                React.createElement("button", { className: "btn btn-outline-success", accessKey: "p", onClick: () => props.onNavigation("Preferences") }, "\u2630")),
+            showTags &&
+                React.createElement("div", { className: "container" },
+                    React.createElement(TagList, { activeTag: tag, tags: props.tags, onClick: handleTagClick }))),
+        React.createElement("main", { className: "App container" },
+            props.showNeverCard && search === "" && tag === "" && experiences.length !== 0 &&
+                React.createElement(NeverCard, { experience: randomExperience(props.experiences.filter(x => x.last === null)), onClick: handleEditOpenClick }),
+            React.createElement(ExperienceList, { experiences: experiences, onClick: props.onClick, onEdit: handleEditOpenClick }),
+            search !== "" && experiences.length === 0 &&
+                React.createElement(React.Fragment, null,
+                    React.createElement("p", null, "There are no matched experiences."),
+                    React.createElement("button", { className: "btn btn-outline-secondary", onClick: handleAddExperienceButtonClick }, "Add new experience"))),
+        React.createElement(AddExperienceDialog, { name: search, isOpen: showDialog, tags: props.tags, onAdd: handleAddExperience, onClose: handleClose }),
+        React.createElement(EditExperienceDialog, { name: search, isOpen: showEditDialog, tags: props.tags, onSave: handleEditSaveClick, onClose: handleClose }),
+        React.createElement(OptionsSheet, { id: activeId, show: showOptions, onClose: handleCloseOptions, onDelete: handleCloseOptions, onDone: handleCloseOptions, onEdit: handleCloseOptions })));
+};
 //# sourceMappingURL=Home.js.map

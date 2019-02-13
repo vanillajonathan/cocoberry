@@ -1,56 +1,45 @@
 ﻿import * as React from "react";
+import { useState, useEffect } from "react";
 
-interface IState {
-    showInstallPrompt: boolean;
-}
+export const PwaInstaller: React.FunctionComponent = () => {
+    let deferredPrompt: any;
+    const [showInstallPrompt, setShowInstallPrompt] = useState(false);
 
-export class PwaInstaller extends React.Component<{}, IState> {
-    private deferredPrompt: any;
-
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            showInstallPrompt: false,
-        };
-
-        this.handleInstall = this.handleInstall.bind(this);
-        this.beforeInstallPrompt = this.beforeInstallPrompt.bind(this);
-    }
-
-    private handleInstall(): void {
-        this.setState({ showInstallPrompt: false });
-        this.deferredPrompt.prompt();
-        this.deferredPrompt.userChoice.then((choiceResult: any) => {
+    function handleInstall(): void {
+        setShowInstallPrompt(false);
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult: any) => {
             if (choiceResult.outcome === "accepted") {
                 console.log("User accepted the A2HS prompt");
             } else {
                 console.log("User dismissed the A2HS prompt");
             }
-            this.deferredPrompt = null;
+            deferredPrompt = null;
         });
     }
 
-    private beforeInstallPrompt(event: Event): void {
-        this.deferredPrompt = event;
-        this.setState({ showInstallPrompt: true });
+    function beforeInstallPrompt(event: Event): void {
+        deferredPrompt = event;
+        setShowInstallPrompt(true);
     }
 
-    componentDidMount() {
-        window.addEventListener("beforeinstallprompt", this.beforeInstallPrompt);
-    }
+    useEffect(() => {
+        window.addEventListener("beforeinstallprompt", beforeInstallPrompt);
+        return () => {
+            window.removeEventListener("beforeinstallprompt", beforeInstallPrompt);
+        };
+    });
 
-    componentWillUnmount() {
-        window.removeEventListener("beforeinstallprompt", this.beforeInstallPrompt);
-    }
-
-    render() {
-        return this.state.showInstallPrompt && (
+    if (showInstallPrompt) {
+        return (
             <div className="card fixed-bottom">
                 <div className="card-body">
                     <p>Install web application?</p>
-                    <button className="btn btn-primary" onClick={this.handleInstall}>Install</button>
+                    <button className="btn btn-primary" onClick={handleInstall}>Install</button>
                 </div>
             </div>
         );
     }
-}
+
+    return null;
+};

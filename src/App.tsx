@@ -1,4 +1,5 @@
 ﻿import * as React from "react";
+import { useState } from "react";
 import uuid from "uuid/v4";
 import { IStorage, INewExperience } from "./IStorage";
 import { IExperience } from "./IExperience";
@@ -13,102 +14,82 @@ interface IProps {
     tags: string[];
 }
 
-interface IState {
-    experiences: IExperience[];
-    nav: string;
-    preferences: IPreferences;
-    showToast: boolean;
-}
-
-class App extends React.Component<IProps, IState> {
-    static defaultProps = {
-        seed: [],
-        tags: [],
-    };
-
-    private timerId: number = 0;
-
-    constructor(props: IProps) {
-        super(props);
-
-        let experiences = props.storage.get();
-
-        if (experiences.length === 0) {
-            this.props.storage.add_many(this.props.seed);
-            experiences = props.storage.get();
-        }
-
-        this.state = {
-            experiences, nav: "", preferences: { showNeverCard: true }, showToast: false
-        };
-
-        this.handleAddExperience = this.handleAddExperience.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleImport = this.handleImport.bind(this);
-        this.handleNavigation = this.handleNavigation.bind(this);
-        this.handlePreferenceChange = this.handlePreferenceChange.bind(this);
+const App: React.FunctionComponent<IProps> = (props: IProps) => {
+    const storedExperiences = props.storage.get();
+    if (storedExperiences.length === 0) {
+        props.storage.add_many(props.seed);
     }
 
-    private handleAddExperience(name: string, tag: string): void {
+    const [experiences, setExperiences] = useState(props.storage.get());
+    const [nav, setNav] = useState("");
+    const [preferences, setPreferences] = useState({ showNeverCard: true });
+    const [showToast, setShowToast] = useState(false);
+
+    let timerId: number = 0;
+
+    function handleAddExperience(name: string, tag: string): void {
         const experience: IExperience = {
             id: uuid(),
             name,
             tag,
         };
-        this.setState(prevState => ({ experiences: [...prevState.experiences, experience] }));
+        setExperiences((prevState: IExperience[]) => {
+            return { ...prevState, experience };
+        });
     }
 
-    private handleClick(key: string): void {
-        this.setState({
-            experiences: this.state.experiences.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i),
-            showToast: true,
-        });
-        window.clearTimeout(this.timerId);
-        this.timerId = window.setTimeout(() => {
-            this.setState({ showToast: false });
+    function handleClick(key: string): void {
+        setExperiences(experiences.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
+        setShowToast(true);
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(() => {
+            setShowToast(false);
         }, 1500);
     }
 
-    private handleImport(experiences: IExperience[]): void {
-        this.setState({ experiences: experiences });
+    function handleImport(experiences: IExperience[]): void {
+        setExperiences(experiences);
     }
 
-    private handleNavigation(component: string): void {
-        this.setState({ nav: component });
+    function handleNavigation(component: string): void {
+        setNav(component);
     }
 
-    private handlePreferenceChange(preferences: IPreferences): void {
-        this.setState({ preferences: preferences });
+    function handlePreferenceChange(preferences: IPreferences): void {
+        setPreferences(preferences);
     }
 
-    public render() {
-        if (this.state.nav === "Preferences") {
-            return (
-                <Preferences
-                    export={this.state.experiences}
-                    onImport={this.handleImport}
-                    onNavigation={this.handleNavigation}
-                    onPreferenceChanged={this.handlePreferenceChange}
-                    preferences={this.state.preferences}
-                />
-            );
-        }
-
+    if (nav === "Preferences") {
         return (
-            <React.Fragment>
-                <Home
-                    experiences={this.state.experiences}
-                    onAddExperience={this.handleAddExperience}
-                    onClick={this.handleClick}
-                    onNavigation={this.handleNavigation}
-                    showNeverCard={this.state.preferences.showNeverCard}
-                    tags={this.props.tags}
-                />
-                <PwaInstaller />
-                <Toast show={this.state.showToast} />
-            </React.Fragment>
+            <Preferences
+                export={experiences}
+                onImport={handleImport}
+                onNavigation={handleNavigation}
+                onPreferenceChanged={handlePreferenceChange}
+                preferences={preferences}
+            />
         );
     }
-}
+
+    return (
+        <React.Fragment>
+            <Home
+                experiences={experiences}
+                onAddExperience={handleAddExperience}
+                onClick={handleClick}
+                onNavigation={handleNavigation}
+                showNeverCard={preferences.showNeverCard}
+                tags={props.tags}
+            />
+            <PwaInstaller />
+            <Toast show={showToast} />
+        </React.Fragment>
+    );
+};
+
+App.defaultProps = {
+    seed: [],
+    tags: [],
+};
 
 export default App;
