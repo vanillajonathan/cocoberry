@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
 import { IExperience } from "../IExperience";
@@ -20,12 +20,20 @@ interface IProps {
 
 export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     const [activeId, setActiveId] = useState("");
+    const [neverCardExperience, setNeverCardExperience] = useState<IExperience | null>(null);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const [showTags, setShowTags] = useState(false);
     const [tag, setTag] = useState("");
+
+    useEffect(() => {
+        if (props.experiences.length !== 0) {
+            const exp = randomExperience(props.experiences.filter(x => x.last === null));
+            setNeverCardExperience(exp);
+        }
+    }, []);
 
     function handleAddExperience(name: string, tag: string): void {
         setShowDialog(false);
@@ -106,8 +114,8 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 }
             </header>
             <main className="App container">
-                {props.showNeverCard && search === "" && tag === "" && experiences.length !== 0 &&
-                    <NeverCard experience={randomExperience(props.experiences.filter(x => x.last === null))} onClick={handleEditOpenClick} />
+                {props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
+                    <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
                 }
                 <ExperienceList experiences={experiences} onClick={props.onClick} onEdit={handleEditOpenClick} />
                 {search !== "" && experiences.length === 0 &&

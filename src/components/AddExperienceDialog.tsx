@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { TagList } from "./TagList";
 
 interface IProps {
-    name?: string;
+    name: string;
     isOpen: boolean;
     tags: string[];
     onAdd(name: string, tag: string): void;
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IProps) => {
-    const [name, setName] = useState(props.name || "");
+    const [name, setName] = useState(props.name);
     const [tag, setTag] = useState("");
     const nameInput = React.createRef<HTMLInputElement>();
 
@@ -79,3 +79,7 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
         </React.Fragment>
     );
 };
+
+AddExperienceDialog.defaultProps = {
+    name: ""
+}

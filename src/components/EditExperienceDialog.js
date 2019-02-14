@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { TagList } from "./TagList";
 export const EditExperienceDialog = (props) => {
-    const [name, setName] = useState(props.name || "");
+    const [name, setName] = useState(props.name);
     const [tag, setTag] = useState("");
     const [last, setLast] = useState(0);
     const nameInput = React.createRef();
@@ -54,5 +54,8 @@ export const EditExperienceDialog = (props) => {
                             React.createElement("button", { type: "button", className: "btn btn-secondary", "data-dismiss": "modal", onClick: handleClose }, "Close"),
                             React.createElement("button", { type: "submit", className: "btn btn-primary" }, "Save")))))),
         React.createElement("div", { className: backdropClassName })));
+};
+EditExperienceDialog.defaultProps = {
+    name: ""
 };
 //# sourceMappingURL=EditExperienceDialog.js.map

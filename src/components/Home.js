@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
 import { ExperienceList } from "./ExperienceList";
@@ -9,12 +9,19 @@ import { TagList } from "./TagList";
 import "./Home.css";
 export const Home = (props) => {
     const [activeId, setActiveId] = useState("");
+    const [neverCardExperience, setNeverCardExperience] = useState(null);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const [showTags, setShowTags] = useState(false);
     const [tag, setTag] = useState("");
+    useEffect(() => {
+        if (props.experiences.length !== 0) {
+            const exp = randomExperience(props.experiences.filter(x => x.last === null));
+            setNeverCardExperience(exp);
+        }
+    }, []);
     function handleAddExperience(name, tag) {
         setShowDialog(false);
         props.onAddExperience(name, tag);
@@ -75,8 +82,8 @@ export const Home = (props) => {
                 React.createElement("div", { className: "container" },
                     React.createElement(TagList, { activeTag: tag, tags: props.tags, onClick: handleTagClick }))),
         React.createElement("main", { className: "App container" },
-            props.showNeverCard && search === "" && tag === "" && experiences.length !== 0 &&
-                React.createElement(NeverCard, { experience: randomExperience(props.experiences.filter(x => x.last === null)), onClick: handleEditOpenClick }),
+            props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
+                React.createElement(NeverCard, { experience: neverCardExperience, onClick: handleEditOpenClick }),
             React.createElement(ExperienceList, { experiences: experiences, onClick: props.onClick, onEdit: handleEditOpenClick }),
             search !== "" && experiences.length === 0 &&
                 React.createElement(React.Fragment, null,

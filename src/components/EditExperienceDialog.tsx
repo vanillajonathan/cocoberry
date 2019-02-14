@@ -4,7 +4,7 @@ import { TagList } from "./TagList";
 import { IExperience } from "../IExperience";
 
 interface IProps {
-    name?: string;
+    name: string;
     isOpen: boolean;
     tags: string[];
     onClose(): void;
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IProps) => {
-    const [name, setName] = useState(props.name || "");
+    const [name, setName] = useState(props.name);
     const [tag, setTag] = useState("");
     const [last, setLast] = useState(0);
     const nameInput = React.createRef<HTMLInputElement>();
@@ -86,3 +86,7 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
         </React.Fragment>
     );
 };
+
+EditExperienceDialog.defaultProps = {
+    name: ""
+}
