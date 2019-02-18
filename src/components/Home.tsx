@@ -5,12 +5,14 @@ import { EditExperienceDialog } from "./EditExperienceDialog";
 import { IExperience } from "../IExperience";
 import { ExperienceList } from "./ExperienceList";
 import { OptionsSheet } from "./OptionsSheet";
+import { MaybeAgainCard } from "./MaybeAgainCard";
 import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
 import "./Home.css";
 
 interface IProps {
     experiences: IExperience[];
+    showMaybeAgainCard?: boolean;
     showNeverCard?: boolean;
     tags: string[];
     onAddExperience(name: string, tag: string): void;
@@ -20,6 +22,7 @@ interface IProps {
 
 export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     const [activeId, setActiveId] = useState("");
+    const [maybeAgainCardExperience, setMaybeAgainCardExperience] = useState<IExperience | null>(null);
     const [neverCardExperience, setNeverCardExperience] = useState<IExperience | null>(null);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
@@ -30,6 +33,8 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     useEffect(() => {
         if (props.experiences.length !== 0) {
+            const maybeExp = randomExperience(props.experiences.filter(x => x.last !== null && x.last !== undefined));
+            setMaybeAgainCardExperience(maybeExp);
             const exp = randomExperience(props.experiences.filter(x => x.last === null));
             setNeverCardExperience(exp);
         }
@@ -114,6 +119,9 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 }
             </header>
             <main className="App container">
+                {props.showMaybeAgainCard && search === "" && tag === "" && maybeAgainCardExperience &&
+                    <MaybeAgainCard experience={maybeAgainCardExperience} onClick={handleEditOpenClick} />
+                }
                 {props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
                     <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
                 }

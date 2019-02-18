@@ -30,6 +30,7 @@ export const Preferences = (props) => {
     }
     function handlePreferenceChanged(event) {
         const preferences = {
+            showMaybeAgainCard: event.currentTarget.checked,
             showNeverCard: event.currentTarget.checked
         };
         props.onChange(preferences);
@@ -40,6 +41,10 @@ export const Preferences = (props) => {
                 React.createElement("button", { className: "btn btn-outline-success", accessKey: "b", onClick: () => props.onNavigation("") }, "Back"))),
         React.createElement("main", { className: "App container" },
             React.createElement("div", { className: "list-group mb-3" },
+                React.createElement("div", { className: "list-group-item" },
+                    React.createElement("div", { className: "custom-control custom-switch" },
+                        React.createElement("input", { className: "custom-control-input", id: "showMaybeAgainCard", type: "checkbox", checked: props.preferences.showMaybeAgainCard, onChange: handlePreferenceChanged }),
+                        React.createElement("label", { className: "custom-control-label", htmlFor: "showMaybeAgainCard" }, "Show the maybe-again card"))),
                 React.createElement("div", { className: "list-group-item" },
                     React.createElement("div", { className: "custom-control custom-switch" },
                         React.createElement("input", { className: "custom-control-input", id: "showNeverCard", type: "checkbox", checked: props.preferences.showNeverCard, onChange: handlePreferenceChanged }),

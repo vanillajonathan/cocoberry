@@ -10,6 +10,7 @@ interface IProps {
 }
 
 export interface IPreferences {
+    showMaybeAgainCard: boolean;
     showNeverCard: boolean;
 }
 
@@ -47,6 +48,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handlePreferenceChanged(event: React.ChangeEvent<HTMLInputElement>): void {
         const preferences: IPreferences = {
+            showMaybeAgainCard: event.currentTarget.checked,
             showNeverCard: event.currentTarget.checked
         };
         props.onChange(preferences);
@@ -62,6 +64,18 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
             <main className="App container">
 
                 <div className="list-group mb-3">
+                    <div className="list-group-item">
+                        <div className="custom-control custom-switch">
+                            <input
+                                className="custom-control-input"
+                                id="showMaybeAgainCard"
+                                type="checkbox"
+                                checked={props.preferences.showMaybeAgainCard}
+                                onChange={handlePreferenceChanged}
+                            />
+                            <label className="custom-control-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
+                        </div>
+                    </div>
                     <div className="list-group-item">
                         <div className="custom-control custom-switch">
                             <input

@@ -22,7 +22,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
 
     const [experiences, setExperiences] = useState(props.storage.get());
     const [nav, setNav] = useState("");
-    const [preferences, setPreferences] = useState({ showNeverCard: true });
+    const [preferences, setPreferences] = useState({ showMaybeAgainCard: false, showNeverCard: true });
     const [showToast, setShowToast] = useState(false);
 
     let timerId: number = 0;
@@ -78,6 +78,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
                 onAddExperience={handleAddExperience}
                 onClick={handleClick}
                 onNavigation={handleNavigation}
+                showMaybeAgainCard={preferences.showMaybeAgainCard}
                 showNeverCard={preferences.showNeverCard}
                 tags={props.tags}
             />

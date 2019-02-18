@@ -4,11 +4,13 @@ import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
 import { ExperienceList } from "./ExperienceList";
 import { OptionsSheet } from "./OptionsSheet";
+import { MaybeAgainCard } from "./MaybeAgainCard";
 import { NeverCard } from "./NeverCard";
 import { TagList } from "./TagList";
 import "./Home.css";
 export const Home = (props) => {
     const [activeId, setActiveId] = useState("");
+    const [maybeAgainCardExperience, setMaybeAgainCardExperience] = useState(null);
     const [neverCardExperience, setNeverCardExperience] = useState(null);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
@@ -18,6 +20,8 @@ export const Home = (props) => {
     const [tag, setTag] = useState("");
     useEffect(() => {
         if (props.experiences.length !== 0) {
+            const maybeExp = randomExperience(props.experiences.filter(x => x.last !== null && x.last !== undefined));
+            setMaybeAgainCardExperience(maybeExp);
             const exp = randomExperience(props.experiences.filter(x => x.last === null));
             setNeverCardExperience(exp);
         }
@@ -82,6 +86,8 @@ export const Home = (props) => {
                 React.createElement("div", { className: "container" },
                     React.createElement(TagList, { activeTag: tag, tags: props.tags, onClick: handleTagClick }))),
         React.createElement("main", { className: "App container" },
+            props.showMaybeAgainCard && search === "" && tag === "" && maybeAgainCardExperience &&
+                React.createElement(MaybeAgainCard, { experience: maybeAgainCardExperience, onClick: handleEditOpenClick }),
             props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
                 React.createElement(NeverCard, { experience: neverCardExperience, onClick: handleEditOpenClick }),
             React.createElement(ExperienceList, { experiences: experiences, onClick: props.onClick, onEdit: handleEditOpenClick }),
