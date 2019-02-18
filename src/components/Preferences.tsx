@@ -4,9 +4,9 @@ import { IExperience } from "../IExperience";
 interface IProps {
     export: IExperience[];
     preferences: IPreferences;
+    onChange(preferences: IPreferences): void;
     onImport(experience: IExperience[]): void;
     onNavigation(component: string): void;
-    onPreferenceChanged(preferences: IPreferences): void;
 }
 
 export interface IPreferences {
@@ -49,7 +49,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
         const preferences: IPreferences = {
             showNeverCard: event.currentTarget.checked
         };
-        props.onPreferenceChanged(preferences);
+        props.onChange(preferences);
     }
 
     return (

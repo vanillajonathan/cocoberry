@@ -32,7 +32,7 @@ export const Preferences = (props) => {
         const preferences = {
             showNeverCard: event.currentTarget.checked
         };
-        props.onPreferenceChanged(preferences);
+        props.onChange(preferences);
     }
     return (React.createElement(React.Fragment, null,
         React.createElement("header", { className: "fixed-top shadow-sm" },

@@ -65,7 +65,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
                 export={experiences}
                 onImport={handleImport}
                 onNavigation={handleNavigation}
-                onPreferenceChanged={handlePreferenceChange}
+                onChange={handlePreferenceChange}
                 preferences={preferences}
             />
         );
