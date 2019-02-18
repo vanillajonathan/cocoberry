@@ -53,6 +53,8 @@ export const Preferences = (props) => {
                     React.createElement("button", { className: "list-group-item list-group-item-action", type: "button", accessKey: "e", onClick: handleBrowse }, "Import from file"),
                     React.createElement("button", { className: "list-group-item list-group-item-action", type: "button", accessKey: "e", onClick: handleExport }, "Export to file")))),
         React.createElement("footer", { className: "container mt-3" },
+            React.createElement("p", null,
+                React.createElement("a", { href: "https://github.com/vanillajonathan/cocoberry", rel: "noopener", target: "_blank" }, "Cocoberry on GitHub")),
             React.createElement("p", null, "Built with \u2764 by Jonathan"))));
 };
 //# sourceMappingURL=Preferences.js.map

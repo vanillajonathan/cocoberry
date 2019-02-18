@@ -91,6 +91,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
             </main>
 
             <footer className="container mt-3">
+                <p><a href="https://github.com/vanillajonathan/cocoberry" rel="noopener" target="_blank">Cocoberry on GitHub</a></p>
                 <p>Built with ❤ by Jonathan</p>
             </footer>
 
