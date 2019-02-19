@@ -37,7 +37,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
     }
 
     function handleClick(key: string): void {
-        setExperiences(experiences.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
+        setExperiences((prevState: IExperience[]) => prevState.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
         setShowToast(true);
         window.clearTimeout(timerId);
         timerId = window.setTimeout(() => {
