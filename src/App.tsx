@@ -33,9 +33,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
             name,
             tag,
         };
-        setExperiences((prevState: IExperience[]) => {
-            return { ...prevState, experience };
-        });
+        setExperiences((prevState: IExperience[]) => [...prevState, experience ]);
     }
 
     function handleClick(key: string): void {
