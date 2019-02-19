@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/cocoberry/static/js/runtime~main.2e9811c9.js"
   },
   {
-    "revision": "9082bd0bacf5e1f051bc",
-    "url": "/cocoberry/static/js/main.9082bd0b.chunk.js"
+    "revision": "406351a1e1342f633b95",
+    "url": "/cocoberry/static/js/main.406351a1.chunk.js"
   },
   {
-    "revision": "d4a9ac67e43c1812e02d",
-    "url": "/cocoberry/static/js/2.d4a9ac67.chunk.js"
+    "revision": "9844155cfd1213d481eb",
+    "url": "/cocoberry/static/js/2.9844155c.chunk.js"
   },
   {
-    "revision": "9082bd0bacf5e1f051bc",
+    "revision": "406351a1e1342f633b95",
     "url": "/cocoberry/static/css/main.0c9e66b4.chunk.css"
   },
   {
-    "revision": "d4a9ac67e43c1812e02d",
+    "revision": "9844155cfd1213d481eb",
     "url": "/cocoberry/static/css/2.16cf6190.chunk.css"
   },
   {
-    "revision": "fc59d4622118e389370ee6bcfd1d802b",
+    "revision": "707b99d0d7a6f30d3f1e82a19344bfeb",
     "url": "/cocoberry/index.html"
   }
 ];
