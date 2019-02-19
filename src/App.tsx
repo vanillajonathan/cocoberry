@@ -82,7 +82,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
                 showNeverCard={preferences.showNeverCard}
                 tags={props.tags}
             />
-            <PwaInstaller />
+            {/*<PwaInstaller />*/}
             <Toast show={showToast} />
         </React.Fragment>
     );

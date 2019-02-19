@@ -14,7 +14,6 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-scripts": "^2.1.5",
-    "rimraf": "^2.6.3",
     "typescript": "^3.3.3",
     "uuid": "^3.3.2"
   },
@@ -22,9 +21,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "tslint -c tslint.json -p tsconfig.json --project . -t stylish || echo",
-    "start": "rimraf ./build && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
