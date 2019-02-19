@@ -4,7 +4,7 @@
   { "name": "Eat banana 🍌", "last": null, "tag": "fruit" },
   { "name": "Eat broccoli 🥦", "tag": "vegetable" },
   { "name": "Eat carrot 🥕", "tag": "vegetable" },
-  { "name": "Eat cherry 🍒", "last": null, "tag": "fruit" },
+  { "name": "Eat cherries 🍒", "last": null, "tag": "fruit" },
   { "name": "Eat chili 🌶️", "tag": "fruit" },
   { "name": "Eat cucumber 🥒", "last": null, "tag": "vegetable" },
   { "name": "Eat corn 🌽", "last": null, "tag": "vegetable" },

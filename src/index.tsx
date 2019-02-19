@@ -15,7 +15,7 @@ const experiences: INewExperience[] = [
     { name: "Eat banana 🍌", last: new Date(2017, 4, 3).getTime(), tag: "fruit" },
     { name: "Eat broccoli 🥦", tag: "vegetable" },
     { name: "Eat carrot 🥕", tag: "vegetable" },
-    { name: "Eat cherry 🍒", last: new Date(2017, 5, 3).getTime(), tag: "fruit" },
+    { name: "Eat cherries 🍒", last: new Date(2017, 5, 3).getTime(), tag: "fruit" },
     { name: "Eat chili 🌶️", tag: "fruit" },
     { name: "Eat cucumber 🥒", last: new Date(2017, 6, 3).getTime(), tag: "vegetable" },
     { name: "Eat corn 🌽", last: new Date(2017, 6, 3).getTime(), tag: "vegetable" },
