@@ -29,10 +29,8 @@ export const Preferences = (props) => {
         reader.readAsText(file);
     }
     function handlePreferenceChanged(event) {
-        const preferences = {
-            showMaybeAgainCard: event.currentTarget.checked,
-            showNeverCard: event.currentTarget.checked
-        };
+        const preferences = Object.assign({}, props.preferences);
+        preferences[event.currentTarget.id] = event.currentTarget.checked;
         props.onChange(preferences);
     }
     return (React.createElement(React.Fragment, null,

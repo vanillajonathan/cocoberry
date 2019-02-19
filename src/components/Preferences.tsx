@@ -47,10 +47,8 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
     }
 
     function handlePreferenceChanged(event: React.ChangeEvent<HTMLInputElement>): void {
-        const preferences: IPreferences = {
-            showMaybeAgainCard: event.currentTarget.checked,
-            showNeverCard: event.currentTarget.checked
-        };
+        const preferences: any = { ...props.preferences };
+        preferences[event.currentTarget.id] = event.currentTarget.checked;
         props.onChange(preferences);
     }
 
