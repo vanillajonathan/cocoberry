@@ -5,7 +5,7 @@ import { IStorage, INewExperience } from "./IStorage";
 import { IExperience } from "./IExperience";
 import { Home } from "./components/Home";
 import { Preferences, IPreferences } from "./components/Preferences";
-import { PwaInstaller } from "./components/PwaInstaller";
+//import { PwaInstaller } from "./components/PwaInstaller";
 import { Toast } from "./components/Toast";
 
 interface IProps {
@@ -20,9 +20,15 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
         props.storage.add_many(props.seed);
     }
 
+    const pref1 = localStorage.getItem("showMaybeAgainCard") || "false";
+    const pref2 = localStorage.getItem("showNeverCard") || "true";
+
     const [experiences, setExperiences] = useState(props.storage.get());
     const [nav, setNav] = useState("");
-    const [preferences, setPreferences] = useState({ showMaybeAgainCard: false, showNeverCard: true });
+    const [preferences, setPreferences] = useState({
+        showMaybeAgainCard: pref1 === "true",
+        showNeverCard: pref2 === "true",
+    });
     const [showToast, setShowToast] = useState(false);
 
     let timerId: number = 0;
@@ -61,9 +67,9 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
         return (
             <Preferences
                 export={experiences}
+                onChange={handlePreferenceChange}
                 onImport={handleImport}
                 onNavigation={handleNavigation}
-                onChange={handlePreferenceChange}
                 preferences={preferences}
             />
         );
