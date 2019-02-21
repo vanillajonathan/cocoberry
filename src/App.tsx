@@ -20,14 +20,14 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
         props.storage.add_many(props.seed);
     }
 
-    const pref1 = localStorage.getItem("showMaybeAgainCard") || "false";
-    const pref2 = localStorage.getItem("showNeverCard") || "true";
+    const prefShowMaybeAgainCard = localStorage.getItem("showMaybeAgainCard") || "false";
+    const prefShowNeverCard = localStorage.getItem("showNeverCard") || "true";
 
     const [experiences, setExperiences] = useState(props.storage.get());
     const [nav, setNav] = useState("");
     const [preferences, setPreferences] = useState({
-        showMaybeAgainCard: pref1 === "true",
-        showNeverCard: pref2 === "true",
+        showMaybeAgainCard: prefShowMaybeAgainCard === "true",
+        showNeverCard: prefShowNeverCard === "true",
     });
     const [showToast, setShowToast] = useState(false);
 
@@ -61,6 +61,8 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handlePreferenceChange(preferences: IPreferences): void {
         setPreferences(preferences);
+        localStorage.setItem("showMaybeAgainCard", preferences.showMaybeAgainCard.toString());
+        localStorage.setItem("showNeverCard", preferences.showNeverCard.toString());
     }
 
     if (nav === "Preferences") {
