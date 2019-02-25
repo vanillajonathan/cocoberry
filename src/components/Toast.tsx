@@ -1,6 +1,7 @@
 ﻿import * as React from "react";
 
 interface IProps {
+    message: string;
     show: boolean;
 }
 
@@ -12,7 +13,7 @@ export const Toast: React.FunctionComponent<IProps> = (props: IProps) => {
     return (
         <div className={className} role="alert" aria-live="assertive" aria-atomic="true">
             <div className="toast-body">
-                Marked as done
+                {props.message}
             </div>
         </div>
     );

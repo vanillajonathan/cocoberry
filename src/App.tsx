@@ -89,7 +89,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
                 tags={props.tags}
             />
             {/*<PwaInstaller />*/}
-            <Toast show={showToast} />
+            <Toast message="Marked as done" show={showToast} />
         </React.Fragment>
     );
 };

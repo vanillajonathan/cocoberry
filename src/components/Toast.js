@@ -5,6 +5,6 @@ export const Toast = (props) => {
         className += " show";
     }
     return (React.createElement("div", { className: className, role: "alert", "aria-live": "assertive", "aria-atomic": "true" },
-        React.createElement("div", { className: "toast-body" }, "Marked as done")));
+        React.createElement("div", { className: "toast-body" }, props.message)));
 };
 //# sourceMappingURL=Toast.js.map
