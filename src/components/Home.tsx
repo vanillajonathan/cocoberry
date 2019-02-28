@@ -137,7 +137,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             <EditExperienceDialog name={search} isOpen={showEditDialog} tags={props.tags} onSave={handleEditSaveClick} onClose={handleClose} />
             <OptionsSheet
                 id={activeId}
-                show={showOptions}
+                open={showOptions}
                 onClose={handleCloseOptions}
                 onDelete={handleCloseOptions}
                 onDone={handleCloseOptions}

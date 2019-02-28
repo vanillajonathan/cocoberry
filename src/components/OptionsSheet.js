@@ -2,11 +2,11 @@ import * as React from "react";
 export const BottomSheet = (props) => {
     let className = "fixed-bottom fade";
     let backdropClassName = "fade";
-    if (props.show) {
+    if (props.open) {
         className += " d-block show";
         backdropClassName += " modal-backdrop show";
     }
-    if (props.show) {
+    if (props.open) {
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: className, tabIndex: -1, role: "dialog", style: { zIndex: 2000 } }, props.children),
             React.createElement("div", { className: backdropClassName, onClick: props.onClose })));
@@ -14,7 +14,7 @@ export const BottomSheet = (props) => {
     return null;
 };
 export const OptionsSheet = (props) => {
-    return (React.createElement(BottomSheet, { show: props.show, onClose: props.onClose },
+    return (React.createElement(BottomSheet, { open: props.open, onClose: props.onClose },
         React.createElement("div", { className: "list-group" },
             React.createElement("a", { className: "list-group-item", onClick: () => props.onDone(props.id) }, "Mark as done"),
             React.createElement("a", { className: "list-group-item", onClick: () => props.onEdit(props.id) }, "Edit"),

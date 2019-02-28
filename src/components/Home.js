@@ -97,6 +97,6 @@ export const Home = (props) => {
                     React.createElement("button", { className: "btn btn-outline-secondary", onClick: handleAddExperienceButtonClick }, "Add new experience"))),
         React.createElement(AddExperienceDialog, { name: search, isOpen: showDialog, tags: props.tags, onAdd: handleAddExperience, onClose: handleClose }),
         React.createElement(EditExperienceDialog, { name: search, isOpen: showEditDialog, tags: props.tags, onSave: handleEditSaveClick, onClose: handleClose }),
-        React.createElement(OptionsSheet, { id: activeId, show: showOptions, onClose: handleCloseOptions, onDelete: handleCloseOptions, onDone: handleCloseOptions, onEdit: handleCloseOptions })));
+        React.createElement(OptionsSheet, { id: activeId, open: showOptions, onClose: handleCloseOptions, onDelete: handleCloseOptions, onDone: handleCloseOptions, onEdit: handleCloseOptions })));
 };
 //# sourceMappingURL=Home.js.map
