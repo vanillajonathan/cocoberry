@@ -1,4 +1,7 @@
 ﻿import * as React from "react";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import { IExperience } from "../IExperience";
 
 interface IProps {
@@ -8,11 +11,11 @@ interface IProps {
 
 export const NeverCard: React.FunctionComponent<IProps> = (props: IProps) => {
     return (
-        <div className="card mb-3">
-            <div className="card-body">
-                <small className="text-muted text-uppercase">You have never…</small>
-                <div>{props.experience.name}</div>
-            </div>
-        </div>
+        <Card>
+            <CardContent>
+                <Typography variant="caption">You have never…</Typography>
+                <Typography>{props.experience.name}</Typography>
+            </CardContent>
+        </Card>
     );
 };

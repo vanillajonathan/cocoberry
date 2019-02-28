@@ -1,5 +1,11 @@
 ﻿import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import TextField from '@material-ui/core/TextField';
 import { TagList } from "./TagList";
 
 interface IProps {
@@ -13,13 +19,6 @@ interface IProps {
 export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IProps) => {
     const [name, setName] = useState(props.name);
     const [tag, setTag] = useState("");
-    const nameInput = React.createRef<HTMLInputElement>();
-
-    useEffect(() => {
-        if (nameInput.current) {
-            nameInput.current.focus();
-        }
-    });
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         setName(event.target.value);
@@ -34,49 +33,30 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
         props.onAdd(name, tag);
     }
 
-    let className = "modal fade";
-    let backdropClassName = "fade";
-    if (props.isOpen) {
-        className += " d-block show";
-        backdropClassName += " modal-backdrop show";
-    }
-
     return (
-        <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Add experience</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form onSubmit={handleSubmit}>
-                            <div className="modal-body">
-                                <div className="form-group">
-                                    <label htmlFor="name">Title</label>
-                                    <input className="form-control" id="name" type="text" value={name} onChange={handleChange} ref={nameInput} autoFocus required />
-                                </div>
-                                <div className="form-group">
-                                    <label>Tag</label>
-                                    <TagList
-                                        activeTag={tag}
-                                        tags={props.tags}
-                                        onClick={tag => setTag(tag)}
-                                    />
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleClose}>Close</button>
-                                <button type="submit" className="btn btn-primary">Add</button>
-                            </div>
-                        </form>
+        <Dialog open={props.isOpen}>
+            <DialogTitle>Add experience</DialogTitle>
+            <form onSubmit={handleSubmit}>
+                <DialogContent>
+                    <div className="form-group">
+                        <label htmlFor="name">Title</label>
+                        <TextField id="name" type="text" value={name} onChange={handleChange} autoFocus required />
                     </div>
-                </div>
-            </div>
-            <div className={backdropClassName} />
-        </React.Fragment>
+                    <div className="form-group">
+                        <label>Tag</label>
+                        <TagList
+                            activeTag={tag}
+                            tags={props.tags}
+                            onClick={tag => setTag(tag)}
+                        />
+                    </div>
+                </DialogContent>
+                <DialogActions>
+                    <Button type="button" data-dismiss="modal" onClick={handleClose}>Close</Button>
+                    <Button color="primary" type="submit">Add</Button>
+                </DialogActions>
+            </form>
+        </Dialog>
     );
 };
 

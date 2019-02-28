@@ -1,4 +1,7 @@
 ﻿import * as React from "react";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import { IExperience } from "../IExperience";
 
@@ -10,11 +13,11 @@ interface IProps {
 export const MaybeAgainCard: React.FunctionComponent<IProps> = (props: IProps) => {
     const timeAgo = moment(props.experience.last || 0).fromNow();
     return (
-        <div className="card mb-3">
-            <div className="card-body">
-                <small className="text-muted text-uppercase">It was {timeAgo}, Maybe again…</small>
-                <div>{props.experience.name}</div>
-            </div>
-        </div>
+        <Card>
+            <CardContent>
+                <Typography variant="caption">It was {timeAgo}, Maybe again…</Typography>
+                <Typography>{props.experience.name}</Typography>
+            </CardContent>
+        </Card>
     );
 };

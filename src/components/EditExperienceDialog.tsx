@@ -1,5 +1,11 @@
 ﻿import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import TextField from '@material-ui/core/TextField';
 import { TagList } from "./TagList";
 import { IExperience } from "../IExperience";
 
@@ -15,13 +21,6 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
     const [name, setName] = useState(props.name);
     const [tag, setTag] = useState("");
     const [last, setLast] = useState(0);
-    const nameInput = React.createRef<HTMLInputElement>();
-
-    useEffect(() => {
-        if (nameInput.current) {
-            nameInput.current.focus();
-        }
-    });
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         setName(event.target.value);
@@ -49,41 +48,31 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
     }
 
     return (
-        <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Edit experience</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <Dialog open={props.isOpen}>
+            <DialogTitle>Edit experience</DialogTitle>
+            <form onSubmit={handleSubmit}>
+                <DialogContent>
+                    <div className="modal-body">
+                        <div className="form-group">
+                            <label htmlFor="name">Title</label>
+                            <TextField id="name" type="text" value={name} onChange={handleChange} autoFocus required />
                         </div>
-                        <form onSubmit={handleSubmit}>
-                            <div className="modal-body">
-                                <div className="form-group">
-                                    <label htmlFor="name">Title</label>
-                                    <input className="form-control" id="name" type="text" value={name} onChange={handleChange} ref={nameInput} autoFocus required />
-                                </div>
-                                <div className="form-group">
-                                    <label>Tag</label>
-                                    <TagList activeTag={tag} tags={props.tags} onClick={tag => setTag(tag)} />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="time">Last</label>
-                                    <input className="form-control" id="time" type="datetime-local" onChange={handleTimeChange} />
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleClose}>Close</button>
-                                <button type="submit" className="btn btn-primary">Save</button>
-                            </div>
-                        </form>
+                        <div className="form-group">
+                            <label>Tag</label>
+                            <TagList activeTag={tag} tags={props.tags} onClick={tag => setTag(tag)} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="time">Last</label>
+                            <TextField id="time" type="datetime-local" onChange={handleTimeChange} />
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div className={backdropClassName} />
-        </React.Fragment>
+                </DialogContent>
+                <DialogActions>
+                    <Button type="button" onClick={handleClose}>Close</Button>
+                    <Button type="submit">Save</Button>
+                </DialogActions>
+            </form>
+        </Dialog>
     );
 };
 

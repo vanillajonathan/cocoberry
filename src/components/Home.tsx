@@ -1,5 +1,14 @@
 ﻿import * as React from "react";
 import { useState, useEffect } from "react";
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 import { AddExperienceDialog } from "./AddExperienceDialog";
 import { EditExperienceDialog } from "./EditExperienceDialog";
 import { IExperience } from "../IExperience";
@@ -65,7 +74,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         setShowEditDialog(false);
     }
 
-    function handleChange(event: React.FormEvent<HTMLInputElement>): void {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         setSearch(event.currentTarget.value);
     }
 
@@ -98,26 +107,23 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     return (
         <React.Fragment>
-            <header className="bg-white fixed-top shadow-sm">
-                <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <span className="navbar-brand d-none d-xl-block">Cocoberry</span>
+            <AppBar color="default">
+                <Toolbar className="navbar navbar-expand-lg navbar-light bg-white">
+                    <Hidden mdDown>
+                        <Typography variant="h6" color="inherit">Cocoberry</Typography>
+                    </Hidden>
                     <div className="form-inline mr-auto">
-                        <div className="input-group">
-                            <input className="form-control" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={handleChange} aria-label="Search" />
-                            <div className="input-group-append mr-sm-2">
-                                <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
-                            </div>
-                        </div>
+                        <TextField color="inherit" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={handleChange} aria-label="Search" />
+                        <IconButton color="inherit" type="button" onClick={handleDropdownClick} aria-label="Show tags"><Icon>expand_more</Icon></IconButton>
                     </div>
-                    <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
-                    <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
-                </nav>
+                    <IconButton color="inherit" accessKey="p" onClick={() => props.onNavigation("Preferences")}><Icon>settings</Icon></IconButton>
+                </Toolbar>
                 {showTags &&
                     <div className="container">
                         <TagList activeTag={tag} tags={props.tags} onClick={handleTagClick} />
                     </div>
                 }
-            </header>
+            </AppBar>
             <main className="App container">
                 {props.showMaybeAgainCard && search === "" && tag === "" && maybeAgainCardExperience &&
                     <MaybeAgainCard experience={maybeAgainCardExperience} onClick={handleEditOpenClick} />
@@ -125,13 +131,14 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 {props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
                     <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
                 }
-                <ExperienceList experiences={experiences} onClick={props.onClick} onEdit={handleEditOpenClick} />
+                <ExperienceList experiences={experiences} onClick={props.onClick} onEdit={handleOpenOptions} />
                 {search !== "" && experiences.length === 0 &&
                     <React.Fragment>
-                        <p>There are no matched experiences.</p>
-                        <button className="btn btn-outline-secondary" onClick={handleAddExperienceButtonClick}>Add new experience</button>
+                        <Typography>There are no matched experiences.</Typography>
+                        <Button onClick={handleAddExperienceButtonClick}>Add new experience</Button>
                     </React.Fragment>
                 }
+                <Fab color="inherit" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience"><Icon>add</Icon></Fab>
             </main>
             <AddExperienceDialog name={search} isOpen={showDialog} tags={props.tags} onAdd={handleAddExperience} onClose={handleClose} />
             <EditExperienceDialog name={search} isOpen={showEditDialog} tags={props.tags} onSave={handleEditSaveClick} onClose={handleClose} />

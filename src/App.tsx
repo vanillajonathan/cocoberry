@@ -1,12 +1,14 @@
 ﻿import * as React from "react";
 import { useState } from "react";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
 import uuid from "uuid/v4";
 import { IStorage, INewExperience } from "./IStorage";
 import { IExperience } from "./IExperience";
 import { Home } from "./components/Home";
 import { Preferences, IPreferences } from "./components/Preferences";
 //import { PwaInstaller } from "./components/PwaInstaller";
-import { Toast } from "./components/Toast";
 
 interface IProps {
     seed: INewExperience[];
@@ -39,7 +41,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
             name,
             tag,
         };
-        setExperiences((prevState: IExperience[]) => [...prevState, experience ]);
+        setExperiences((prevState: IExperience[]) => [...prevState, experience]);
     }
 
     function handleClick(key: string): void {
@@ -77,8 +79,28 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
         );
     }
 
+    const theme = createMuiTheme({
+        typography: {
+            // Use the system font instead of the default Roboto font.
+            fontFamily: [
+                'Roboto',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Segoe UI"',
+                'Roboto',
+                '"Helvetica Neue"',
+                'Arial',
+                'sans-serif',
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+            ].join(','),
+        },
+    });
+
     return (
-        <React.Fragment>
+        <MuiThemeProvider theme={theme}>
+            <CssBaseline />
             <Home
                 experiences={experiences}
                 onAddExperience={handleAddExperience}
@@ -89,8 +111,8 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
                 tags={props.tags}
             />
             {/*<PwaInstaller />*/}
-            <Toast message="Marked as done" show={showToast} />
-        </React.Fragment>
+            <Snackbar message="Marked as done" open={showToast} />
+        </MuiThemeProvider>
     );
 };
 

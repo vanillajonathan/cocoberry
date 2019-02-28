@@ -1,4 +1,5 @@
 ﻿import * as React from "react";
+import Chip from '@material-ui/core/Chip';
 
 interface IProps {
     activeTag: string;
@@ -18,9 +19,11 @@ export const TagList: React.FunctionComponent<IProps> = (props: IProps) => {
     return (
         <ul className="list-inline">
             {props.tags.map(tag => {
-                let className = "badge ";
-                className += (tag.toLowerCase() === props.activeTag ? "badge-primary" : "badge-light");
-                return <li className="list-inline-item" key={tag}><span className={className} onClick={handleClick}>{tag}</span></li>;
+                if (tag.toLowerCase() === props.activeTag) {
+                    return <Chip key={tag} color="secondary" onClick={handleClick} label={tag} />;
+                } else {
+                    return <Chip key={tag} onClick={handleClick} label={tag} />;
+                }
             })}
         </ul>
     );

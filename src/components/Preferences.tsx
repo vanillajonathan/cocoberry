@@ -1,4 +1,11 @@
 ﻿import * as React from "react";
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { IExperience } from "../IExperience";
 
 interface IProps {
@@ -54,57 +61,53 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
 
     return (
         <React.Fragment>
-            <header className="fixed-top shadow-sm">
-                <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <button className="btn btn-outline-success" accessKey="b" onClick={() => props.onNavigation("")}>Back</button>
-                </nav>
-            </header>
+            <AppBar color="default">
+                <Toolbar>
+                    <Button className="btn btn-outline-success" accessKey="b" onClick={() => props.onNavigation("")}>Back</Button>
+                </Toolbar>
+            </AppBar>
             <main className="App container">
 
-                <div className="list-group mb-3">
-                    <div className="list-group-item">
-                        <div className="custom-control custom-switch">
-                            <input
-                                className="custom-control-input"
-                                id="showMaybeAgainCard"
-                                type="checkbox"
-                                checked={props.preferences.showMaybeAgainCard}
-                                onChange={handlePreferenceChanged}
-                            />
-                            <label className="custom-control-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
-                        </div>
-                    </div>
-                    <div className="list-group-item">
-                        <div className="custom-control custom-switch">
-                            <input
-                                className="custom-control-input"
-                                id="showNeverCard"
-                                type="checkbox"
-                                checked={props.preferences.showNeverCard}
-                                onChange={handlePreferenceChanged}
-                            />
-                            <label className="custom-control-label" htmlFor="showNeverCard">Show the you-have-never card</label>
-                        </div>
-                    </div>
-                </div>
+                <FormControl>
+                    <FormControlLabel
+                        control={<Switch
+                                     className="custom-control-input"
+                                     id="showMaybeAgainCard"
+                                     type="checkbox"
+                                     checked={props.preferences.showMaybeAgainCard}
+                                     onChange={handlePreferenceChanged}
+                                 />}
+                        label="Show the maybe-again card"
+                    />
+                    <FormControlLabel
+                        control={<Switch
+                                     className="custom-control-input"
+                                     id="showNeverCard"
+                                     type="checkbox"
+                                     checked={props.preferences.showNeverCard}
+                                     onChange={handlePreferenceChanged}
+                        />}
+                        label="Show the you-have-never card"
+                    />
+                </FormControl>
 
                 <div className="card">
                     <div className="card-body">
-                        <h5 className="card-title">Export and import experiences</h5>
-                        <p className="card-text">Your experiences can be imported and exported. They are stored in the JSON format.</p>
+                        <Typography variant="subtitle1">Export and import experiences</Typography>
+                        <Typography>Your experiences can be imported and exported. They are stored in the JSON format.</Typography>
                         <input className="form-control-file" id="file" type="file" accept="application/json" onChange={handleImport} ref={fileInput} hidden required />
                     </div>
                     <div className="list-group list-group-flush">
-                        <button className="list-group-item list-group-item-action" type="button" accessKey="e" onClick={handleBrowse}>Import from file</button>
-                        <button className="list-group-item list-group-item-action" type="button" accessKey="e" onClick={handleExport}>Export to file</button>
+                        <Button className="list-group-item list-group-item-action" type="button" accessKey="e" onClick={handleBrowse}>Import from file</Button>
+                        <Button className="list-group-item list-group-item-action" type="button" accessKey="e" onClick={handleExport}>Export to file</Button>
                     </div>
                 </div>
 
             </main>
 
             <footer className="container mt-3">
-                <p><a href="https://github.com/vanillajonathan/cocoberry" rel="noopener" target="_blank">Cocoberry on GitHub</a></p>
-                <p>Built with ❤ by Jonathan</p>
+                <Typography><a href="https://github.com/vanillajonathan/cocoberry" rel="noopener" target="_blank">Cocoberry on GitHub</a></Typography>
+                <Typography>Built with ❤ by Jonathan</Typography>
             </footer>
 
         </React.Fragment>

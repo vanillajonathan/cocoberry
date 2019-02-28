@@ -1,32 +1,8 @@
 import * as React from "react";
-
-interface IBottomSheetProps {
-    children: JSX.Element;
-    show: boolean;
-    onClose(): void;
-}
-
-export const BottomSheet: React.FunctionComponent<IBottomSheetProps> = (props: IBottomSheetProps) => {
-    let className = "fixed-bottom fade";
-    let backdropClassName = "fade";
-    if (props.show) {
-        className += " d-block show";
-        backdropClassName += " modal-backdrop show";
-    }
-
-    if (props.show) {
-        return (
-            <React.Fragment>
-                <div className={className} tabIndex={-1} role="dialog" style={{ zIndex: 2000 }}>
-                    {props.children}
-                </div>
-                <div className={backdropClassName} onClick={props.onClose}/>
-            </React.Fragment>
-        );
-    }
-
-    return null;
-};
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 interface IOptionSheetProps {
     id: string;
@@ -39,12 +15,18 @@ interface IOptionSheetProps {
 
 export const OptionsSheet: React.FunctionComponent<IOptionSheetProps> = (props: IOptionSheetProps) => {
     return (
-        <BottomSheet show={props.show} onClose={props.onClose}>
-            <div className="list-group">
-                <a className="list-group-item" onClick={() => props.onDone(props.id)}>Mark as done</a>
-                <a className="list-group-item" onClick={() => props.onEdit(props.id)}>Edit</a>
-                <a className="list-group-item" onClick={() => props.onDelete(props.id)}>Delete</a>
-            </div>
-        </BottomSheet>
+        <Drawer anchor="bottom" open={props.show} onClose={props.onClose}>
+            <List>
+                <ListItem onClick={() => props.onDone(props.id)} button>
+                    <ListItemText primary="Mark as done" />
+                </ListItem>
+                <ListItem onClick={() => props.onEdit(props.id)} button>
+                    <ListItemText primary="Edit" />
+                </ListItem>
+                <ListItem onClick={() => props.onDelete(props.id)} button>
+                    <ListItemText primary="Delete" />
+                </ListItem>
+            </List>
+        </Drawer>
     );
 };
