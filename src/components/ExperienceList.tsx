@@ -4,6 +4,7 @@ import { IExperience } from "../IExperience";
 
 interface IProps {
     experiences: IExperience[];
+    reverse?: boolean;
     onClick(id: string): void;
     onEdit(id: string): void;
 }
@@ -37,6 +38,11 @@ export const ExperienceList: React.FunctionComponent<IProps> = (props: IProps) =
             x.last < moment().subtract(1, "y").valueOf() &&
             x.last > moment().subtract(2, "y").valueOf()).sort(compare);
 
+    let experiences = props.experiences.sort(compare);
+    if (props.reverse) {
+        experiences = experiences.reverse();
+    }
+
     const weekGroup = (
         <React.Fragment>
             <h2 className="h5">A week ago</h2>
@@ -57,7 +63,7 @@ export const ExperienceList: React.FunctionComponent<IProps> = (props: IProps) =
 
     return (
         <React.Fragment>
-            <ExperienceListGroup onClick={props.onClick} onEdit={props.onEdit} experiences={props.experiences.sort(compare)} />
+            <ExperienceListGroup onClick={props.onClick} onEdit={props.onEdit} experiences={experiences} />
             {weekAgo.length > 0 && weekGroup}
             {monthAgo.length > 0 && monthGroup}
             {yearAgo.length > 0 && yearGroup}

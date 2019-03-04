@@ -12,6 +12,7 @@ export const Home = (props) => {
     const [activeId, setActiveId] = useState("");
     const [maybeAgainCardExperience, setMaybeAgainCardExperience] = useState(null);
     const [neverCardExperience, setNeverCardExperience] = useState(null);
+    const [reverse, setReverse] = useState(false);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
@@ -90,7 +91,7 @@ export const Home = (props) => {
                 React.createElement(MaybeAgainCard, { experience: maybeAgainCardExperience, onClick: handleEditOpenClick }),
             props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
                 React.createElement(NeverCard, { experience: neverCardExperience, onClick: handleEditOpenClick }),
-            React.createElement(ExperienceList, { experiences: experiences, onClick: props.onClick, onEdit: handleEditOpenClick }),
+            React.createElement(ExperienceList, { experiences: experiences, reverse: reverse, onClick: props.onClick, onEdit: handleEditOpenClick }),
             search !== "" && experiences.length === 0 &&
                 React.createElement(React.Fragment, null,
                     React.createElement("p", null, "There are no matched experiences."),

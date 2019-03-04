@@ -24,6 +24,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     const [activeId, setActiveId] = useState("");
     const [maybeAgainCardExperience, setMaybeAgainCardExperience] = useState<IExperience | null>(null);
     const [neverCardExperience, setNeverCardExperience] = useState<IExperience | null>(null);
+    const [reverse, setReverse] = useState(false);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
@@ -125,7 +126,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 {props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
                     <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
                 }
-                <ExperienceList experiences={experiences} onClick={props.onClick} onEdit={handleEditOpenClick} />
+                <ExperienceList experiences={experiences} reverse={reverse} onClick={props.onClick} onEdit={handleEditOpenClick} />
                 {search !== "" && experiences.length === 0 &&
                     <React.Fragment>
                         <p>There are no matched experiences.</p>
