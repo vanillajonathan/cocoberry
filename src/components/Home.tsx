@@ -75,6 +75,10 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         setShowTags((prevState: boolean) => !prevState);
     }
 
+    function handleSort(): void {
+        setReverse((prevState: boolean) => !prevState);
+    }
+
     function handleTagClick(tag: string): void {
         setTag(tag);
     }
@@ -110,6 +114,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                             </div>
                         </div>
                     </div>
+                    <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="r" onClick={handleSort} title="Sort">▲</button>
                     <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
                     <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
                 </nav>

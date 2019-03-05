@@ -53,6 +53,9 @@ export const Home = (props) => {
         event.target.parentElement.classList.toggle("dropup");
         setShowTags((prevState) => !prevState);
     }
+    function handleSort() {
+        setReverse((prevState) => !prevState);
+    }
     function handleTagClick(tag) {
         setTag(tag);
     }
@@ -81,6 +84,7 @@ export const Home = (props) => {
                         React.createElement("input", { className: "form-control", type: "search", accessKey: "s", placeholder: "Search\u2026", title: "Search", onChange: handleChange, "aria-label": "Search" }),
                         React.createElement("div", { className: "input-group-append mr-sm-2" },
                             React.createElement("button", { className: "btn btn-outline-success dropdown-toggle", type: "button", onClick: handleDropdownClick, "aria-label": "Show tags" })))),
+                React.createElement("button", { className: "btn btn-outline-success mr-sm-2 d-none d-xl-block", accessKey: "r", onClick: handleSort, title: "Sort" }, "\u25B2"),
                 React.createElement("button", { className: "btn btn-outline-success mr-sm-2", accessKey: "n", onClick: handleAddExperienceButtonClick, title: "Add new experience" }, "+"),
                 React.createElement("button", { className: "btn btn-outline-success", accessKey: "p", onClick: () => props.onNavigation("Preferences") }, "\u2630")),
             showTags &&
