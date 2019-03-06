@@ -43,6 +43,7 @@ const experiences: INewExperience[] = [
     { name: "Bake a applepie 🥧🍪", last: new Date(2018, 7, 13).getTime() },
     { name: "Basketball 🏀", tag: "activity" },
     { name: "Bike 🚴", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
+    { name: "Bowling 🎳", last: null, tag: "activity" },
     { name: "Box 🥊", last: null, tag: "activity" },
     { name: "Climb 🧗", last: null, tag: "activity" },
     { name: "Cold shower 🥶🚿", tag: "activity" },
