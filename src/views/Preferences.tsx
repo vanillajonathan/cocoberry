@@ -1,15 +1,14 @@
 ﻿import * as React from "react";
+import { useState } from "react";
 import { IExperience } from "../IExperience";
+import { IStorage } from "../IStorage";
 
 interface IProps {
-    export: IExperience[];
-    preferences: IPreferences;
-    onChange(preferences: IPreferences): void;
-    onImport(experience: IExperience[]): void;
+    storage: IStorage;
     onNavigation(component: string): void;
 }
 
-export interface IPreferences {
+interface IPreferences {
     showMaybeAgainCard: boolean;
     showNeverCard: boolean;
 }
@@ -17,8 +16,16 @@ export interface IPreferences {
 export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
     const fileInput: any = React.createRef();
 
+    const prefShowMaybeAgainCard = localStorage.getItem("showMaybeAgainCard") || "false";
+    const prefShowNeverCard = localStorage.getItem("showNeverCard") || "true";
+
+    const [preferences, setPreferences] = useState<IPreferences>({
+        showMaybeAgainCard: prefShowMaybeAgainCard === "true",
+        showNeverCard: prefShowNeverCard === "true",
+    });
+
     function handleExport(): void {
-        const json = JSON.stringify(props.export);
+        const json = JSON.stringify(props.storage.get());
         const file = new File([json], "cocoberry.json", { type: "octet/stream" });
         const url = window.URL.createObjectURL(file);
         window.location.assign(url);
@@ -36,7 +43,8 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
             if (typeof reader.result === "string") {
                 try {
                     const experiences = JSON.parse(reader.result) as IExperience[];
-                    props.onImport(experiences);
+                    //props.onImport(experiences);
+                    props.storage.add_many(experiences);
                 } catch (e) {
                     alert(e);
                 }
@@ -47,9 +55,13 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
     }
 
     function handlePreferenceChanged(event: React.ChangeEvent<HTMLInputElement>): void {
-        const preferences: any = { ...props.preferences };
-        preferences[event.currentTarget.id] = event.currentTarget.checked;
-        props.onChange(preferences);
+        const currentTarget = event.currentTarget;
+        setPreferences((prevState: IPreferences) => {
+            const preferences: any = { ...prevState };
+            preferences[currentTarget.id] = currentTarget.checked;
+            return preferences;
+        });
+        localStorage.setItem(currentTarget.id, currentTarget.checked.toString());
     }
 
     return (
@@ -68,7 +80,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
                                 className="custom-control-input"
                                 id="showMaybeAgainCard"
                                 type="checkbox"
-                                checked={props.preferences.showMaybeAgainCard}
+                                checked={preferences.showMaybeAgainCard}
                                 onChange={handlePreferenceChanged}
                             />
                             <label className="custom-control-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
@@ -80,7 +92,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
                                 className="custom-control-input"
                                 id="showNeverCard"
                                 type="checkbox"
-                                checked={props.preferences.showNeverCard}
+                                checked={preferences.showNeverCard}
                                 onChange={handlePreferenceChanged}
                             />
                             <label className="custom-control-label" htmlFor="showNeverCard">Show the you-have-never card</label>
@@ -95,7 +107,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
                         <input className="form-control-file" id="file" type="file" accept="application/json" onChange={handleImport} ref={fileInput} hidden required />
                     </div>
                     <div className="list-group list-group-flush">
-                        <button className="list-group-item list-group-item-action" type="button" accessKey="e" onClick={handleBrowse}>Import from file</button>
+                        <button className="list-group-item list-group-item-action" type="button" accessKey="i" onClick={handleBrowse}>Import from file</button>
                         <button className="list-group-item list-group-item-action" type="button" accessKey="e" onClick={handleExport}>Export to file</button>
                     </div>
                 </div>

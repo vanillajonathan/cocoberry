@@ -1,36 +1,47 @@
 ﻿import * as React from "react";
 import { useState, useEffect } from "react";
-import { AddExperienceDialog } from "./AddExperienceDialog";
-import { EditExperienceDialog } from "./EditExperienceDialog";
+import uuid from "uuid/v4";
+import { AddExperienceDialog } from "../components/AddExperienceDialog";
+import { EditExperienceDialog } from "../components/EditExperienceDialog";
 import { IExperience } from "../IExperience";
-import { ExperienceList } from "./ExperienceList";
-import { OptionsSheet } from "./OptionsSheet";
-import { MaybeAgainCard } from "./MaybeAgainCard";
-import { NeverCard } from "./NeverCard";
-import { TagList } from "./TagList";
+import { ExperienceList } from "../components/ExperienceList";
+import { OptionsSheet } from "../components/OptionsSheet";
+import { MaybeAgainCard } from "../components/MaybeAgainCard";
+import { NeverCard } from "../components/NeverCard";
+import { ShortcutsDialog } from "../components/ShortcutsDialog";
+import { TagList } from "../components/TagList";
+import { Toast } from "../components/Toast";
 import "./Home.css";
 
 interface IProps {
     experiences: IExperience[];
-    showMaybeAgainCard?: boolean;
-    showNeverCard?: boolean;
     tags: string[];
-    onAddExperience(name: string, tag: string): void;
-    onClick(key: string): void;
     onNavigation(component: string): void;
 }
 
 export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     const [activeId, setActiveId] = useState("");
+    //const [experiences, setExperiences] = useState(props.storage.get());
+    const [experiences, setExperiences] = useState(props.experiences);
     const [maybeAgainCardExperience, setMaybeAgainCardExperience] = useState<IExperience | null>(null);
     const [neverCardExperience, setNeverCardExperience] = useState<IExperience | null>(null);
     const [reverse, setReverse] = useState(false);
     const [search, setSearch] = useState("");
     const [showDialog, setShowDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
+    const [showShortcutsDialog, setShowShortcutsDialog] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const [showTags, setShowTags] = useState(false);
+    const [showToast, setShowToast] = useState(false);
     const [tag, setTag] = useState("");
+
+    const prefShowMaybeAgainCard = localStorage.getItem("showMaybeAgainCard") || "false";
+    const prefShowNeverCard = localStorage.getItem("showNeverCard") || "true";
+
+    const [showMaybeAgainCard] = useState(prefShowMaybeAgainCard === "true");
+    const [showNeverCard] = useState(prefShowNeverCard === "true");
+
+    let timerId: number = 0;
 
     useEffect(() => {
         if (props.experiences.length !== 0) {
@@ -43,11 +54,25 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handleAddExperience(name: string, tag: string): void {
         setShowDialog(false);
-        props.onAddExperience(name, tag);
+        const experience: IExperience = {
+            id: uuid(),
+            name,
+            tag,
+        };
+        setExperiences((prevState: IExperience[]) => [...prevState, experience]);
     }
 
     function handleAddExperienceButtonClick(): void {
         setShowDialog(true);
+    }
+
+    function handleClick(key: string): void {
+        setExperiences((prevState: IExperience[]) => prevState.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
+        setShowToast(true);
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(() => {
+            setShowToast(false);
+        }, 1500);
     }
 
     function handleOpenOptions(): void {
@@ -91,14 +116,14 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         return experiences[Math.floor(Math.random() * experiences.length)];
     }
 
-    let experiences: IExperience[];
+    let myExperiences: IExperience[];
     if (search !== "" || tag !== "") {
-        experiences = props.experiences.filter(x => x.name.toLowerCase().includes(search.toLowerCase()));
+        myExperiences = experiences.filter(x => x.name.toLowerCase().includes(search.toLowerCase()));
         if (tag !== "") {
-            experiences = experiences.filter(x => x.tag != null && x.tag.includes(tag));
+            myExperiences = myExperiences.filter(x => x.tag != null && x.tag.includes(tag));
         }
     } else {
-        experiences = props.experiences.filter(x => x.last != null);
+        myExperiences = experiences.filter(x => x.last != null);
     }
 
     return (
@@ -114,6 +139,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                             </div>
                         </div>
                     </div>
+                    <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
                     <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="r" onClick={handleSort} title="Sort">▲</button>
                     <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
                     <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
@@ -125,14 +151,14 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 }
             </header>
             <main className="App container">
-                {props.showMaybeAgainCard && search === "" && tag === "" && maybeAgainCardExperience &&
+                {showMaybeAgainCard && search === "" && tag === "" && maybeAgainCardExperience &&
                     <MaybeAgainCard experience={maybeAgainCardExperience} onClick={handleEditOpenClick} />
                 }
-                {props.showNeverCard && search === "" && tag === "" && neverCardExperience &&
+                {showNeverCard && search === "" && tag === "" && neverCardExperience &&
                     <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
                 }
-                <ExperienceList experiences={experiences} reverse={reverse} onClick={props.onClick} onEdit={handleEditOpenClick} />
-                {search !== "" && experiences.length === 0 &&
+                <ExperienceList experiences={myExperiences} reverse={reverse} onClick={handleClick} onEdit={handleEditOpenClick} />
+                {search !== "" && myExperiences.length === 0 &&
                     <React.Fragment>
                         <p>There are no matched experiences.</p>
                         <button className="btn btn-outline-secondary" onClick={handleAddExperienceButtonClick}>Add new experience</button>
@@ -141,6 +167,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             </main>
             <AddExperienceDialog name={search} isOpen={showDialog} tags={props.tags} onAdd={handleAddExperience} onClose={handleClose} />
             <EditExperienceDialog name={search} isOpen={showEditDialog} tags={props.tags} onSave={handleEditSaveClick} onClose={handleClose} />
+            <ShortcutsDialog isOpen={showShortcutsDialog} onClose={() => setShowShortcutsDialog(false)} />
             <OptionsSheet
                 id={activeId}
                 open={showOptions}
@@ -149,6 +176,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 onDone={handleCloseOptions}
                 onEdit={handleCloseOptions}
             />
+            <Toast message="Marked as done" show={showToast} />
         </React.Fragment>
     );
 };
