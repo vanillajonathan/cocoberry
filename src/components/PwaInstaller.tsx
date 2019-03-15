@@ -32,12 +32,7 @@ export const PwaInstaller: React.FunctionComponent = () => {
 
     if (showInstallPrompt) {
         return (
-            <div className="card fixed-bottom">
-                <div className="card-body">
-                    <p>Install web application?</p>
-                    <button className="btn btn-primary" onClick={handleInstall}>Install</button>
-                </div>
-            </div>
+            <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" onClick={handleInstall} title="Install web application">Install</button>
         );
     }
 

@@ -3,7 +3,6 @@ import { useState } from "react";
 import { IStorage, INewExperience } from "./IStorage";
 import { Home } from "./views/Home";
 import { Preferences } from "./views/Preferences";
-//import { PwaInstaller } from "./components/PwaInstaller";
 
 interface IProps {
     seed: INewExperience[];

@@ -8,6 +8,7 @@ import { ExperienceList } from "../components/ExperienceList";
 import { OptionsSheet } from "../components/OptionsSheet";
 import { MaybeAgainCard } from "../components/MaybeAgainCard";
 import { NeverCard } from "../components/NeverCard";
+import { PwaInstaller } from "../components/PwaInstaller";
 import { ShortcutsDialog } from "../components/ShortcutsDialog";
 import { TagList } from "../components/TagList";
 import { Toast } from "../components/Toast";
@@ -139,6 +140,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                             </div>
                         </div>
                     </div>
+                    {PwaInstaller}
                     <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
                     <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="r" onClick={handleSort} title="Sort">▲</button>
                     <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
