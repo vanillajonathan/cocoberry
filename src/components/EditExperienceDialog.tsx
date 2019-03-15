@@ -88,5 +88,5 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
 };
 
 EditExperienceDialog.defaultProps = {
-    name: ""
-}
+    name: "",
+};

@@ -12,8 +12,8 @@ interface IProps {
 }
 
 const App: React.FunctionComponent<IProps> = (props: IProps) => {
-    const storedExperiences = props.storage.get();
-    if (storedExperiences.length === 0) {
+    const experiences = props.storage.get();
+    if (experiences.length === 0) {
         props.storage.add_many(props.seed);
     }
     const [nav, setNav] = useState("");
@@ -33,7 +33,7 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
 
     return (
         <Home
-            experiences={storedExperiences}
+            experiences={props.storage.get()}
             onNavigation={handleNavigation}
             tags={props.tags}
         />
