@@ -40,10 +40,10 @@ interface IOptionSheetProps {
 export const OptionsSheet: React.FunctionComponent<IOptionSheetProps> = (props: IOptionSheetProps) => {
     return (
         <BottomSheet open={props.open} onClose={props.onClose}>
-            <div className="list-group">
-                <a className="list-group-item" onClick={() => props.onDone(props.id)}>Mark as done</a>
-                <a className="list-group-item" onClick={() => props.onEdit(props.id)}>Edit</a>
-                <a className="list-group-item" onClick={() => props.onDelete(props.id)}>Delete</a>
+            <div className="list-group list-group-flush">
+                <a className="list-group-item list-group-item-action" onClick={() => props.onDone(props.id)}>Mark as done</a>
+                <a className="list-group-item list-group-item-action" onClick={() => props.onEdit(props.id)}>Edit</a>
+                <a className="list-group-item list-group-item-action" onClick={() => props.onDelete(props.id)}>Delete</a>
             </div>
         </BottomSheet>
     );

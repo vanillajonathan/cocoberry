@@ -15,9 +15,9 @@ export const BottomSheet = (props) => {
 };
 export const OptionsSheet = (props) => {
     return (React.createElement(BottomSheet, { open: props.open, onClose: props.onClose },
-        React.createElement("div", { className: "list-group" },
-            React.createElement("a", { className: "list-group-item", onClick: () => props.onDone(props.id) }, "Mark as done"),
-            React.createElement("a", { className: "list-group-item", onClick: () => props.onEdit(props.id) }, "Edit"),
-            React.createElement("a", { className: "list-group-item", onClick: () => props.onDelete(props.id) }, "Delete"))));
+        React.createElement("div", { className: "list-group list-group-flush" },
+            React.createElement("a", { className: "list-group-item list-group-item-action", onClick: () => props.onDone(props.id) }, "Mark as done"),
+            React.createElement("a", { className: "list-group-item list-group-item-action", onClick: () => props.onEdit(props.id) }, "Edit"),
+            React.createElement("a", { className: "list-group-item list-group-item-action", onClick: () => props.onDelete(props.id) }, "Delete"))));
 };
 //# sourceMappingURL=OptionsSheet.js.map

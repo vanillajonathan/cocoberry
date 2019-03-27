@@ -4,7 +4,7 @@ import { TagList } from "./TagList";
 import { IExperience } from "../IExperience";
 
 interface IProps {
-    name: string;
+    experience: IExperience;
     isOpen: boolean;
     tags: string[];
     onClose(): void;
@@ -12,9 +12,9 @@ interface IProps {
 }
 
 export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IProps) => {
-    const [name, setName] = useState(props.name);
-    const [tag, setTag] = useState("");
-    const [last, setLast] = useState(0);
+    const [name, setName] = useState(props.experience.name);
+    const [tag, setTag] = useState(props.experience.tag || "");
+    const [last, setLast] = useState(props.experience.last || 0);
     const nameInput = React.createRef<HTMLInputElement>();
 
     useEffect(() => {
@@ -71,7 +71,7 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="time">Last</label>
-                                    <input className="form-control" id="time" type="datetime-local" onChange={handleTimeChange} />
+                                    <input className="form-control" id="time" type="datetime-local" value={last} onChange={handleTimeChange} />
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -85,8 +85,4 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
             <div className={backdropClassName} />
         </React.Fragment>
     );
-};
-
-EditExperienceDialog.defaultProps = {
-    name: "",
 };

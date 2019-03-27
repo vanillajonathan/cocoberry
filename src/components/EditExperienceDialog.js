@@ -2,9 +2,9 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { TagList } from "./TagList";
 export const EditExperienceDialog = (props) => {
-    const [name, setName] = useState(props.name);
-    const [tag, setTag] = useState("");
-    const [last, setLast] = useState(0);
+    const [name, setName] = useState(props.experience.name);
+    const [tag, setTag] = useState(props.experience.tag || "");
+    const [last, setLast] = useState(props.experience.last || 0);
     const nameInput = React.createRef();
     useEffect(() => {
         if (nameInput.current) {
@@ -49,13 +49,10 @@ export const EditExperienceDialog = (props) => {
                                 React.createElement(TagList, { activeTag: tag, tags: props.tags, onClick: tag => setTag(tag) })),
                             React.createElement("div", { className: "form-group" },
                                 React.createElement("label", { htmlFor: "time" }, "Last"),
-                                React.createElement("input", { className: "form-control", id: "time", type: "datetime-local", onChange: handleTimeChange }))),
+                                React.createElement("input", { className: "form-control", id: "time", type: "datetime-local", value: last, onChange: handleTimeChange }))),
                         React.createElement("div", { className: "modal-footer" },
                             React.createElement("button", { type: "button", className: "btn btn-secondary", "data-dismiss": "modal", onClick: handleClose }, "Close"),
                             React.createElement("button", { type: "submit", className: "btn btn-primary" }, "Save")))))),
         React.createElement("div", { className: backdropClassName })));
-};
-EditExperienceDialog.defaultProps = {
-    name: "",
 };
 //# sourceMappingURL=EditExperienceDialog.js.map

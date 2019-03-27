@@ -5,7 +5,7 @@ import { AddExperienceDialog } from "../components/AddExperienceDialog";
 import { EditExperienceDialog } from "../components/EditExperienceDialog";
 import { IExperience } from "../IExperience";
 import { ExperienceList } from "../components/ExperienceList";
-import { OptionsSheet } from "../components/OptionsSheet";
+import { BottomSheet } from "../components/OptionsSheet";
 import { MaybeAgainCard } from "../components/MaybeAgainCard";
 import { NeverCard } from "../components/NeverCard";
 import { PwaInstaller } from "../components/PwaInstaller";
@@ -22,19 +22,21 @@ interface IProps {
 
 export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     const [activeId, setActiveId] = useState("");
+    const [activeExperience, setActiveExperience] = useState<IExperience>();
     //const [experiences, setExperiences] = useState(props.storage.get());
     const [experiences, setExperiences] = useState(props.experiences);
     const [maybeAgainCardExperience, setMaybeAgainCardExperience] = useState<IExperience | null>(null);
     const [neverCardExperience, setNeverCardExperience] = useState<IExperience | null>(null);
     const [reverse, setReverse] = useState(false);
     const [search, setSearch] = useState("");
-    const [showDialog, setShowDialog] = useState(false);
+    const [showAddDialog, setShowDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
     const [showShortcutsDialog, setShowShortcutsDialog] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const [showTags, setShowTags] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [tag, setTag] = useState("");
+    const [toastMessage, setToastMessage] = useState("");
 
     const prefShowMaybeAgainCard = localStorage.getItem("showMaybeAgainCard") || "false";
     const prefShowNeverCard = localStorage.getItem("showNeverCard") || "true";
@@ -68,6 +70,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     }
 
     function handleClick(key: string): void {
+        setShowOptions(false);
         setExperiences((prevState: IExperience[]) => prevState.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
         setShowToast(true);
         window.clearTimeout(timerId);
@@ -76,7 +79,19 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         }, 1500);
     }
 
-    function handleOpenOptions(): void {
+    function handleDelete(key: string): void {
+        setShowOptions(false);
+        setShowToast(true);
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(() => {
+            setShowToast(false);
+        }, 1500);
+    }
+
+    function handleOpenOptions(id: string): void {
+        setActiveId(id);
+        const exp = experiences.find(x => x.id === id);
+        setActiveExperience(exp);
         setShowOptions(true);
     }
 
@@ -85,7 +100,8 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     }
 
     function handleEditOpenClick(tag: string): void {
-        setShowEditDialog(true);
+        setShowOptions(false);
+        setShowEditDialog(true);  
     }
 
     function handleEditSaveClick(experience: IExperience): void {
@@ -111,6 +127,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handleClose(): void {
         setShowDialog(false);
+        setShowEditDialog(false);
     }
 
     function randomExperience(experiences: IExperience[]): IExperience {
@@ -159,7 +176,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                 {showNeverCard && search === "" && tag === "" && neverCardExperience &&
                     <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
                 }
-                <ExperienceList experiences={myExperiences} reverse={reverse} onClick={handleClick} onEdit={handleEditOpenClick} />
+                <ExperienceList experiences={myExperiences} reverse={reverse} onClick={handleOpenOptions} onEdit={handleEditOpenClick} />
                 {search !== "" && myExperiences.length === 0 &&
                     <React.Fragment>
                         <p>There are no matched experiences.</p>
@@ -167,17 +184,18 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                     </React.Fragment>
                 }
             </main>
-            <AddExperienceDialog name={search} isOpen={showDialog} tags={props.tags} onAdd={handleAddExperience} onClose={handleClose} />
-            <EditExperienceDialog name={search} isOpen={showEditDialog} tags={props.tags} onSave={handleEditSaveClick} onClose={handleClose} />
+            <AddExperienceDialog name={search} isOpen={showAddDialog} tags={props.tags} onAdd={handleAddExperience} onClose={handleClose} />
+            {showEditDialog && activeExperience &&
+                <EditExperienceDialog experience={activeExperience} isOpen={showEditDialog} tags={props.tags} onSave={handleEditSaveClick} onClose={handleClose} />
+            }
             <ShortcutsDialog isOpen={showShortcutsDialog} onClose={() => setShowShortcutsDialog(false)} />
-            <OptionsSheet
-                id={activeId}
-                open={showOptions}
-                onClose={handleCloseOptions}
-                onDelete={handleCloseOptions}
-                onDone={handleCloseOptions}
-                onEdit={handleCloseOptions}
-            />
+            <BottomSheet open={showOptions} onClose={handleCloseOptions}>
+                <div className="list-group list-group-flush">
+                    <a className="list-group-item list-group-item-action" onClick={() => handleClick(activeId)}>Mark as done</a>
+                    <a className="list-group-item list-group-item-action" onClick={() => handleEditOpenClick(activeId)}>Edit</a>
+                    <a className="list-group-item list-group-item-action" onClick={() => handleDelete(activeId)}>Delete</a>
+                </div>
+            </BottomSheet>
             <Toast message="Marked as done" show={showToast} />
         </React.Fragment>
     );
