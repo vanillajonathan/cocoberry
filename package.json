@@ -4,17 +4,17 @@
   "private": true,
   "dependencies": {
     "@types/jest": "^24.0.11",
-    "@types/node": "^11.12.0",
-    "@types/react": "^16.8.9",
+    "@types/node": "^11.13.0",
+    "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.3",
     "@types/uuid": "^3.4.4",
     "bootstrap": "^4.3.1",
     "gh-pages": "^2.0.1",
     "moment": "^2.24.0",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "^2.1.8",
-    "typescript": "^3.3.4000",
+    "typescript": "^3.4.2",
     "uuid": "^3.3.2"
   },
   "scripts": {

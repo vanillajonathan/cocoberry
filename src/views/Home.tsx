@@ -72,6 +72,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     function handleClick(key: string): void {
         setShowOptions(false);
         setExperiences((prevState: IExperience[]) => prevState.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
+        setToastMessage("Marked as done");
         setShowToast(true);
         window.clearTimeout(timerId);
         timerId = window.setTimeout(() => {
@@ -81,6 +82,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handleDelete(key: string): void {
         setShowOptions(false);
+        setToastMessage("Removed");
         setShowToast(true);
         window.clearTimeout(timerId);
         timerId = window.setTimeout(() => {
@@ -196,7 +198,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                     <a className="list-group-item list-group-item-action" onClick={() => handleDelete(activeId)}>Delete</a>
                 </div>
             </BottomSheet>
-            <Toast message="Marked as done" show={showToast} />
+            <Toast message={toastMessage} show={showToast} />
         </React.Fragment>
     );
 };
