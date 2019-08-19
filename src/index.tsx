@@ -65,6 +65,7 @@ const experiences: INewExperience[] = [
     { name: "Theatre 🎭", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Yoga 🧘", last: new Date(2019, 0, 11).getTime(), tag: "activity" },
     { name: "Watch a movie 🎬", last: null, tag: "activity" },
+    { name: "Volleyball 🏐", last: null, tag: "activity" },
     { name: "Wrestle 🤼", last: null, tag: "activity" },
     { name: "Cook pasta 🍝", last: null },
     { name: "Beach 🏖", last: null, tag: "places" },

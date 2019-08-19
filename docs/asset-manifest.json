@@ -1,15 +1,17 @@
 {
-  "main.css": "/cocoberry/static/css/main.681115ee.chunk.css",
-  "main.js": "/cocoberry/static/js/main.9b22fbf7.chunk.js",
-  "main.js.map": "/cocoberry/static/js/main.9b22fbf7.chunk.js.map",
-  "runtime~main.js": "/cocoberry/static/js/runtime~main.57375bfc.js",
-  "runtime~main.js.map": "/cocoberry/static/js/runtime~main.57375bfc.js.map",
-  "static/css/2.9e52ab8f.chunk.css": "/cocoberry/static/css/2.9e52ab8f.chunk.css",
-  "static/js/2.c839b202.chunk.js": "/cocoberry/static/js/2.c839b202.chunk.js",
-  "static/js/2.c839b202.chunk.js.map": "/cocoberry/static/js/2.c839b202.chunk.js.map",
-  "index.html": "/cocoberry/index.html",
-  "precache-manifest.a226ca328339b1635771dd74484d0ca9.js": "/cocoberry/precache-manifest.a226ca328339b1635771dd74484d0ca9.js",
-  "service-worker.js": "/cocoberry/service-worker.js",
-  "static/css/2.9e52ab8f.chunk.css.map": "/cocoberry/static/css/2.9e52ab8f.chunk.css.map",
-  "static/css/main.681115ee.chunk.css.map": "/cocoberry/static/css/main.681115ee.chunk.css.map"
+  "files": {
+    "main.css": "/cocoberry/static/css/main.92f4b966.chunk.css",
+    "main.js": "/cocoberry/static/js/main.fb3acd77.chunk.js",
+    "main.js.map": "/cocoberry/static/js/main.fb3acd77.chunk.js.map",
+    "runtime~main.js": "/cocoberry/static/js/runtime~main.65538b13.js",
+    "runtime~main.js.map": "/cocoberry/static/js/runtime~main.65538b13.js.map",
+    "static/css/2.0f7a873c.chunk.css": "/cocoberry/static/css/2.0f7a873c.chunk.css",
+    "static/js/2.7fc4af17.chunk.js": "/cocoberry/static/js/2.7fc4af17.chunk.js",
+    "static/js/2.7fc4af17.chunk.js.map": "/cocoberry/static/js/2.7fc4af17.chunk.js.map",
+    "index.html": "/cocoberry/index.html",
+    "precache-manifest.7a71b70b3d6fe928f012e3e7e067cc91.js": "/cocoberry/precache-manifest.7a71b70b3d6fe928f012e3e7e067cc91.js",
+    "service-worker.js": "/cocoberry/service-worker.js",
+    "static/css/2.0f7a873c.chunk.css.map": "/cocoberry/static/css/2.0f7a873c.chunk.css.map",
+    "static/css/main.92f4b966.chunk.css.map": "/cocoberry/static/css/main.92f4b966.chunk.css.map"
+  }
 }
