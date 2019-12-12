@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/cocoberry/precache-manifest.efdda4f8b0e165c1d927785ae6c14d14.js"
+  "/cocoberry/precache-manifest.71d298a5d5cab94786b2c9a03fa5099f.js"
 );
 
 self.addEventListener('message', (event) => {
