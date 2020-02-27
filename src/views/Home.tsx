@@ -1,6 +1,6 @@
 ﻿import * as React from "react";
 import { useState, useEffect } from "react";
-import uuid from "uuid/v4";
+import { v4 as uuid } from 'uuid';
 import { AddExperienceDialog } from "../components/AddExperienceDialog";
 import { EditExperienceDialog } from "../components/EditExperienceDialog";
 import { IExperience } from "../IExperience";
