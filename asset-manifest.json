@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/cocoberry/static/css/main.5b27bfbe.chunk.css",
-    "main.js": "/cocoberry/static/js/main.05c60b1a.chunk.js",
-    "main.js.map": "/cocoberry/static/js/main.05c60b1a.chunk.js.map",
+    "main.js": "/cocoberry/static/js/main.4dcad3eb.chunk.js",
+    "main.js.map": "/cocoberry/static/js/main.4dcad3eb.chunk.js.map",
     "runtime-main.js": "/cocoberry/static/js/runtime-main.d98fcd03.js",
     "runtime-main.js.map": "/cocoberry/static/js/runtime-main.d98fcd03.js.map",
     "static/css/2.b07ff35c.chunk.css": "/cocoberry/static/css/2.b07ff35c.chunk.css",
     "static/js/2.89f3e35e.chunk.js": "/cocoberry/static/js/2.89f3e35e.chunk.js",
     "static/js/2.89f3e35e.chunk.js.map": "/cocoberry/static/js/2.89f3e35e.chunk.js.map",
     "index.html": "/cocoberry/index.html",
-    "precache-manifest.3e34a8dd6b6a8f39bef6adc2a062a0cf.js": "/cocoberry/precache-manifest.3e34a8dd6b6a8f39bef6adc2a062a0cf.js",
+    "precache-manifest.72406aa38826c78966a1f7a56316b91f.js": "/cocoberry/precache-manifest.72406aa38826c78966a1f7a56316b91f.js",
     "service-worker.js": "/cocoberry/service-worker.js",
     "static/css/2.b07ff35c.chunk.css.map": "/cocoberry/static/css/2.b07ff35c.chunk.css.map",
     "static/css/main.5b27bfbe.chunk.css.map": "/cocoberry/static/css/main.5b27bfbe.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.b07ff35c.chunk.css",
     "static/js/2.89f3e35e.chunk.js",
     "static/css/main.5b27bfbe.chunk.css",
-    "static/js/main.05c60b1a.chunk.js"
+    "static/js/main.4dcad3eb.chunk.js"
   ]
 }

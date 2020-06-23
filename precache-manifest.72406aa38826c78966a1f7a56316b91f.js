@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9be46e3b42f49edf5db0985eaf1dd744",
+    "revision": "1c18c98c4e751d58d1f4bd50e0c98e9c",
     "url": "/cocoberry/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cocoberry/static/css/2.b07ff35c.chunk.css"
   },
   {
-    "revision": "9c1a8b30b2c8ba80aa63",
+    "revision": "a3306ea1c255b15f5f94",
     "url": "/cocoberry/static/css/main.5b27bfbe.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cocoberry/static/js/2.89f3e35e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9c1a8b30b2c8ba80aa63",
-    "url": "/cocoberry/static/js/main.05c60b1a.chunk.js"
+    "revision": "a3306ea1c255b15f5f94",
+    "url": "/cocoberry/static/js/main.4dcad3eb.chunk.js"
   },
   {
     "revision": "ff3663ae766b909607dc",
