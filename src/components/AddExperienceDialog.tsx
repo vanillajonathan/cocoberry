@@ -54,11 +54,11 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
-                                <div className="form-group">
+                                <div className="mb-3">
                                     <label htmlFor="name">Title</label>
                                     <input className="form-control" id="name" type="text" value={name} onChange={handleChange} ref={nameInput} autoFocus required />
                                 </div>
-                                <div className="form-group">
+                                <div className="mb-3">
                                     <label>Tag</label>
                                     <TagList
                                         activeTag={tag}

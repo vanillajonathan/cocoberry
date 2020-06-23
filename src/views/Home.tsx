@@ -150,20 +150,26 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         <React.Fragment>
             <header className="bg-white fixed-top shadow-sm">
                 <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <span className="navbar-brand d-none d-xl-block">Cocoberry</span>
-                    <div className="form-inline mr-auto">
-                        <div className="input-group">
-                            <input className="form-control" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={handleChange} aria-label="Search" />
-                            <div className="input-group-append mr-sm-2">
-                                <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
+                    <div className="container-fluid">
+                        <div className="d-flex flex-grow-1">
+                            <span className="navbar-brand d-none d-xl-block">Cocoberry</span>
+                            <div className="mr-auto">
+                                <div className="input-group">
+                                    <input className="form-control" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={handleChange} aria-label="Search" />
+                                    <div className="input-group-append mr-sm-2">
+                                        <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="">
+                                {PwaInstaller}
+                                <button className="btn btn-outline-success mr-sm-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
+                                <button className="btn btn-outline-success mr-sm-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
+                                <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
+                                <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
                             </div>
                         </div>
                     </div>
-                    {PwaInstaller}
-                    <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
-                    <button className="btn btn-outline-success mr-sm-2 d-none d-xl-block" accessKey="r" onClick={handleSort} title="Sort">▲</button>
-                    <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
-                    <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
                 </nav>
                 {showTags &&
                     <div className="container">

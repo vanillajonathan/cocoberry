@@ -68,34 +68,36 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
         <React.Fragment>
             <header className="fixed-top shadow-sm">
                 <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <button className="btn btn-outline-success" accessKey="b" onClick={() => props.onNavigation("")}>Back</button>
+                    <div className="container-fluid">
+                        <button className="btn btn-outline-success" accessKey="b" onClick={() => props.onNavigation("")}>Back</button>
+                    </div>
                 </nav>
             </header>
             <main className="App container">
 
                 <div className="list-group mb-3">
                     <div className="list-group-item">
-                        <div className="custom-control custom-switch">
+                        <div className="form-check form-switch">
                             <input
-                                className="custom-control-input"
+                                className="form-check-input"
                                 id="showMaybeAgainCard"
                                 type="checkbox"
                                 checked={preferences.showMaybeAgainCard}
                                 onChange={handlePreferenceChanged}
                             />
-                            <label className="custom-control-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
+                            <label className="form-check-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
                         </div>
                     </div>
                     <div className="list-group-item">
-                        <div className="custom-control custom-switch">
+                        <div className="form-check form-switch">
                             <input
-                                className="custom-control-input"
+                                className="form-check-input"
                                 id="showNeverCard"
                                 type="checkbox"
                                 checked={preferences.showNeverCard}
                                 onChange={handlePreferenceChanged}
                             />
-                            <label className="custom-control-label" htmlFor="showNeverCard">Show the you-have-never card</label>
+                            <label className="form-check-label" htmlFor="showNeverCard">Show the you-have-never card</label>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ export const TagList: React.FunctionComponent<IProps> = (props: IProps) => {
         <ul className="list-inline">
             {props.tags.map(tag => {
                 let className = "badge ";
-                className += (tag.toLowerCase() === props.activeTag ? "badge-primary" : "badge-light");
+                className += (tag.toLowerCase() === props.activeTag ? "bg-primary" : "bg-light text-dark");
                 return <li className="list-inline-item" key={tag}><span className={className} onClick={handleClick}>{tag}</span></li>;
             })}
         </ul>

@@ -27,22 +27,28 @@ export const ShortcutsDialog: React.FunctionComponent<IProps> = (props: IProps) 
                         <div className="modal-body">
                             <div className="container-fluid">
                                 <div className="row">
-                                    <div className="col-6">
+                                    <div className="col">
                                         <kbd><kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>N</kbd></kbd>
                                     </div>
-                                    <div className="col-6">Add new experience</div>
-                                    <div className="col-6">
+                                    <div className="col">Add new experience</div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
                                         <kbd><kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd></kbd>
                                     </div>
-                                    <div className="col-6">Search</div>
-                                    <div className="col-6">
+                                    <div className="col">Search</div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
                                         <kbd><kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd></kbd>
                                     </div>
-                                    <div className="col-6">Preferences</div>
-                                    <div className="col-6">
+                                    <div className="col">Preferences</div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
                                         <kbd><kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>R</kbd></kbd>
                                     </div>
-                                    <div className="col-6">Reverse sort</div>
+                                    <div className="col">Reverse sort</div>
                                 </div>
                             </div>
                         </div>

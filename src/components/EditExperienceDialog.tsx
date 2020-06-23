@@ -61,15 +61,15 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
-                                <div className="form-group">
+                                <div className="mb-3">
                                     <label htmlFor="name">Title</label>
                                     <input className="form-control" id="name" type="text" value={name} onChange={handleChange} ref={nameInput} autoFocus required />
                                 </div>
-                                <div className="form-group">
+                                <div className="mb-3">
                                     <label>Tag</label>
                                     <TagList activeTag={tag} tags={props.tags} onClick={tag => setTag(tag)} />
                                 </div>
-                                <div className="form-group">
+                                <div className="mb-3">
                                     <label htmlFor="time">Last</label>
                                     <input className="form-control" id="time" type="datetime-local" value={last} onChange={handleTimeChange} />
                                 </div>
