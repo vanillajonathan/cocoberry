@@ -78,6 +78,11 @@ const experiences: INewExperience[] = [
 const storage: IStorage = new LocalStorage();
 const tags: string[] = ["Activity", "Fruit", "Places", "Vegetable"];
 
-ReactDOM.render(<App seed={experiences} storage={storage} tags={tags} />, document.getElementById("root"));
+ReactDOM.render(
+    <React.StrictMode>
+        <App seed={experiences} storage={storage} tags={tags} />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
 
 serviceWorker.register();

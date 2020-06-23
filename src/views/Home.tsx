@@ -53,7 +53,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             const exp = randomExperience(props.experiences.filter(x => x.last === null));
             setNeverCardExperience(exp);
         }
-    }, []);
+    }, [props.experiences]);
 
     function handleAddExperience(name: string, tag: string): void {
         setShowDialog(false);
@@ -156,13 +156,11 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                             <div className="mr-auto">
                                 <div className="input-group">
                                     <input className="form-control" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={handleChange} aria-label="Search" />
-                                    <div className="input-group-append mr-sm-2">
-                                        <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
-                                    </div>
+                                    <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
                                 </div>
                             </div>
-                            <div className="">
-                                {PwaInstaller}
+                            <div>
+                                <PwaInstaller />
                                 <button className="btn btn-outline-success mr-sm-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
                                 <button className="btn btn-outline-success mr-sm-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
                                 <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
