@@ -82,6 +82,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handleDelete(key: string): void {
         setShowOptions(false);
+        setExperiences((prevState: IExperience[]) => (prevState.filter(e => e.id !== key)));
         setToastMessage("Removed");
         setShowToast(true);
         window.clearTimeout(timerId);
@@ -108,6 +109,18 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handleEditSaveClick(experience: IExperience): void {
         setShowEditDialog(false);
+        setExperiences((prevState: IExperience[]) => (prevState.map(e => {
+            if (e.id === experience.id) {
+                e = experience;
+            }
+            return e;
+        })));
+        setToastMessage("Edited:" + experience.name);
+        setShowToast(true);
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(() => {
+            setShowToast(false);
+        }, 1500);
     }
 
     function handleChange(event: React.FormEvent<HTMLInputElement>): void {

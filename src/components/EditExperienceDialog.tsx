@@ -27,8 +27,13 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
         setName(event.target.value);
     }
 
+    function handleSetTag(tagName: string): void {
+        setTag(tagName);
+    }
+
     function handleTimeChange(event: React.ChangeEvent<HTMLInputElement>): void {
-        setLast(parseInt(event.target.value, 10));
+        const date = new Date(event.target.value);
+        setLast(date.getTime());
     }
 
     function handleClose(): void {
@@ -37,7 +42,7 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        const experience: IExperience = { id: "", name: name, tag: tag, last: last };
+        const experience: IExperience = { id: props.experience.id, name: name, tag: tag, last: last };
         props.onSave(experience);
     }
 
@@ -67,11 +72,11 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
                                 </div>
                                 <div className="mb-3">
                                     <label>Tag</label>
-                                    <TagList activeTag={tag} tags={props.tags} onClick={tag => setTag(tag)} />
+                                    <TagList activeTag={tag} tags={props.tags} onClick={handleSetTag} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="time">Last</label>
-                                    <input className="form-control" id="time" type="datetime-local" value={last} onChange={handleTimeChange} />
+                                    <input className="form-control" id="time" type="datetime-local" value={new Date(last).toISOString().substring(0, 16)} onChange={handleTimeChange} />
                                 </div>
                             </div>
                             <div className="modal-footer">
