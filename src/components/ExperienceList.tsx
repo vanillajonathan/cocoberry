@@ -82,7 +82,7 @@ const ExperienceListGroup: React.FunctionComponent<IExperienceListGroupProps> = 
         return (
             <React.Fragment>
                 <div><small className="float-right text-muted">{new Date(experience.last).toLocaleDateString("sv-se")}</small></div>
-                <time className="d-block text-muted small" dateTime={new Date(experience.last).toISOString()} title={experience.last.toString()}>{moment(experience.last).fromNow()}</time>
+                <time className="d-block text-muted small" dateTime={new Date(experience.last).toISOString()} title={new Date(experience.last).toLocaleString()}>{moment(experience.last).fromNow()}</time>
             </React.Fragment>);
     }
 
