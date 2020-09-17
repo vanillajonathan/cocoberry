@@ -1,1 +1,0 @@
-{"version":3,"sources":["Home.css"],"names":[],"mappings":"AAAA,KACI,kBACJ,CAEA,4CACI,KACI,wBAAiB,CAAjB,qBAAiB,CAAjB,oBAAiB,CAAjB,gBACJ,CACJ","file":"main.5b27bfbe.chunk.css","sourcesContent":[".App {\r\n    padding-top: 4.5rem;\r\n}\r\n\r\n@media screen and (display-mode: standalone) {\r\n    body {\r\n        user-select: none;\r\n    }\r\n}"]}
