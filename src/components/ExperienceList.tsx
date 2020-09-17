@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import moment from "moment";
+import { DateTime } from "luxon";
 import { IExperience } from "../IExperience";
 
 interface IProps {
@@ -25,18 +25,18 @@ export const ExperienceList: React.FunctionComponent<IProps> = (props: IProps) =
 
     const weekAgo = props.experiences
         .filter(x => x.last != null &&
-            x.last < moment().subtract(1, "w").valueOf() &&
-            x.last > moment().subtract(2, "w").valueOf()).sort(compare);
+            x.last < DateTime.local().minus({ weeks: 1 }).valueOf() &&
+            x.last > DateTime.local().minus({ weeks: 2 }).valueOf()).sort(compare);
 
     const monthAgo = props.experiences
         .filter(x => x.last != null &&
-            x.last < moment().subtract(1, "m").valueOf() &&
-            x.last > moment().subtract(2, "m").valueOf()).sort(compare);
+            x.last < DateTime.local().minus({ months: 1 }).valueOf() &&
+            x.last > DateTime.local().minus({ months: 2 }).valueOf()).sort(compare);
 
     const yearAgo = props.experiences
         .filter(x => x.last != null &&
-            x.last < moment().subtract(1, "y").valueOf() &&
-            x.last > moment().subtract(2, "y").valueOf()).sort(compare);
+            x.last < DateTime.local().minus({ years: 1 }).valueOf() &&
+            x.last > DateTime.local().minus({ years: 2 }).valueOf()).sort(compare);
 
     let experiences = props.experiences.sort(compare);
     if (props.reverse) {
@@ -82,7 +82,7 @@ const ExperienceListGroup: React.FunctionComponent<IExperienceListGroupProps> = 
         return (
             <React.Fragment>
                 <div><small className="float-right text-muted">{new Date(experience.last).toLocaleDateString("sv-se")}</small></div>
-                <time className="d-block text-muted small" dateTime={new Date(experience.last).toISOString()} title={new Date(experience.last).toLocaleString()}>{moment(experience.last).fromNow()}</time>
+                <time className="d-block text-muted small" dateTime={new Date(experience.last).toISOString()} title={new Date(experience.last).toLocaleString()}>{DateTime.fromMillis(experience.last).toRelative()}</time>
             </React.Fragment>);
     }
 

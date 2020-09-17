@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import moment from "moment";
+import { DateTime } from "luxon";
 import { IExperience } from "../IExperience";
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export const MaybeAgainCard: React.FunctionComponent<IProps> = (props: IProps) => {
-    const timeAgo = moment(props.experience.last || 0).fromNow();
+    const timeAgo = DateTime.fromMillis(props.experience.last || 0).toRelative();
     return (
         <div className="card mb-3">
             <div className="card-body">
