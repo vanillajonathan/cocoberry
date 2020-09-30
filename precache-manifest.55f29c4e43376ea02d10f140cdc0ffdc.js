@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0c186a49ccad0456878839ab09b460ae",
+    "revision": "abb7c630761d947919a106a5aeafa1e9",
     "url": "/cocoberry/index.html"
   },
   {
-    "revision": "7351a2abfd18d460bacd",
-    "url": "/cocoberry/static/css/2.809f38ef.chunk.css"
+    "revision": "fd88ae030a988f913c38",
+    "url": "/cocoberry/static/css/2.c0a2b1fa.chunk.css"
   },
   {
     "revision": "1d51ea504e600071f188",
     "url": "/cocoberry/static/css/main.7b8cd4a9.chunk.css"
   },
   {
-    "revision": "7351a2abfd18d460bacd",
+    "revision": "fd88ae030a988f913c38",
     "url": "/cocoberry/static/js/2.5f66d88e.chunk.js"
   },
   {

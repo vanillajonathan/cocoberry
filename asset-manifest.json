@@ -5,19 +5,19 @@
     "main.js.map": "/cocoberry/static/js/main.8d459df6.chunk.js.map",
     "runtime-main.js": "/cocoberry/static/js/runtime-main.d98fcd03.js",
     "runtime-main.js.map": "/cocoberry/static/js/runtime-main.d98fcd03.js.map",
-    "static/css/2.809f38ef.chunk.css": "/cocoberry/static/css/2.809f38ef.chunk.css",
+    "static/css/2.c0a2b1fa.chunk.css": "/cocoberry/static/css/2.c0a2b1fa.chunk.css",
     "static/js/2.5f66d88e.chunk.js": "/cocoberry/static/js/2.5f66d88e.chunk.js",
     "static/js/2.5f66d88e.chunk.js.map": "/cocoberry/static/js/2.5f66d88e.chunk.js.map",
     "index.html": "/cocoberry/index.html",
-    "precache-manifest.2b97881eddc7a836f7411309c3403905.js": "/cocoberry/precache-manifest.2b97881eddc7a836f7411309c3403905.js",
+    "precache-manifest.55f29c4e43376ea02d10f140cdc0ffdc.js": "/cocoberry/precache-manifest.55f29c4e43376ea02d10f140cdc0ffdc.js",
     "service-worker.js": "/cocoberry/service-worker.js",
-    "static/css/2.809f38ef.chunk.css.map": "/cocoberry/static/css/2.809f38ef.chunk.css.map",
+    "static/css/2.c0a2b1fa.chunk.css.map": "/cocoberry/static/css/2.c0a2b1fa.chunk.css.map",
     "static/css/main.7b8cd4a9.chunk.css.map": "/cocoberry/static/css/main.7b8cd4a9.chunk.css.map",
     "static/js/2.5f66d88e.chunk.js.LICENSE.txt": "/cocoberry/static/js/2.5f66d88e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d98fcd03.js",
-    "static/css/2.809f38ef.chunk.css",
+    "static/css/2.c0a2b1fa.chunk.css",
     "static/js/2.5f66d88e.chunk.js",
     "static/css/main.7b8cd4a9.chunk.css",
     "static/js/main.8d459df6.chunk.js"
