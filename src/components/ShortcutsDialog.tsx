@@ -20,9 +20,7 @@ export const ShortcutsDialog: React.FunctionComponent<IProps> = (props: IProps) 
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Keyboard Shortcuts</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={props.onClose}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close" onClick={props.onClose}></button>
                         </div>
                         <div className="modal-body">
                             <div className="container-fluid">

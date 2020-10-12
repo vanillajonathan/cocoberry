@@ -48,9 +48,7 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Add experience</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
