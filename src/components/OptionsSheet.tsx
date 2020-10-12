@@ -13,19 +13,15 @@ export const BottomSheet: React.FunctionComponent<IBottomSheetProps> = (props: I
         className += " d-block show";
         backdropClassName += " modal-backdrop show";
     }
-
-    if (props.open) {
-        return (
-            <React.Fragment>
-                <div className={className} tabIndex={-1} role="dialog" style={{ zIndex: 2000 }}>
-                    {props.children}
-                </div>
-                <div className={backdropClassName} onClick={props.onClose}/>
-            </React.Fragment>
-        );
-    }
-
-    return null;
+    
+    return (
+        <React.Fragment>
+            <div className={className} tabIndex={-1} role="dialog" style={{ zIndex: 2000 }}>
+                {props.children}
+            </div>
+            <div className={backdropClassName} onClick={props.onClose}/>
+        </React.Fragment>
+    );
 };
 
 interface IOptionSheetProps {
