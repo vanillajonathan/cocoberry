@@ -16,7 +16,7 @@ export const BottomSheet: React.FunctionComponent<IBottomSheetProps> = (props: I
     
     return (
         <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog" style={{ zIndex: 2000 }}>
+            <div className={className} tabIndex={-1} role="dialog" style={props.open ? { zIndex: 1050 } : { zIndex: -1 }}>
                 {props.children}
             </div>
             <div className={backdropClassName} onClick={props.onClose}/>
