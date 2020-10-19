@@ -35,7 +35,7 @@ export class LocalStorage implements IStorage {
 
     public get(): IExperience[] {
         const experiences = localStorage.getItem("experiences");
-        if (experiences === null) {
+        if (experiences === null || experiences === "") {
             return [];
         }
         return JSON.parse(experiences);
