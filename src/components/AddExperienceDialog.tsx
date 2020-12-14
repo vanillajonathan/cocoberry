@@ -19,6 +19,17 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
         if (nameInput.current) {
             nameInput.current.focus();
         }
+
+        var myModal = document.getElementById('exampleModal');
+        var myInput = document.getElementById('name');
+        if (myModal !== null && myInput !== null) {
+            myModal.addEventListener('shown.bs.modal',
+                () => {
+                    if (myInput !== null) {
+                        myInput.focus();
+                    }
+                });
+        }
     });
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -35,15 +46,15 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
     }
 
     let className = "modal fade";
-    let backdropClassName = "fade";
-    if (props.isOpen) {
-        className += " d-block show";
-        backdropClassName += " modal-backdrop show";
-    }
+    //let backdropClassName = "fade";
+    //if (props.isOpen) {
+    //    className += " d-block show";
+    //    backdropClassName += " modal-backdrop show";
+    //}
 
     return (
         <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog">
+            <div className={className} id="exampleModal" data-backdrop="static" data-keyboard="false" tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -73,7 +84,6 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
                     </div>
                 </div>
             </div>
-            <div className={backdropClassName} />
         </React.Fragment>
     );
 };

@@ -166,7 +166,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                     <div className="container-fluid">
                         <div className="d-flex flex-grow-1">
                             <span className="navbar-brand d-none d-xl-block">Cocoberry</span>
-                            <div className="mr-auto">
+                            <div className="me-auto">
                                 <div className="input-group">
                                     <input className="form-control" type="search" accessKey="s" placeholder="Search…" title="Search" onChange={handleChange} aria-label="Search" />
                                     <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
@@ -174,9 +174,9 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                             </div>
                             <div>
                                 <PwaInstaller />
-                                <button className="btn btn-outline-success mr-sm-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
-                                <button className="btn btn-outline-success mr-sm-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
-                                <button className="btn btn-outline-success mr-sm-2" accessKey="n" onClick={handleAddExperienceButtonClick} title="Add new experience">+</button>
+                                <button className="btn btn-outline-success me-sm-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts">K</button>
+                                <button className="btn btn-outline-success me-sm-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
+                                <button className="btn btn-outline-success me-sm-2" accessKey="n" /*onClick={handleAddExperienceButtonClick}*/ title="Add new experience" data-toggle="modal" data-target="#exampleModal">+</button>
                                 <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
                             </div>
                         </div>
