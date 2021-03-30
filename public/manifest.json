@@ -21,5 +21,6 @@
   "start_url": "/cocoberry/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "Keep track of things you might want to do or have done but want to do again" 
 }

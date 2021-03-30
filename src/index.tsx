@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
