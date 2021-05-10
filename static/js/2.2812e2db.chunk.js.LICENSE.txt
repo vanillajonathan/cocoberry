@@ -4,13 +4,7 @@ object-assign
 @license MIT
 */
 
-/*!
-  * Bootstrap v5.0.0-beta1 (https://getbootstrap.com/)
-  * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
-
-/** @license React v0.20.1
+/** @license React v0.20.2
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -19,7 +13,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v17.0.1
+/** @license React v17.0.2
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -28,7 +22,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v17.0.1
+/** @license React v17.0.2
  * react-jsx-runtime.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -37,7 +31,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v17.0.1
+/** @license React v17.0.2
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
