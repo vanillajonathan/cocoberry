@@ -7,19 +7,19 @@ interface IBottomSheetProps {
 }
 
 export const BottomSheet: React.FunctionComponent<IBottomSheetProps> = (props: IBottomSheetProps) => {
-    let className = "fixed-bottom fade";
-    let backdropClassName = "fade";
-    if (props.open) {
-        className += " d-block show";
-        backdropClassName += " modal-backdrop show";
-    }
+    let className = "offcanvas offcanvas-bottom";
+    //let backdropClassName = "fade";
+    //if (props.open) {
+    //    className += " d-block show";
+    //    backdropClassName += " modal-backdrop show";
+    //}
+    // style={props.open ? { zIndex: 1050 } : { zIndex: -1 }}
     
     return (
         <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog" style={props.open ? { zIndex: 1050 } : { zIndex: -1 }}>
+            <div className={className} id="bottomSheet" tabIndex={-1} role="dialog" style={{ height: 'initial' }}>
                 {props.children}
             </div>
-            <div className={backdropClassName} onClick={props.onClose}/>
         </React.Fragment>
     );
 };

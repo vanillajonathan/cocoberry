@@ -1,8 +1,9 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { useState } from "react";
 import { IStorage, INewExperience } from "./IStorage";
 import { Home } from "./views/Home";
 import { Preferences } from "./views/Preferences";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 interface IProps {
     seed: INewExperience[];

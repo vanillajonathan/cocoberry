@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { useState } from "react";
 import { IExperience } from "../IExperience";
 import { IStorage } from "../IStorage";

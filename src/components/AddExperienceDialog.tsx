@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { useState, useEffect } from "react";
 import { TagList } from "./TagList";
 
@@ -20,7 +20,7 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
             nameInput.current.focus();
         }
 
-        var myModal = document.getElementById('exampleModal');
+        var myModal = document.getElementById('addModal');
         var myInput = document.getElementById('name');
         if (myModal !== null && myInput !== null) {
             myModal.addEventListener('shown.bs.modal',
@@ -54,12 +54,12 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
 
     return (
         <React.Fragment>
-            <div className={className} id="exampleModal" data-backdrop="static" data-keyboard="false" tabIndex={-1} role="dialog">
+            <div className={className} id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Add experience</h5>
-                            <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
@@ -77,7 +77,7 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleClose}>Close</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
                                 <button type="submit" className="btn btn-primary">Add</button>
                             </div>
                         </form>

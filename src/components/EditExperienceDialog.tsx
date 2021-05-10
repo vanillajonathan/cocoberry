@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { useState, useEffect } from "react";
 import { TagList } from "./TagList";
 import { IExperience } from "../IExperience";
@@ -18,8 +18,25 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
     const nameInput = React.createRef<HTMLInputElement>();
 
     useEffect(() => {
+        setName(props.experience.name);
+        setTag(props.experience.tag || "");
+        setLast(props.experience.last || 0);
+    }, [props.experience]);
+
+    useEffect(() => {
         if (nameInput.current) {
             nameInput.current.focus();
+        }
+
+        var myModal = document.getElementById('editModal');
+        var myInput = document.getElementById('name');
+        if (myModal !== null && myInput !== null) {
+            myModal.addEventListener('shown.bs.modal',
+                () => {
+                    if (myInput !== null) {
+                        myInput.focus();
+                    }
+                });
         }
     });
 
@@ -37,7 +54,7 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
     }
 
     function handleClose(): void {
-        props.onClose();
+        //props.onClose();
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
@@ -47,20 +64,20 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
     }
 
     let className = "modal fade";
-    let backdropClassName = "fade";
-    if (props.isOpen) {
-        className += " d-block show";
-        backdropClassName += " modal-backdrop show";
-    }
+    //let backdropClassName = "fade";
+    //if (props.isOpen) {
+    //    className += " d-block show";
+    //    backdropClassName += " modal-backdrop show";
+    //}
 
     return (
         <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog">
+            <div className={className} id="editModal" data-bs-keyboard="false" tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Edit experience</h5>
-                            <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
@@ -78,14 +95,13 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleClose}>Close</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
                                 <button type="submit" className="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div className={backdropClassName} />
         </React.Fragment>
     );
 };

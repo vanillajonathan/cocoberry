@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { DateTime } from "luxon";
 import { IExperience } from "../IExperience";
 

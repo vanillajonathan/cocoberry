@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 
 interface IProps {
     isOpen: boolean;
@@ -6,21 +6,14 @@ interface IProps {
 }
 
 export const ShortcutsDialog: React.FunctionComponent<IProps> = (props: IProps) => {
-    let className = "modal fade";
-    let backdropClassName = "fade";
-    if (props.isOpen) {
-        className += " d-block show";
-        backdropClassName += " modal-backdrop show";
-    }
-
     return (
         <React.Fragment>
-            <div className={className} tabIndex={-1} role="dialog">
+            <div className="modal fade" id="shortcutsModal" tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Keyboard Shortcuts</h5>
-                            <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close" onClick={props.onClose}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={props.onClose}></button>
                         </div>
                         <div className="modal-body">
                             <div className="container-fluid">
@@ -51,12 +44,11 @@ export const ShortcutsDialog: React.FunctionComponent<IProps> = (props: IProps) 
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={props.onClose}>Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.onClose}>Close</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={backdropClassName} />
         </React.Fragment>
     );
 };

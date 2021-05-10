@@ -3,19 +3,19 @@
   "version": "0.1.3",
   "private": true,
   "dependencies": {
-    "@types/jest": "^26.0.22",
-    "@types/luxon": "^1.26.2",
+    "@types/jest": "^26.0.23",
+    "@types/luxon": "^1.26.5",
     "@types/node": "14.14.37",
-    "@types/react": "^17.0.3",
+    "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.3",
     "@types/uuid": "^8.3.0",
-    "bootstrap": "^5.0.0-beta3",
+    "bootstrap": "^5.0.0",
     "gh-pages": "^3.1.0",
     "luxon": "^1.26.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
-    "typescript": "^4.2.3",
+    "typescript": "^4.2.4",
     "uuid": "^8.3.2"
   },
   "scripts": {
@@ -42,5 +42,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://vanillajonathan.github.io/cocoberry"
+  "homepage": "https://vanillajonathan.github.io/cocoberry",
+  "devDependencies": {
+    "@types/bootstrap": "^5.0.13"
+  }
 }
