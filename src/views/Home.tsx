@@ -74,7 +74,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     function handleClick(key: string): void {
         if (bottomSheet !== null) {
             const offcanvas = bootstrap.Offcanvas.getInstance(bottomSheet);
-            offcanvas.hide(); // fix
+            offcanvas?.hide(); // fix
         }
         setShowOptions(false);
         setExperiences((prevState: IExperience[]) => prevState.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
@@ -89,7 +89,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     function handleDelete(key: string): void {
         if (bottomSheet !== null) {
             const offcanvas = bootstrap.Offcanvas.getInstance(bottomSheet);
-            offcanvas.hide(); // fix
+            offcanvas?.hide(); // fix
         }
         setShowOptions(false);
         setExperiences((prevState: IExperience[]) => (prevState.filter(e => e.id !== key)));
@@ -124,7 +124,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         const el = document.getElementById('bottomSheet');
         if (el !== null) {
             const offcanvas = bootstrap.Offcanvas.getInstance(el);
-            offcanvas.hide(); // fix
+            offcanvas?.hide(); // fix
         }
         //setShowOptions(false);
         
