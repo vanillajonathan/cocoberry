@@ -4,10 +4,8 @@ import { TagList } from "./TagList";
 
 interface IProps {
     name: string;
-    isOpen: boolean;
     tags: string[];
     onAdd(name: string, tag: string): void;
-    onClose(): void;
 }
 
 export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IProps) => {
@@ -36,39 +34,28 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
         setName(event.target.value);
     }
 
-    function handleClose(): void {
-        props.onClose();
-    }
-
     function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         props.onAdd(name, tag);
     }
 
-    let className = "modal fade";
-    //let backdropClassName = "fade";
-    //if (props.isOpen) {
-    //    className += " d-block show";
-    //    backdropClassName += " modal-backdrop show";
-    //}
-
     return (
         <React.Fragment>
-            <div className={className} id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} role="dialog">
+            <div className="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Add experience</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
                                 <div className="mb-3">
-                                    <label htmlFor="name">Title</label>
+                                    <label className="form-label" htmlFor="name">Title</label>
                                     <input className="form-control" id="name" type="text" value={name} onChange={handleChange} ref={nameInput} autoFocus required />
                                 </div>
                                 <div className="mb-3">
-                                    <label>Tag</label>
+                                    <label className="form-label">Tag</label>
                                     <TagList
                                         activeTag={tag}
                                         tags={props.tags}
@@ -77,7 +64,7 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" className="btn btn-primary">Add</button>
                             </div>
                         </form>

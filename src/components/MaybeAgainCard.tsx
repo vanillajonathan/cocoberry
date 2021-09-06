@@ -4,7 +4,6 @@ import { IExperience } from "../IExperience";
 
 interface IProps {
     experience: IExperience;
-    onClick(id: string): void;
 }
 
 export const MaybeAgainCard: React.FunctionComponent<IProps> = (props: IProps) => {

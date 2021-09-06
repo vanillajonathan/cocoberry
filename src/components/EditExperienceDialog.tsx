@@ -5,9 +5,7 @@ import { IExperience } from "../IExperience";
 
 interface IProps {
     experience: IExperience;
-    isOpen: boolean;
     tags: string[];
-    onClose(): void;
     onSave(experience: IExperience): void;
 }
 
@@ -53,49 +51,38 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
         setLast(date.getTime());
     }
 
-    function handleClose(): void {
-        //props.onClose();
-    }
-
     function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         const experience: IExperience = { id: props.experience.id, name: name, tag: tag, last: last };
         props.onSave(experience);
     }
 
-    let className = "modal fade";
-    //let backdropClassName = "fade";
-    //if (props.isOpen) {
-    //    className += " d-block show";
-    //    backdropClassName += " modal-backdrop show";
-    //}
-
     return (
         <React.Fragment>
-            <div className={className} id="editModal" data-bs-keyboard="false" tabIndex={-1} role="dialog">
+            <div className="modal fade" id="editModal" data-bs-keyboard="false" tabIndex={-1} role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">Edit experience</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="modal-body">
                                 <div className="mb-3">
-                                    <label htmlFor="name">Title</label>
+                                    <label className="form-label" htmlFor="name">Title</label>
                                     <input className="form-control" id="name" type="text" value={name} onChange={handleChange} ref={nameInput} autoFocus required />
                                 </div>
                                 <div className="mb-3">
-                                    <label>Tag</label>
+                                    <label className="form-label">Tag</label>
                                     <TagList activeTag={tag} tags={props.tags} onClick={handleSetTag} />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="time">Last</label>
+                                    <label className="form-label" htmlFor="time">Last</label>
                                     <input className="form-control" id="time" type="datetime-local" value={new Date(last).toISOString().substring(0, 16)} onChange={handleTimeChange} />
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" className="btn btn-primary">Save</button>
                             </div>
                         </form>

@@ -3,7 +3,6 @@ import { IExperience } from "../IExperience";
 
 interface IProps {
     experience: IExperience;
-    onClick(id: string): void;
 }
 
 export const NeverCard: React.FunctionComponent<IProps> = (props: IProps) => {

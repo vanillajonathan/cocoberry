@@ -30,10 +30,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     const [neverCardExperience, setNeverCardExperience] = useState<IExperience | null>(null);
     const [reverse, setReverse] = useState(false);
     const [search, setSearch] = useState("");
-    const [showAddDialog, setShowDialog] = useState(false);
-    //const [showEditDialog, setShowEditDialog] = useState(false);
     const [showShortcutsDialog, setShowShortcutsDialog] = useState(false);
-    const [showOptions, setShowOptions] = useState(false);
     const [showTags, setShowTags] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [tag, setTag] = useState("");
@@ -58,7 +55,11 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
     }, [props.experiences]);
 
     function handleAddExperience(name: string, tag: string): void {
-        setShowDialog(false);
+        const modalEl = document.getElementById('addModal');
+        if (modalEl !== null) {
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal?.hide();
+        }
         const experience: IExperience = {
             id: uuid(),
             name,
@@ -67,16 +68,11 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         setExperiences((prevState: IExperience[]) => [...prevState, experience]);
     }
 
-    function handleAddExperienceButtonClick(): void {
-        setShowDialog(true);
-    }
-
     function handleClick(key: string): void {
         if (bottomSheet !== null) {
             const offcanvas = bootstrap.Offcanvas.getInstance(bottomSheet);
             offcanvas?.hide(); // fix
         }
-        setShowOptions(false);
         setExperiences((prevState: IExperience[]) => prevState.map(i => i.id === key ? { ...i, last: new Date().getTime() } : i));
         setToastMessage("Marked as done");
         setShowToast(true);
@@ -91,7 +87,6 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             const offcanvas = bootstrap.Offcanvas.getInstance(bottomSheet);
             offcanvas?.hide(); // fix
         }
-        setShowOptions(false);
         setExperiences((prevState: IExperience[]) => (prevState.filter(e => e.id !== key)));
         setToastMessage("Removed");
         setShowToast(true);
@@ -105,20 +100,13 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
         const exp = experiences.find(x => x.id === id);
         setActiveId(id);
         setActiveExperience(exp);
-        setShowOptions(true);
         if (bottomSheet !== null) {
             const offcanvas = new bootstrap.Offcanvas(bottomSheet);
             offcanvas.show(bottomSheet); // fix
         }
     }
 
-    function handleCloseOptions(): void {
-        setShowOptions(false);
-    }
-
     function handleEditOpenClick(id: string): void {
-        //setActiveId(id);
-        //setShowEditDialog(true);
         const exp = experiences.find(x => x.id === id);
         setActiveExperience(exp);
         const el = document.getElementById('bottomSheet');
@@ -126,24 +114,27 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             const offcanvas = bootstrap.Offcanvas.getInstance(el);
             offcanvas?.hide(); // fix
         }
-        //setShowOptions(false);
-        
-        const el1 = document.getElementById('editModal');
-        if (el1 !== null) {
-            const modal = new bootstrap.Modal(el1, { backdrop: 'static' });
+
+        const modalEl = document.getElementById('editModal');
+        if (modalEl !== null) {
+            const modal = new bootstrap.Modal(modalEl, { backdrop: 'static' });
             modal.show(); // fix
         }
     }
 
     function handleEditSaveClick(experience: IExperience): void {
-        //setShowEditDialog(false);
+        const modalEl = document.getElementById('editModal');
+        if (modalEl !== null) {
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal?.hide();
+        }
         setExperiences((prevState: IExperience[]) => (prevState.map(e => {
             if (e.id === experience.id) {
                 e = experience;
             }
             return e;
         })));
-        setToastMessage("Edited:" + experience.name);
+        setToastMessage("Edited: " + experience.name);
         setShowToast(true);
         window.clearTimeout(timerId);
         timerId = window.setTimeout(() => {
@@ -166,11 +157,6 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     function handleTagClick(tag: string): void {
         setTag(tag);
-    }
-
-    function handleClose(): void {
-        setShowDialog(false);
-        //setShowEditDialog(false);
     }
 
     function randomExperience(experiences: IExperience[]): IExperience {
@@ -204,7 +190,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                                 <PwaInstaller />
                                 <button className="btn btn-outline-success me-sm-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts" data-bs-toggle="modal" data-bs-target="#shortcutsModal">K</button>
                                 <button className="btn btn-outline-success me-sm-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
-                                <button className="btn btn-outline-success me-sm-2" accessKey="n" /*onClick={handleAddExperienceButtonClick}*/ title="Add new experience" data-bs-toggle="modal" data-bs-target="#addModal">+</button>
+                                <button className="btn btn-outline-success me-sm-2" accessKey="n" title="Add new experience" data-bs-toggle="modal" data-bs-target="#addModal">+</button>
                                 <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
                             </div>
                         </div>
@@ -218,25 +204,25 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             </header>
             <main className="App container">
                 {showMaybeAgainCard && search === "" && tag === "" && maybeAgainCardExperience &&
-                    <MaybeAgainCard experience={maybeAgainCardExperience} onClick={handleEditOpenClick} />
+                    <MaybeAgainCard experience={maybeAgainCardExperience} />
                 }
                 {showNeverCard && search === "" && tag === "" && neverCardExperience &&
-                    <NeverCard experience={neverCardExperience} onClick={handleEditOpenClick} />
+                    <NeverCard experience={neverCardExperience} />
                 }
                 <ExperienceList experiences={myExperiences} reverse={reverse} onClick={handleOpenOptions} onEdit={handleEditOpenClick} />
                 {search !== "" && myExperiences.length === 0 &&
                     <React.Fragment>
                         <p>There are no matched experiences.</p>
-                        <button className="btn btn-outline-secondary" onClick={handleAddExperienceButtonClick}>Add new experience</button>
+                        <button className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Add new experience</button>
                     </React.Fragment>
                 }
             </main>
-            <AddExperienceDialog name={search} isOpen={showAddDialog} tags={props.tags} onAdd={handleAddExperience} onClose={handleClose} />
+            <AddExperienceDialog name={search} tags={props.tags} onAdd={handleAddExperience} />
             {activeExperience &&
-            <EditExperienceDialog experience={activeExperience} isOpen={true} tags={props.tags} onSave={handleEditSaveClick} onClose={handleClose} />
+            <EditExperienceDialog experience={activeExperience} tags={props.tags} onSave={handleEditSaveClick} />
                 }
             <ShortcutsDialog isOpen={showShortcutsDialog} onClose={() => setShowShortcutsDialog(false)} />
-            <BottomSheet open={showOptions} onClose={handleCloseOptions}>
+            <BottomSheet>
                 <div className="list-group list-group-flush">
                     <a className="list-group-item list-group-item-action" onClick={() => handleClick(activeId)}>Mark as done</a>
                     <a className="list-group-item list-group-item-action" onClick={() => handleEditOpenClick(activeId)}>Edit</a>
