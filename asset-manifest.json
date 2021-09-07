@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/cocoberry/static/css/main.15333d3a.chunk.css",
-    "main.js": "/cocoberry/static/js/main.6a77aee6.chunk.js",
-    "main.js.map": "/cocoberry/static/js/main.6a77aee6.chunk.js.map",
+    "main.js": "/cocoberry/static/js/main.531b73fa.chunk.js",
+    "main.js.map": "/cocoberry/static/js/main.531b73fa.chunk.js.map",
     "runtime-main.js": "/cocoberry/static/js/runtime-main.905d4402.js",
     "runtime-main.js.map": "/cocoberry/static/js/runtime-main.905d4402.js.map",
     "static/css/2.818011ed.chunk.css": "/cocoberry/static/css/2.818011ed.chunk.css",
-    "static/js/2.cc46ef4f.chunk.js": "/cocoberry/static/js/2.cc46ef4f.chunk.js",
-    "static/js/2.cc46ef4f.chunk.js.map": "/cocoberry/static/js/2.cc46ef4f.chunk.js.map",
+    "static/js/2.caaf61a0.chunk.js": "/cocoberry/static/js/2.caaf61a0.chunk.js",
+    "static/js/2.caaf61a0.chunk.js.map": "/cocoberry/static/js/2.caaf61a0.chunk.js.map",
     "index.html": "/cocoberry/index.html",
     "static/css/2.818011ed.chunk.css.map": "/cocoberry/static/css/2.818011ed.chunk.css.map",
     "static/css/main.15333d3a.chunk.css.map": "/cocoberry/static/css/main.15333d3a.chunk.css.map",
-    "static/js/2.cc46ef4f.chunk.js.LICENSE.txt": "/cocoberry/static/js/2.cc46ef4f.chunk.js.LICENSE.txt"
+    "static/js/2.caaf61a0.chunk.js.LICENSE.txt": "/cocoberry/static/js/2.caaf61a0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.905d4402.js",
     "static/css/2.818011ed.chunk.css",
-    "static/js/2.cc46ef4f.chunk.js",
+    "static/js/2.caaf61a0.chunk.js",
     "static/css/main.15333d3a.chunk.css",
-    "static/js/main.6a77aee6.chunk.js"
+    "static/js/main.531b73fa.chunk.js"
   ]
 }
