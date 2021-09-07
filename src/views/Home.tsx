@@ -186,11 +186,11 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
                                     <button className="btn btn-outline-success dropdown-toggle" type="button" onClick={handleDropdownClick} aria-label="Show tags" />
                                 </div>
                             </div>
-                            <div>
+                            <div className="d-flex ms-2">
                                 <PwaInstaller />
-                                <button className="btn btn-outline-success me-sm-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts" data-bs-toggle="modal" data-bs-target="#shortcutsModal">K</button>
-                                <button className="btn btn-outline-success me-sm-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
-                                <button className="btn btn-outline-success me-sm-2" accessKey="n" title="Add new experience" data-bs-toggle="modal" data-bs-target="#addModal">+</button>
+                                <button className="btn btn-outline-success me-2 d-none d-xl-inline" accessKey="?" onClick={() => setShowShortcutsDialog(true)} title="Shortcuts" data-bs-toggle="modal" data-bs-target="#shortcutsModal">K</button>
+                                <button className="btn btn-outline-success me-2 d-none d-xl-inline" accessKey="r" onClick={handleSort} title="Sort">▲</button>
+                                <button className="btn btn-outline-success me-2" accessKey="n" title="Add new experience" data-bs-toggle="modal" data-bs-target="#addModal">+</button>
                                 <button className="btn btn-outline-success" accessKey="p" onClick={() => props.onNavigation("Preferences")}>☰</button>
                             </div>
                         </div>
