@@ -82,6 +82,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
                                 className="form-check-input"
                                 id="showMaybeAgainCard"
                                 type="checkbox"
+                                role="switch"
                                 checked={preferences.showMaybeAgainCard}
                                 onChange={handlePreferenceChanged}
                             />
@@ -94,6 +95,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
                                 className="form-check-input"
                                 id="showNeverCard"
                                 type="checkbox"
+                                role="switch"
                                 checked={preferences.showNeverCard}
                                 onChange={handlePreferenceChanged}
                             />
