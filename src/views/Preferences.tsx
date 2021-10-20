@@ -76,31 +76,27 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
             <main className="App container">
 
                 <div className="list-group mb-3">
-                    <div className="list-group-item">
-                        <div className="form-check form-switch">
-                            <input
-                                className="form-check-input"
-                                id="showMaybeAgainCard"
-                                type="checkbox"
-                                role="switch"
-                                checked={preferences.showMaybeAgainCard}
-                                onChange={handlePreferenceChanged}
-                            />
-                            <label className="form-check-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
-                        </div>
+                    <div className="list-group-item form-switch">
+                        <label className="form-check-label" htmlFor="showMaybeAgainCard">Show the maybe-again card</label>
+                        <input
+                            className="form-check-input float-end"
+                            id="showMaybeAgainCard"
+                            type="checkbox"
+                            role="switch"
+                            checked={preferences.showMaybeAgainCard}
+                            onChange={handlePreferenceChanged}
+                        />
                     </div>
-                    <div className="list-group-item">
-                        <div className="form-check form-switch">
-                            <input
-                                className="form-check-input"
-                                id="showNeverCard"
-                                type="checkbox"
-                                role="switch"
-                                checked={preferences.showNeverCard}
-                                onChange={handlePreferenceChanged}
-                            />
-                            <label className="form-check-label" htmlFor="showNeverCard">Show the you-have-never card</label>
-                        </div>
+                    <div className="list-group-item form-switch">
+                        <label className="form-check-label" htmlFor="showNeverCard">Show the you-have-never card</label>
+                        <input
+                            className="form-check-input float-end"
+                            id="showNeverCard"
+                            type="checkbox"
+                            role="switch"
+                            checked={preferences.showNeverCard}
+                            onChange={handlePreferenceChanged}
+                        />
                     </div>
                 </div>
 
