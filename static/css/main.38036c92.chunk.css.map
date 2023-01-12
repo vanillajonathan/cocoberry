@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/Home.css"],"names":[],"mappings":"AAAA,KACI,kBACJ,CAEA,4CACI,KACI,wBAAiB,CAAjB,gBACJ,CACJ","file":"main.38036c92.chunk.css","sourcesContent":[".App {\n    padding-top: 4.5rem;\n}\n\n@media screen and (display-mode: standalone) {\n    body {\n        user-select: none;\n    }\n}"]}
