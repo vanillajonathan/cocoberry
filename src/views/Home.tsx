@@ -175,8 +175,8 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     return (
         <React.Fragment>
-            <header className="bg-white fixed-top shadow-sm">
-                <nav className="navbar navbar-expand-lg navbar-light bg-white">
+            <header className="fixed-top shadow-sm">
+                <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
                         <div className="d-flex flex-grow-1">
                             <span className="navbar-brand d-none d-xl-block">Cocoberry</span>
