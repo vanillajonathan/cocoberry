@@ -67,7 +67,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
     return (
         <React.Fragment>
             <header className="fixed-top shadow-sm">
-                <nav className="navbar navbar-expand-lg navbar-light bg-white">
+                <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
                         <button className="btn btn-outline-success" accessKey="b" onClick={() => props.onNavigation("")}>Back</button>
                     </div>
