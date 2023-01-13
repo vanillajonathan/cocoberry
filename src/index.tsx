@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
@@ -82,11 +82,13 @@ const experiences: INewExperience[] = [
 const storage: IStorage = new LocalStorage();
 const tags: string[] = ["Activity", "Fruit", "Places", "Vegetable"];
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App seed={experiences} storage={storage} tags={tags} />
-    </React.StrictMode>,
-    document.getElementById('root')
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <App seed={experiences} storage={storage} tags={tags} />
+  </React.StrictMode>
 );
 
 serviceWorker.register();
