@@ -12,7 +12,7 @@ interface IProps {
 export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IProps) => {
     const [name, setName] = useState(props.experience.name);
     const [tag, setTag] = useState(props.experience.tag || "");
-    const [last, setLast] = useState(props.experience.last || 0);
+    const [last, setLast] = useState<number | null>(props.experience.last || 0);
     const nameInput = React.createRef<HTMLInputElement>();
 
     useEffect(() => {
@@ -37,6 +37,14 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
                 });
         }
     });
+
+    function formatDate(): string {
+        if (last === null) {
+            return "";
+        }
+
+        return new Date(last).toISOString().substring(0, 16);
+    }
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         setName(event.target.value);
@@ -82,7 +90,7 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="time">Last</label>
-                                    <input className="form-control" id="time" type="datetime-local" value={new Date(last).toISOString().substring(0, 16)} onChange={handleTimeChange} />
+                                    <input className="form-control" id="time" type="datetime-local" value={formatDate()} onChange={handleTimeChange} />
                                 </div>
                             </div>
                             <div className="modal-footer">
