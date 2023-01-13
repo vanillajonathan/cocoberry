@@ -47,8 +47,12 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
     }
 
     function handleTimeChange(event: React.ChangeEvent<HTMLInputElement>): void {
-        const date = new Date(event.target.value);
-        setLast(date.getTime());
+        if (event.target.value === "") {
+            setLast(null);
+        } else {
+            const date = new Date(event.target.value);
+            setLast(date.getTime());
+        }
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
