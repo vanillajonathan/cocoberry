@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { IStorage, INewExperience } from "./IStorage";
 import { IExperience } from "./IExperience";
 
@@ -6,7 +5,7 @@ export class LocalStorage implements IStorage {
     public add(experience: INewExperience): void {
         const experiences = this.get();
         const item: IExperience = {
-            id: uuid(),
+            id: crypto.randomUUID(),
             last: experience.last,
             name: experience.name,
             tag: experience.tag,
@@ -19,7 +18,7 @@ export class LocalStorage implements IStorage {
         const data = this.get();
         for (const experience of experiences) {
             const item: IExperience = {
-                id: uuid(),
+                id: crypto.randomUUID(),
                 last: experience.last,
                 name: experience.name,
                 tag: experience.tag,

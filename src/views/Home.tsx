@@ -1,6 +1,5 @@
 ﻿import * as React from "react";
 import { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
 import { AddExperienceDialog } from "../components/AddExperienceDialog";
 import { EditExperienceDialog } from "../components/EditExperienceDialog";
 import { IExperience } from "../IExperience";
@@ -61,7 +60,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
             modal?.hide();
         }
         const experience: IExperience = {
-            id: uuid(),
+            id: crypto.randomUUID(),
             name,
             tag,
         };
