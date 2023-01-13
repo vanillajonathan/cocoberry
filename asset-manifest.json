@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cocoberry/static/css/main.3e7622b1.css",
-    "main.js": "/cocoberry/static/js/main.9c4aee6e.js",
+    "main.js": "/cocoberry/static/js/main.b89903b5.js",
     "index.html": "/cocoberry/index.html",
     "main.3e7622b1.css.map": "/cocoberry/static/css/main.3e7622b1.css.map",
-    "main.9c4aee6e.js.map": "/cocoberry/static/js/main.9c4aee6e.js.map"
+    "main.b89903b5.js.map": "/cocoberry/static/js/main.b89903b5.js.map"
   },
   "entrypoints": [
     "static/css/main.3e7622b1.css",
-    "static/js/main.9c4aee6e.js"
+    "static/js/main.b89903b5.js"
   ]
 }
