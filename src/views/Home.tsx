@@ -174,7 +174,7 @@ export const Home: React.FunctionComponent<IProps> = (props: IProps) => {
 
     return (
         <React.Fragment>
-            <header className="fixed-top shadow-sm">
+            <header className="fixed-top shadow-sm bg-body-tertiary">
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
                         <div className="d-flex flex-grow-1">
