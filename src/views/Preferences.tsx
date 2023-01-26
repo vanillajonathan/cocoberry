@@ -104,7 +104,7 @@ export const Preferences: React.FunctionComponent<IProps> = (props: IProps) => {
                     <div className="card-body">
                         <h5 className="card-title">Export and import experiences</h5>
                         <p className="card-text">Your experiences can be imported and exported. They are stored in the JSON format.</p>
-                        <input className="form-control-file" id="file" type="file" accept="application/json" onChange={handleImport} ref={fileInput} hidden required />
+                        <input id="file" type="file" accept="application/json" onChange={handleImport} ref={fileInput} hidden required />
                     </div>
                     <div className="list-group list-group-flush">
                         <button className="list-group-item list-group-item-action" type="button" accessKey="i" onClick={handleBrowse}>Import from file</button>
