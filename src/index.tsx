@@ -8,7 +8,7 @@ import { IStorage, INewExperience } from "./IStorage";
 import { LocalStorage } from "./localStorage";
 //import * as data from "./seed.json";
 
-import seed from "./seed.json";
+//import seed from "./seed.json";
 
 const experiences: INewExperience[] = [
     { name: "Eat apple 🍏", last: new Date(2018, 4, 3).getTime(), tag: "fruit" },
