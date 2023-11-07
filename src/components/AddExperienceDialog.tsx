@@ -18,8 +18,8 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
             nameInput.current.focus();
         }
 
-        var myModal = document.getElementById('addModal');
-        var myInput = document.getElementById('name');
+        const myModal = document.getElementById('addModal');
+        const myInput = document.getElementById('name');
         if (myModal !== null && myInput !== null) {
             myModal.addEventListener('shown.bs.modal',
                 () => {

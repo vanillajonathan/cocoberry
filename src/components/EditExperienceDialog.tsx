@@ -26,8 +26,8 @@ export const EditExperienceDialog: React.FunctionComponent<IProps> = (props: IPr
             nameInput.current.focus();
         }
 
-        var myModal = document.getElementById('editModal');
-        var myInput = document.getElementById('name');
+        const myModal = document.getElementById('editModal');
+        const myInput = document.getElementById('name');
         if (myModal !== null && myInput !== null) {
             myModal.addEventListener('shown.bs.modal',
                 () => {
