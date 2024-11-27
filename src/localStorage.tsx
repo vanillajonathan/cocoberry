@@ -28,7 +28,7 @@ export class LocalStorage implements IStorage {
         localStorage.setItem("experiences", JSON.stringify(data));
     }
 
-    public delete(id: string): void {
+    public delete(_id: string): void {
         throw new Error("Method not implemented.");
     }
 
@@ -40,7 +40,7 @@ export class LocalStorage implements IStorage {
         return JSON.parse(experiences);
     }
 
-    public update(experience: IExperience): void {
+    public update(_experience: IExperience): void {
         throw new Error("Method not implemented.");
     }
 }
