@@ -74,7 +74,3 @@ export const AddExperienceDialog: React.FunctionComponent<IProps> = (props: IPro
         </React.Fragment>
     );
 };
-
-AddExperienceDialog.defaultProps = {
-    name: "",
-};

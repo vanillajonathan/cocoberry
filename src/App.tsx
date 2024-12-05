@@ -40,9 +40,4 @@ const App: React.FunctionComponent<IProps> = (props: IProps) => {
     );
 };
 
-App.defaultProps = {
-    seed: [],
-    tags: [],
-};
-
 export default App;
