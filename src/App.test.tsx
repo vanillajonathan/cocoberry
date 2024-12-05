@@ -1,4 +1,4 @@
-import * as ReactDOM from "react-dom";
+import {createRoot} from 'react-dom/client';
 import App from "./App";
 import { LocalStorage } from "./localStorage";
 
@@ -7,6 +7,7 @@ const tags = ["Fruit", "Vegetable", "Activity"];
 
 it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<App storage={storage} tags={tags} seed={[]} />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const root = createRoot(div);
+    root.render(<App storage={storage} tags={tags} seed={[]} />);
+    root.unmount();
 });

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DateTime } from "luxon";
 import { IExperience } from "../IExperience";
+import { JSX } from "react/jsx-runtime";
 
 interface IProps {
     experiences: IExperience[];

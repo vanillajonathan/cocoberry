@@ -1,4 +1,5 @@
 import * as React from "react";
+import { JSX } from "react/jsx-runtime";
 
 interface IBottomSheetProps {
     children: JSX.Element;
